@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="区块链、web3、金融、智能合约" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Call Data 解析 | Wild</title>
+<link rel="shortcut icon" href="https://ckp-0217.github.io/favicon.ico?v=1677168066912">
+<link rel="stylesheet" href="https://ckp-0217.github.io/styles/main.css">
+
+
+    <link rel="canonical" href="https://ckp-0217.github.io/post/call-data-jie-xi/" />
+    <meta name="socialText" content="" />
+    <meta name="description" content="Input Data/Call Data
+以太坊智能合约交易的交易调用数据Input Data也称Call Data，在区块浏览器可以看到这个信息，它是由16进制的字符组成，需要经过解析才可以知道这个交易调用的方法和参数。
+组成
+组成结构是..." />
+    <meta name="referrer" content="always" />
+    
+      <link rel="stylesheet" href="https://ckp-0217.github.io/media/css/katex.min.css">
+      <script defer src="https://ckp-0217.github.io/media/scripts/katex.min.js"></script>
+      <script defer src="https://ckp-0217.github.io/media/scripts/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+      
+        
+          <link rel="stylesheet" href="https://ckp-0217.github.io/media/css/prism.css">
+          
+            
+                
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://ckp-0217.github.io" class="logo">
+      
+          <span class="symbol"><img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/5899.png" alt="" />
+            
+                <img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/wild.png" alt="" />
+                
+                
+          </span>
+          
+
+
+            <div class="site-title">
+              
+              
+                <div style="font-size: 0.4em;">
+                  区块链、web3、金融、智能合约
+                </div>
+
+            </div>
+
+    </a>
+    <div id="search" style="margin-top: 10px" >
+      <div>
+        <form id="gridea-search-form" data-update="1677168066912" action="/search/index.html"><input
+            class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..." />
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+      
+          <li><a href="https://ckp-0217.github.io" class="menu">
+              主页
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/archives" class="menu">
+              归档
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/tags" class="menu">
+              标签
+            </a></li>
+          
+            
+  </ul>
+</nav>
+      <!-- Main -->
+      <div id="main">
+        <div class="tags-container-sticky">
+  
+    
+      
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/zhi-ya-jie-dai/">
+                      质押借贷 <span style="color:#ed556a;font-weight: 1000;">
+                          3
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/YpOF8hrMn/">
+                      DeFi <span style="color:#ed556a;font-weight: 1000;">
+                          5
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/yuan-ma-fen-xi/">
+                      源码分析 <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/jiao-yi-jie-xi/">
+                      交易解析 <span style="color:#ed556a;font-weight: 1000;">
+                          3
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/nft/">
+                      NFT <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/idIT1Ofe5/">
+                      开发工具 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/jin-rong-li-lun/">
+                      金融理论 <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/an-quan/">
+                      安全 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/shen-ji/">
+                      审计 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/dai-li-sheng-ji/">
+                      代理升级 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/CHkr7jZdg/">
+                      智能合约 <span style="color:#ed556a;font-weight: 1000;">
+                          5
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/he-yue-ce-shi/">
+                      合约测试 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+</div>
+          <div class="inner">
+            <div class="post-pagetitle">
+              <h1>
+                Call Data 解析
+              </h1>
+            </div>
+            <div class="post-info">
+              <time class="post-time">
+                2023-01-10
+              </time>
+              <span class="read-times">
+                4 min read
+              </span>
+              
+                <a href="https://ckp-0217.github.io/tag/jiao-yi-jie-xi/" class="post-tags">
+                  # 交易解析
+                </a>
+                
+            </div>
+            
+                <div class="post-content-wrapper">
+                  <div class="post-content">
+                    <h2 id="input-datacall-data">Input Data/Call Data</h2>
+<p>以太坊智能合约交易的交易调用数据<code>Input Data</code>也称<code>Call Data</code>，在区块浏览器可以看到这个信息，它是由16进制的字符组成，需要经过解析才可以知道这个交易调用的方法和参数。</p>
+<h2 id="组成">组成</h2>
+<p>组成结构是 <code>方法 + 参数</code></p>
+<pre><code>以下是一个转账Input Data
+0xa9059cbb00000000000000000000000093f8dddd876c7dBE3323723500e83E202A7C96CC00000000000000000000000000000000000000000000000000000000d09dc300
+</code></pre>
+<h3 id="方法">方法</h3>
+<p>EVM中使用函数选择器来调用合约中的指定函数。</p>
+<pre><code>例如转账：
+keccak256(&quot;transfer(address,uint256)&quot;);
+//a9059cbb2ab09eb219583f4a59a5d0623ade346d962bcd4e46b11da047c9049b
+将会返回一个32字节的hash编码，然后再取前4字节
+//0xa9059cbb
+</code></pre>
+<h3 id="参数">参数</h3>
+<p>每一个参数将会被转换成16进制并且占用32字节</p>
+<pre><code>例如上面的Input Data：
+0xa9059cbb
+00000000000000000000000093f8dddd876c7dBE3323723500e83E202A7C96CC
+00000000000000000000000000000000000000000000000000000000d09dc300
+又因为他的参数类型应该是address和uint256
+所以可以解析出原有的参数是
+address--0x93f8dddd876c7dBE3323723500e83E202A7C96CC
+uint256--3500000000
+</code></pre>
+<h3 id="动态参数">动态参数</h3>
+<p>对于参数是string，bytes，或者数组等等，在动态参数的所在行与实际行的距离将会变成偏移量。<br>
+组成结构是 <code>偏移量</code>+<code>长度</code>+<code>数值</code></p>
+<pre><code>例如 function input (string[] memory a)这一个使用到动态参数的函数
+//传入参数
+string[] a: [&quot;ckp&quot;,&quot;0217&quot;]
+0xd4f856c400000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000003636b70000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000043032313700000000000000000000000000000000000000000000000000000000
+</code></pre>
+<pre><code>解析后：
+0xd4f856c4
+0000000000000000000000000000000000000000000000000000000000000020//这里的20就是数组的偏移量
+0000000000000000000000000000000000000000000000000000000000000002//这里就是数组的起始位置 表示长度为2
+0000000000000000000000000000000000000000000000000000000000000040//这里是第一个string的偏移量
+0000000000000000000000000000000000000000000000000000000000000080//这里是第二个string的偏移量
+0000000000000000000000000000000000000000000000000000000000000003//这里是第一个string的起始位置 长度为3
+636b700000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000004//这里是第一个string的起始位置 长度为4
+3032313700000000000000000000000000000000000000000000000000000000
+接下来就是将两个16进制转换成string就可以得到原有的参数了
+</code></pre>
+<p>这里的string占用都是小于32字节，如果超过了32字节是什么情况呢。</p>
+<pre><code>string[] a&quot;:[&quot;ckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckpckp&quot;,&quot;0217&quot;]
+0xd4f856c4
+0000000000000000000000000000000000000000000000000000000000000020
+0000000000000000000000000000000000000000000000000000000000000002
+0000000000000000000000000000000000000000000000000000000000000040
+00000000000000000000000000000000000000000000000000000000000000e0
+000000000000000000000000000000000000000000000000000000000000006f//长度为111 则占用了111/32+1行
+636b70636b70636b70636b70636b70636b70636b70636b70636b70636b70636b
+70636b70636b70636b70636b70636b70636b70636b70636b70636b70636b7063
+6b70636b70636b70636b70636b70636b70636b70636b70636b70636b70636b70
+636b70636b70636b70636b70636b700000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000004
+3032313700000000000000000000000000000000000000000000000000000000
+</code></pre>
+<h4 id="偏移量读取">偏移量读取</h4>
+<pre><code>这里举例静态用address 动态用bytes和[]
+如果结构是 {address,bytes[a1,a2,a3]  a,bytes[b1,b2,b3] b}
+0000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4//地址参数
+0000000000000000000000000000000000000000000000000000000000000060//a偏移量
+00000000000000000000000000000000000000000000000000000000000001a0//b偏移量
+0000000000000000000000000000000000000000000000000000000000000003//a长度
+0000000000000000000000000000000000000000000000000000000000000060//a1偏移量
+00000000000000000000000000000000000000000000000000000000000000a0//a2偏移量
+00000000000000000000000000000000000000000000000000000000000000e0//a3偏移量
+0000000000000000000000000000000000000000000000000000000000000002//a1长度
+1212000000000000000000000000000000000000000000000000000000000000//a1值
+0000000000000000000000000000000000000000000000000000000000000002//a2长度
+1212000000000000000000000000000000000000000000000000000000000000//a2值
+0000000000000000000000000000000000000000000000000000000000000002//a3长度
+1212000000000000000000000000000000000000000000000000000000000000//a3值
+0000000000000000000000000000000000000000000000000000000000000002//b长度
+0000000000000000000000000000000000000000000000000000000000000040//b1偏移量
+0000000000000000000000000000000000000000000000000000000000000080//b2偏移量
+0000000000000000000000000000000000000000000000000000000000000002//b1长度
+1212000000000000000000000000000000000000000000000000000000000000//b1值
+0000000000000000000000000000000000000000000000000000000000000002//b2长度
+1212000000000000000000000000000000000000000000000000000000000000//b1值
+</code></pre>
+<pre><code>可以看到a偏移量是96,b偏移量是416
+a1的偏移量是96 a2是160 a3是224
+b1偏移量是64 b2是128
+a的偏移量为 address所在行(32)+a偏移量所在行(32)+b偏移量所在行(32)=96
+b的偏移量为 a的偏移量(96)+a长度(32)+abc偏移量(96)+abc长度(96)+abc值(96)=416
+a1的偏移量为 abc偏移量所在行(96)
+a2的偏移量为 a1+a1长度+a1值=160
+a3的偏移量为 a2+a2长度+a2值=224
+
+a1的偏移量为 abc偏移量所在行(96)
+a2的偏移量为 a1+a1长度+a1值=160
+
+偏移量不一定是基于当前行来计算的 例如a要加上+address的偏移
+</code></pre>
+
+                  </div>
+                  <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#input-datacall-data">Input Data/Call Data</a></li>
+<li><a href="#%E7%BB%84%E6%88%90">组成</a>
+<ul>
+<li><a href="#%E6%96%B9%E6%B3%95">方法</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0">参数</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0">动态参数</a>
+<ul>
+<li><a href="#%E5%81%8F%E7%A7%BB%E9%87%8F%E8%AF%BB%E5%8F%96">偏移量读取</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                  </div>
+                </div>
+
+                <div class="page-count">
+                  
+
+                      
+                </div>
+                <div class="post-pagination inner">
+                  
+                    <div class="prev-post">
+                      <div>
+                        <a href="https://ckp-0217.github.io/post/geth-huo-qu-jiao-yi-xin-xi/">上一篇 Geth获取交易信息</a>
+
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="next-post">
+                      <div>
+                        <a href="https://ckp-0217.github.io/post/ce-shi-fang-fa/">下一篇 测试方法</a>
+
+                      </div>
+                    </div>
+                    
+                     
+                </div>
+
+          </div>
+
+
+      </div>
+
+      <!-- back to top -->
+      <button oneclik="topFunction()" id="BackToTop">
+        TOP
+      </button>
+
+      <div class="post-comment inner">
+        <div class="post-comment">
+          
+
+
+
+
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    <section>
+      <h2>Follow</h2>
+      <ul class="icons">
+        
+          
+          <li>
+            <a href="https://github.com/ckp-0217" target="_blank">
+              <i class="icon brands style2 fab fa-github"></i>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </section>
+    <ul class="copyright">
+      <li>
+        <a href="https://ckp-0217.github.io/atom.xml" target="_blank">
+          RSS
+        </a> 
+      </li>
+      <li>ckp0217@foxmail.com</li>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://ckp-0217.github.io/media/scripts/jquery.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/browser.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/breakpoints.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/util.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/main.js"></script>
+  
+    <script src="https://ckp-0217.github.io/media/scripts/prism.js"></script>
+    <script>
+      Prism.highlightAll();
+    </script>
+    
+      <script>
+        post_scroll();
+        back_to_top();
+      </script>
+</body>
+
+</html>

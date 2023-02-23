@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="区块链、web3、金融、智能合约" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AAVE V2 经济模型 | Wild</title>
+<link rel="shortcut icon" href="https://ckp-0217.github.io/favicon.ico?v=1677168066912">
+<link rel="stylesheet" href="https://ckp-0217.github.io/styles/main.css">
+
+
+    <link rel="canonical" href="https://ckp-0217.github.io/post/aave-v2-jing-ji-mo-xing/" />
+    <meta name="socialText" content="" />
+    <meta name="description" content="AAVE V2
+白皮书与官网里面详细记载了AAVE V2的改版变化以及计算公式和经济模型,这里主要通过 官方文档、白皮书、源码 详细分析一下计算公式和经济模型.
+同时V3的版本可以参见另一篇博客，虽然有V3升级，但是V2的持仓量是V3的好十..." />
+    <meta name="referrer" content="always" />
+    
+      <link rel="stylesheet" href="https://ckp-0217.github.io/media/css/katex.min.css">
+      <script defer src="https://ckp-0217.github.io/media/scripts/katex.min.js"></script>
+      <script defer src="https://ckp-0217.github.io/media/scripts/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+      
+        
+          <link rel="stylesheet" href="https://ckp-0217.github.io/media/css/prism.css">
+          
+            
+                
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://ckp-0217.github.io" class="logo">
+      
+          <span class="symbol"><img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/5899.png" alt="" />
+            
+                <img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/wild.png" alt="" />
+                
+                
+          </span>
+          
+
+
+            <div class="site-title">
+              
+              
+                <div style="font-size: 0.4em;">
+                  区块链、web3、金融、智能合约
+                </div>
+
+            </div>
+
+    </a>
+    <div id="search" style="margin-top: 10px" >
+      <div>
+        <form id="gridea-search-form" data-update="1677168066912" action="/search/index.html"><input
+            class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..." />
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+      
+          <li><a href="https://ckp-0217.github.io" class="menu">
+              主页
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/archives" class="menu">
+              归档
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/tags" class="menu">
+              标签
+            </a></li>
+          
+            
+  </ul>
+</nav>
+      <!-- Main -->
+      <div id="main">
+        <div class="tags-container-sticky">
+  
+    
+      
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/zhi-ya-jie-dai/">
+                      质押借贷 <span style="color:#ed556a;font-weight: 1000;">
+                          3
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/YpOF8hrMn/">
+                      DeFi <span style="color:#ed556a;font-weight: 1000;">
+                          5
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/yuan-ma-fen-xi/">
+                      源码分析 <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/jiao-yi-jie-xi/">
+                      交易解析 <span style="color:#ed556a;font-weight: 1000;">
+                          3
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/nft/">
+                      NFT <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/idIT1Ofe5/">
+                      开发工具 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/jin-rong-li-lun/">
+                      金融理论 <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/an-quan/">
+                      安全 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/shen-ji/">
+                      审计 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/dai-li-sheng-ji/">
+                      代理升级 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/CHkr7jZdg/">
+                      智能合约 <span style="color:#ed556a;font-weight: 1000;">
+                          5
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/he-yue-ce-shi/">
+                      合约测试 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+</div>
+          <div class="inner">
+            <div class="post-pagetitle">
+              <h1>
+                AAVE V2 经济模型
+              </h1>
+            </div>
+            <div class="post-info">
+              <time class="post-time">
+                2023-01-31
+              </time>
+              <span class="read-times">
+                18 min read
+              </span>
+              
+                <a href="https://ckp-0217.github.io/tag/yuan-ma-fen-xi/" class="post-tags">
+                  # 源码分析
+                </a>
+                
+                <a href="https://ckp-0217.github.io/tag/zhi-ya-jie-dai/" class="post-tags">
+                  # 质押借贷
+                </a>
+                
+                <a href="https://ckp-0217.github.io/tag/YpOF8hrMn/" class="post-tags">
+                  # DeFi
+                </a>
+                
+            </div>
+            
+                <div class="post-content-wrapper">
+                  <div class="post-content">
+                    <h1 id="aave-v2">AAVE V2</h1>
+<p>白皮书与官网里面详细记载了AAVE V2的改版变化以及计算公式和经济模型,这里主要通过 <strong>官方文档、白皮书、源码</strong> 详细分析一下计算公式和经济模型.<br>
+同时V3的版本可以参见另一篇博客，虽然有V3升级，但是V2的持仓量是V3的好十几倍。</p>
+<h1 id="经济模型">经济模型</h1>
+<p>作为超额抵押借贷产品，用户需要抵押资产才可以从中借出资产，当资不抵债（健康因子小于1）那么就会被清算。同时AAVE 提供稳定利率和浮动利率的借款。</p>
+<p>以下公式都是适用稳定利率和浮动利率 只是合约中配置的数值不同 只要将对应的数据代入即可</p>
+<p>同时不论是稳定还是浮动 使用的都是复利</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">本</mi><mi mathvariant="normal">息</mi><mo>=</mo><mi mathvariant="normal">本</mi><mi mathvariant="normal">金</mi><mo>∗</mo><mi mathvariant="normal">（</mi><mn>1</mn><mo>+</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><msup><mi mathvariant="normal">）</mi><mrow><mi mathvariant="normal">时</mi><mi mathvariant="normal">间</mi></mrow></msup></mrow><annotation encoding="application/x-tex">
+本息=本金*（1+利率）^{时间}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">息</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">金</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">（</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.363em;vertical-align:0em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mord"><span class="mord cjk_fallback">）</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.363em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">时</span><span class="mord cjk_fallback mtight">间</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<h2 id="资产利用率">资产利用率</h2>
+<p>通俗来说就是 总资产借出了多少比例<br>
+<strong>公式</strong></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">资</mi><mi mathvariant="normal">产</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">债</mi><mi mathvariant="normal">务</mi></mrow><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">资</mi><mi mathvariant="normal">产</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+资产利用率= \frac{总债务}{总资产}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">资</span><span class="mord cjk_fallback">产</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.739em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.394em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">资</span><span class="mord cjk_fallback mtight">产</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">债</span><span class="mord cjk_fallback mtight">务</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p><strong>代码</strong></p>
+<pre><code>    //计s算当前利用率
+    vars.utilizationRate = vars.totalDebt == 0
+      ? 0
+      : vars.totalDebt.rayDiv(availableLiquidity.add(vars.totalDebt));
+</code></pre>
+<h2 id="稳定浮动-利率">稳定/浮动 利率</h2>
+<p>在借款时可以选择稳定利率和浮动利率。<br>
+稳定利率：在贷款期间利率是不变的。稳定利率会大于当前浮动利率<br>
+浮动利率：在贷款期间利率会随着利用率的变化而变化。<br>
+同时利率会根据市场的需求情况（利用率）变化，是一条折线图。<br>
+<img src="http://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/AAVE%20v2%20DAI%20Rate.png" alt="image" loading="lazy"><br>
+<strong>公式</strong></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>=</mo><mrow><mo fence="true">{</mo><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi mathvariant="normal">基</mi><mi mathvariant="normal">准</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>+</mo><mfrac><mrow><mi mathvariant="normal">资</mi><mi mathvariant="normal">金</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi></mrow><mrow><mi mathvariant="normal">期</mi><mi mathvariant="normal">望</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">优</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi></mrow></mfrac><mo>∗</mo><mi>R</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>S</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mn>1</mn><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi mathvariant="normal">资</mi><mi mathvariant="normal">金</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi><mo>&lt;</mo><mo>=</mo><mi mathvariant="normal">期</mi><mi mathvariant="normal">望</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">优</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi mathvariant="normal">基</mi><mi mathvariant="normal">准</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>+</mo><mi>R</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>S</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mn>1</mn><mo>+</mo><mfrac><mrow><mi mathvariant="normal">资</mi><mi mathvariant="normal">金</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi><mo>−</mo><mi mathvariant="normal">期</mi><mi mathvariant="normal">望</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">优</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi></mrow><mrow><mn>1</mn><mo>−</mo><mi mathvariant="normal">期</mi><mi mathvariant="normal">望</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">优</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi></mrow></mfrac><mo>∗</mo><mi>R</mi><mi>a</mi><mi>t</mi><mi>e</mi><mi>S</mi><mi>l</mi><mi>o</mi><mi>p</mi><mi>e</mi><mn>2</mn><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi mathvariant="normal">资</mi><mi mathvariant="normal">金</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi><mo>&gt;</mo><mi mathvariant="normal">期</mi><mi mathvariant="normal">望</mi><mi mathvariant="normal">最</mi><mi mathvariant="normal">优</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+利率=\begin{cases} 
+		基准利率+\frac{资金利用率}{期望最优利用率}*RateSlope1, &amp; 资金利用率&lt;=期望最优利用率\\ 
+		基准利率 + RateSlope1+ \frac{资金利用率-期望最优利用率}{1-期望最优利用率}*RateSlope2, &amp; 资金利用率&gt;期望最优利用率\\
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord cjk_fallback">基</span><span class="mord cjk_fallback">准</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.394em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">期</span><span class="mord cjk_fallback mtight">望</span><span class="mord cjk_fallback mtight">最</span><span class="mord cjk_fallback mtight">优</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">用</span><span class="mord cjk_fallback mtight">率</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">资</span><span class="mord cjk_fallback mtight">金</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">用</span><span class="mord cjk_fallback mtight">率</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mord">1</span><span class="mpunct">,</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord cjk_fallback">基</span><span class="mord cjk_fallback">准</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.802331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">−</span><span class="mord cjk_fallback mtight">期</span><span class="mord cjk_fallback mtight">望</span><span class="mord cjk_fallback mtight">最</span><span class="mord cjk_fallback mtight">优</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">用</span><span class="mord cjk_fallback mtight">率</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">资</span><span class="mord cjk_fallback mtight">金</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">用</span><span class="mord cjk_fallback mtight">率</span><span class="mbin mtight">−</span><span class="mord cjk_fallback mtight">期</span><span class="mord cjk_fallback mtight">望</span><span class="mord cjk_fallback mtight">最</span><span class="mord cjk_fallback mtight">优</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">用</span><span class="mord cjk_fallback mtight">率</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span><span class="mord">2</span><span class="mpunct">,</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord cjk_fallback">资</span><span class="mord cjk_fallback">金</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord cjk_fallback">期</span><span class="mord cjk_fallback">望</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">优</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord cjk_fallback">资</span><span class="mord cjk_fallback">金</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord cjk_fallback">期</span><span class="mord cjk_fallback">望</span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">优</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p><strong>代码</strong></p>
+<pre><code>    //如果当前利用率大于期望利用率
+    if (vars.utilizationRate &gt; OPTIMAL_UTILIZATION_RATE) {
+      //（利用率-期望利用率）/（1-期望利用率）
+      uint256 excessUtilizationRateRatio =
+        vars.utilizationRate.sub(OPTIMAL_UTILIZATION_RATE).rayDiv(EXCESS_UTILIZATION_RATE);
+      //基准利率（0）+RateSlope1+（利用率-期望利用率）/（1-期望利用率）*RateSlope2
+      vars.currentStableBorrowRate = vars.currentStableBorrowRate.add(_stableRateSlope1).add(
+        _stableRateSlope2.rayMul(excessUtilizationRateRatio)
+      );
+
+      vars.currentVariableBorrowRate = _baseVariableBorrowRate.add(_variableRateSlope1).add(
+        _variableRateSlope2.rayMul(excessUtilizationRateRatio)
+      );
+    } else {
+      //资金利用率/期望最优利用率*RateSlope1
+      vars.currentStableBorrowRate = vars.currentStableBorrowRate.add(
+        _stableRateSlope1.rayMul(vars.utilizationRate.rayDiv(OPTIMAL_UTILIZATION_RATE))
+      );
+      vars.currentVariableBorrowRate = _baseVariableBorrowRate.add(
+        vars.utilizationRate.rayMul(_variableRateSlope1).rayDiv(OPTIMAL_UTILIZATION_RATE)
+      );
+    }
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="http://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/AAVE%20v2%20DAI%20RateSlope.png" alt="image" loading="lazy"></figure>
+<p>利率与资金利用率呈正相关 市场需求越多利率越高 反之越低</p>
+<h2 id="平均稳定借款利率">平均稳定借款利率</h2>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi mathvariant="normal">平</mi><mi mathvariant="normal">均</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi></mrow><mo stretchy="true">‾</mo></mover><mo>=</mo><mfrac><mrow><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi mathvariant="normal">利</mi><msub><mi mathvariant="normal">率</mi><mi>k</mi></msub><mo>∗</mo><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mi>k</mi></msub></mrow><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+\overline{平均借贷利率}=\frac{\sum\limits_{k=1}^n利率_k*数量_k} {总数量}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord overline"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.2em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">平</span><span class="mord cjk_fallback">均</span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">贷</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span></span></span><span style="top:-3.12em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.373907em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.028907em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-4.0485235em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop op-limits mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4005478571428571em;"><span style="top:-1.8379664285714286em;margin-left:0em;"><span class="pstrut" style="height:2.75em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-2.7500050000000003em;"><span class="pstrut" style="height:2.75em;"></span><span><span class="mop op-symbol small-op mtight">∑</span></span></span><span style="top:-3.700005em;margin-left:0em;"><span class="pstrut" style="height:2.75em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.0550335714285715em;"><span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord cjk_fallback mtight">利</span><span class="mord mtight"><span class="mord cjk_fallback mtight">率</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>如果这个区块没有借出或归还 那么借贷率是不变<br>
+如果发生一笔借款或是还款 利率就会变化 假设借还 数量m和利率m<br>
+<strong>借款</strong></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi mathvariant="normal">平</mi><mi mathvariant="normal">均</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><msub><mi mathvariant="normal">率</mi><mi>n</mi></msub></mrow><mo stretchy="true">‾</mo></mover><mo>=</mo><mfrac><mrow><mover accent="true"><mrow><mi mathvariant="normal">平</mi><mi mathvariant="normal">均</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><msub><mi mathvariant="normal">率</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo stretchy="true">‾</mo></mover><mo>∗</mo><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mi>m</mi></msub><mo>∗</mo><mi mathvariant="normal">利</mi><msub><mi mathvariant="normal">率</mi><mi>m</mi></msub></mrow><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mi>n</mi></msub><mo>+</mo><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mi>m</mi></msub></mrow></mfrac><mspace linebreak="newline"></mspace></mrow><annotation encoding="application/x-tex">
+\overline{平均借贷利率_n}=\frac{\overline{平均借贷利率_{n-1}}*数量_{n-1}+数量_m*利率_m} {总数量_n+数量_m}\\
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5168699999999999em;vertical-align:-0.15em;"></span><span class="mord overline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3513919999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">平</span><span class="mord cjk_fallback">均</span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">贷</span><span class="mord cjk_fallback">利</span><span class="mord"><span class="mord cjk_fallback">率</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.271392em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.305196em;vertical-align:-0.44509999999999994em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.860096em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.451765em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord overline mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.5623142857142858em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mtight"><span class="mord cjk_fallback mtight">平</span><span class="mord cjk_fallback mtight">均</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">利</span><span class="mord mtight"><span class="mord cjk_fallback mtight">率</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3173142857142857em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20252142857142857em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.464314285714286em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line mtight" style="border-bottom-width:0.049em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20252142857142857em;"><span></span></span></span></span></span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3173142857142857em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20252142857142857em;"><span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">利</span><span class="mord mtight"><span class="mord cjk_fallback mtight">率</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span></span></span></p>
+<p><strong>还款</strong></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi mathvariant="normal">平</mi><mi mathvariant="normal">均</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><msub><mi mathvariant="normal">率</mi><mi>n</mi></msub></mrow><mo stretchy="true">‾</mo></mover><mo>=</mo><mfrac><mrow><mover accent="true"><mrow><mi mathvariant="normal">平</mi><mi mathvariant="normal">均</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><msub><mi mathvariant="normal">率</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><mo stretchy="true">‾</mo></mover><mo>∗</mo><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mi>m</mi></msub><mo>∗</mo><mi mathvariant="normal">利</mi><msub><mi mathvariant="normal">率</mi><mi>m</mi></msub></mrow><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mi>n</mi></msub><mo>−</mo><mi mathvariant="normal">数</mi><msub><mi mathvariant="normal">量</mi><mi>m</mi></msub></mrow></mfrac><mspace linebreak="newline"></mspace></mrow><annotation encoding="application/x-tex">
+\overline{平均借贷利率_n}=\frac{\overline{平均借贷利率_{n-1}}*数量_{n-1}-数量_m*利率_m} {总数量_n-数量_m}\\
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5168699999999999em;vertical-align:-0.15em;"></span><span class="mord overline"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3513919999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord cjk_fallback">平</span><span class="mord cjk_fallback">均</span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">贷</span><span class="mord cjk_fallback">利</span><span class="mord"><span class="mord cjk_fallback">率</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.271392em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line" style="border-bottom-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.305196em;vertical-align:-0.44509999999999994em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.860096em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.451765em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord overline mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.5623142857142858em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mtight"><span class="mord cjk_fallback mtight">平</span><span class="mord cjk_fallback mtight">均</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">利</span><span class="mord mtight"><span class="mord cjk_fallback mtight">率</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3173142857142857em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20252142857142857em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.464314285714286em;"><span class="pstrut" style="height:3em;"></span><span class="overline-line mtight" style="border-bottom-width:0.049em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20252142857142857em;"><span></span></span></span></span></span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3173142857142857em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.20252142857142857em;"><span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord cjk_fallback mtight">数</span><span class="mord mtight"><span class="mord cjk_fallback mtight">量</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">利</span><span class="mord mtight"><span class="mord cjk_fallback mtight">率</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span></span></span></p>
+<p><strong>借款代码</strong></p>
+<pre><code>
+    vars.currentAvgStableRate = _avgStableRate = vars
+      .currentAvgStableRate//当前借贷平均借贷利率
+      .rayMul(vars.previousSupply.wadToRay())//*之前借贷数量
+      .add(rate.rayMul(vars.amountInRay))//加上利率*数量
+      .rayDiv(vars.nextSupply.wadToRay());//除上更新后总数量
+</code></pre>
+<p><strong>还款代码</strong></p>
+<pre><code>
+    //因为分开计算 并且使用高精度乘法与除法 会有轻微误差 防止uint异常
+        if (previousSupply &lt;= amount) {
+        //如果用户的数量超过了池子贷款数量 直接清空了
+        //那么 平均利率和总借款 就都是0
+          _avgStableRate = 0;
+          _totalSupply = 0;
+        } else {
+        //这里要计算一下用户的 利率*借款 是不是超过了 平均*总借款
+        //不然相减会直接异常
+          nextSupply = _totalSupply = previousSupply.sub(amount);
+          uint256 firstTerm = _avgStableRate.rayMul(previousSupply.wadToRay());
+          uint256 secondTerm = userStableRate.rayMul(amount.wadToRay());
+        //同上
+          if (secondTerm &gt;= firstTerm) {
+            newAvgStableRate = _avgStableRate = _totalSupply = 0;
+          } else {
+            //平均利率=（当前平均利率*之前总借款数量-用户的还款数量*利率）/(之前总借款数量-还款)
+            newAvgStableRate = _avgStableRate = firstTerm.sub(secondTerm).rayDiv(nextSupply.wadToRay());
+          }
+        }
+</code></pre>
+<h2 id="当前流动性利率">当前流动性利率</h2>
+<p>当前的流动性利率表示 每单位流动性可以产生的利息是多少</p>
+<p>易得</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">当</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">当</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">息</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">当</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+当前的流动性利率=\frac{当前利息率*当前借贷数量}{总的流动性}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">前</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">性</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.064696em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.719696em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">的</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span><span class="mord cjk_fallback mtight">性</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">当</span><span class="mord cjk_fallback mtight">前</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">息</span><span class="mord cjk_fallback mtight">率</span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">当</span><span class="mord cjk_fallback mtight">前</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>其中</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">当</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">息</mi><mi mathvariant="normal">率</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi><mo>+</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow><mrow><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi><mo>+</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+当前利息率=\frac{稳定借贷利率*稳定借贷数量+流动借贷利率*流动借贷数量}{稳定+流动借贷数量}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">前</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">息</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.205662em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.802331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">稳</span><span class="mord cjk_fallback mtight">定</span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">稳</span><span class="mord cjk_fallback mtight">定</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">率</span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">稳</span><span class="mord cjk_fallback mtight">定</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">率</span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>又因</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi mathvariant="normal">当</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi></mrow></mfrac><mo>=</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi></mrow><annotation encoding="application/x-tex">
+\frac{当前借贷数量}{总的流动性}=利用率
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.739em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.394em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">的</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span><span class="mord cjk_fallback mtight">性</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">当</span><span class="mord cjk_fallback mtight">前</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span></span></span></span></p>
+<p>则</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">当</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi><mo>+</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow></mfrac><mo>∗</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">率</mi></mrow><annotation encoding="application/x-tex">
+当前的流动性利率=\frac{稳定借贷利率*稳定借贷数量+流动借贷利率*流动借贷数量}{总借贷数量}*利用率
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">前</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">性</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1473309999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.802331em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">稳</span><span class="mord cjk_fallback mtight">定</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">率</span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">稳</span><span class="mord cjk_fallback mtight">定</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">率</span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">贷</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">率</span></span></span></span><br>
+$<br>
+当前的流动性利率=平均借贷利率<em>资金利用率\<br>
+本息=本</em>（流动性利用率*时间+1）</p>
+<pre><code>**代码**
+
+        //计算当前流动性利率
+
+        //稳定借贷利率*稳定借贷数量
+        uint256 weightedVariableRate = 
+            totalVariableDebt.wadToRay().rayMul(currentVariableBorrowRate);
+        //流动借贷利率*流动借贷数量
+        uint256 weightedStableRate = 
+            totalStableDebt.wadToRay().rayMul(currentAverageStableBorrowRate);
+        //相加除 稳定+流动借贷数量
+        uint256 overallBorrowRate =
+            weightedVariableRate.add(weightedStableRate).rayDiv(totalDebt.wadToRay());  
+        //乘上 利用率 这里有百分比乘法 同时减去移入储备金的利率
+        vars.currentLiquidityRate = overallBorrowRate  
+            .rayMul(vars.utilizationRate)
+            .percentMul(PercentageMath.PERCENTAGE_FACTOR.sub(reserveFactor));
+</code></pre>
+<h2 id="atoken">aToken</h2>
+<p>AAVE将供应的Token 转移给aToken 同时给用户铸造aToken。<br>
+compound也是使用同种方式来存储用户的供应<br>
+但是不同的是compound的atoken与原生token不是1:1<br>
+而AAVE 则是可以1:1兑换的 随之用户aToken的数量是会变化的。</p>
+<h3 id="atoken-变化">aToken 变化</h3>
+<p>出于成本和设计 智能合约是无法做到每个区块入息时都更新所有用户的资产</p>
+<p>AAVE 通过维护一个<strong>流动性指数</strong>可以理解成汇率<br>
+底层资产不变 通过改变汇率就可以更新aToken的数量</p>
+<p>当查阅资产的时候 底层资产会乘上当前流动性指数<br>
+当用户查询这个aToken的数量时 balance会乘上实时汇率（只会增不会减少）<br>
+这样就做到aToken的数量时递增的 并且和token的兑换是1:1<br>
+aToken随着每个区块都在递增 让人心情愉悦</p>
+<p>相应的当token转换成aToken时候 底层存储的是balance=amount/指数</p>
+<pre><code> uint256 cumulatedLiquidityInterest =
+            MathUtils.calculateLinearInterest(currentLiquidityRate, timestamp);
+          newLiquidityIndex = cumulatedLiquidityInterest.rayMul(liquidityIndex);
+</code></pre>
+<h3 id="流动性指数">流动性指数</h3>
+<p>liquidityIndex<br>
+对于每一个aToken 都有一个流动性指数<br>
+这个流动性指数是一个累计值<br>
+类似于汇率 表示每单位的原始底层资产 可以兑换多少的aToken 也就是每单位的本金+收益<br>
+当用户供应和销毁时 aToken中会记录原始资产的数值</p>
+<blockquote>
+<p>例如 当 指数为2时 存入100个usdc</p>
+</blockquote>
+<pre><code>    100/2 =&gt; 最终铸造的是50个
+    uint256 amountScaled = amount.rayDiv(index);
+    require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT);
+    _mint(user, amountScaled);
+</code></pre>
+<p><strong>公式</strong></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">指</mi><mi mathvariant="normal">数</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi></mrow><mrow><mi mathvariant="normal">底</mi><mi mathvariant="normal">层</mi><mi mathvariant="normal">资</mi><mi mathvariant="normal">产</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+指数 = \frac{总流动}{底层资产}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">指</span><span class="mord cjk_fallback">数</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.739em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.394em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">底</span><span class="mord cjk_fallback mtight">层</span><span class="mord cjk_fallback mtight">资</span><span class="mord cjk_fallback mtight">产</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><br>
+因为利息是按区块结算<br>
+所以每一个区块的第一笔交易 会触发利息计算<br>
+则可能是</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mo>=</mo><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi>n</mi><mo>−</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">性</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">化</mi><mspace linebreak="newline"></mspace><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">化</mi><mo>=</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">息</mi><mo>+</mo><mi mathvariant="normal">存</mi><mi mathvariant="normal">入</mi><mi mathvariant="normal">或</mi><mi mathvariant="normal">取</mi><mi mathvariant="normal">出</mi></mrow><annotation encoding="application/x-tex">
+总流动 = 总流动n-1 + 流行性变化\\
+流动性变化 = 利息 + 存入或取出
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">性</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">化</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">性</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">化</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">息</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">入</span><span class="mord cjk_fallback">或</span><span class="mord cjk_fallback">取</span><span class="mord cjk_fallback">出</span></span></span></span></p>
+<p>假设当前是 存入（取出同理）</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mo>=</mo><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi>n</mi><mo>−</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">息</mi><mo>+</mo><mi mathvariant="normal">存</mi><mi mathvariant="normal">入</mi></mrow><annotation encoding="application/x-tex">
+总流动 = 总流动n-1 + 利息 + 存入
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">息</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">入</span></span></span></span><br>
+因为利息应该是前一次计算到当前区块累计的（在这个区块开始时就入账了）<br>
+可以这一步拆成两步 0 1 2 （3个状态）</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mn>1</mn><mo>=</mo><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mn>0</mn><mo>+</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">息</mi><mspace linebreak="newline"></mspace><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mn>2</mn><mo>=</mo><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mn>1</mn><mo>+</mo><mi mathvariant="normal">存</mi><mi mathvariant="normal">入</mi></mrow><annotation encoding="application/x-tex">
+总流动1 = 总流动0 + 利息\\
+总流动2 = 总流动1 + 存入
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">息</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">存</span><span class="mord cjk_fallback">入</span></span></span></span></p>
+<p>那么此时的汇率就是</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">指</mi><mi mathvariant="normal">数</mi><mn>1</mn><mo>=</mo><mi mathvariant="normal">（</mi><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mn>0</mn><mo>+</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">息</mi><mi mathvariant="normal">）</mi><mi mathvariant="normal">/</mi><mi mathvariant="normal">底</mi><mi mathvariant="normal">层</mi><mi mathvariant="normal">资</mi><mi mathvariant="normal">产</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">
+指数1 = （总流动0 + 利息） / 底层资产0
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord cjk_fallback">指</span><span class="mord cjk_fallback">数</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">（</span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">息</span><span class="mord cjk_fallback">）</span><span class="mord">/</span><span class="mord cjk_fallback">底</span><span class="mord cjk_fallback">层</span><span class="mord cjk_fallback">资</span><span class="mord cjk_fallback">产</span><span class="mord">0</span></span></span></span><br>
+因为</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">利</mi><mi mathvariant="normal">息</mi><mo>=</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><msub><mi mathvariant="normal">动</mi><mn>0</mn></msub><mo>∗</mo><mi mathvariant="normal">时</mi><mi mathvariant="normal">间</mi><mspace linebreak="newline"></mspace></mrow><annotation encoding="application/x-tex">
+利息 = 流动性利率*总流动_0*时间\\
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">息</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">性</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61528em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">流</span><span class="mord"><span class="mord cjk_fallback">动</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">间</span></span><span class="mspace newline"></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mn>1</mn></msub><mo>=</mo><mfrac><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><msub><mi mathvariant="normal">动</mi><mn>0</mn></msub><mo>+</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">时</mi><mi mathvariant="normal">间</mi><mo>∗</mo><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><msub><mi mathvariant="normal">动</mi><mn>0</mn></msub></mrow><mrow><mi mathvariant="normal">底</mi><mi mathvariant="normal">层</mi><mi mathvariant="normal">流</mi><msub><mi mathvariant="normal">动</mi><mn>0</mn></msub></mrow></mfrac><mspace linebreak="newline"></mspace><mfrac><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">流</mi><msub><mi mathvariant="normal">动</mi><mn>0</mn></msub></mrow><mrow><mi mathvariant="normal">底</mi><mi mathvariant="normal">层</mi><mi mathvariant="normal">流</mi><msub><mi mathvariant="normal">动</mi><mn>0</mn></msub></mrow></mfrac><mo>=</mo><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">
+    指数_1=\frac{总流动_0+流动性利率*时间*总流动_0}{底层流动_0}\\
+    \frac{总流动_0}{底层流动_0}= 指数_0
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5168699999999999em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">指</span><span class="mord"><span class="mord cjk_fallback">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.263531em;vertical-align:-0.44509999999999994em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8184309999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">底</span><span class="mord cjk_fallback mtight">层</span><span class="mord cjk_fallback mtight">流</span><span class="mord mtight"><span class="mord cjk_fallback mtight">动</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4101em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">流</span><span class="mord mtight"><span class="mord cjk_fallback mtight">动</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">流</span><span class="mord cjk_fallback mtight">动</span><span class="mord cjk_fallback mtight">性</span><span class="mord cjk_fallback mtight">利</span><span class="mord cjk_fallback mtight">率</span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">时</span><span class="mord cjk_fallback mtight">间</span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">流</span><span class="mord mtight"><span class="mord cjk_fallback mtight">动</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:1.0773199999999998em;vertical-align:-0.44509999999999994em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.63222em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">底</span><span class="mord cjk_fallback mtight">层</span><span class="mord cjk_fallback mtight">流</span><span class="mord mtight"><span class="mord cjk_fallback mtight">动</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4101em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">流</span><span class="mord mtight"><span class="mord cjk_fallback mtight">动</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.45110799999999995em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">指</span><span class="mord"><span class="mord cjk_fallback">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><br>
+则<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mn>1</mn></msub><mo>=</mo><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mn>0</mn></msub><mo>∗</mo><mi mathvariant="normal">（</mi><mn>1</mn><mo>+</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi mathvariant="normal">时</mi><mi mathvariant="normal">间</mi><mi mathvariant="normal">）</mi></mrow><annotation encoding="application/x-tex">
+指数_1 = 指数_0 *（1 + 流动性利率*时间）
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5168699999999999em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">指</span><span class="mord"><span class="mord cjk_fallback">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.61528em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">指</span><span class="mord"><span class="mord cjk_fallback">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">（</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">性</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">间</span><span class="mord cjk_fallback">）</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mn>2</mn></msub><mo>=</mo><mfrac><mrow><mi mathvariant="normal">底</mi><mi mathvariant="normal">层</mi><mi mathvariant="normal">资</mi><msub><mi mathvariant="normal">产</mi><mn>0</mn></msub><mo>∗</mo><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mn>1</mn></msub><mo>+</mo><mi mathvariant="normal">存</mi><mi mathvariant="normal">入</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow><mrow><mi mathvariant="normal">底</mi><mi mathvariant="normal">层</mi><mi mathvariant="normal">资</mi><msub><mi mathvariant="normal">产</mi><mn>0</mn></msub><mo>+</mo><mi mathvariant="normal">存</mi><mi mathvariant="normal">入</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi><mi mathvariant="normal">/</mi><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">
+指数_2 = \frac{底层资产_0 * 指数_1 + 存入数量}{底层资产_0 + 存入数量/指数_1}= 指数_1
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5168699999999999em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">指</span><span class="mord"><span class="mord cjk_fallback">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.338431em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8184309999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">底</span><span class="mord cjk_fallback mtight">层</span><span class="mord cjk_fallback mtight">资</span><span class="mord mtight"><span class="mord cjk_fallback mtight">产</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">存</span><span class="mord cjk_fallback mtight">入</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span><span class="mord mtight">/</span><span class="mord cjk_fallback mtight">指</span><span class="mord mtight"><span class="mord cjk_fallback mtight">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4101em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">底</span><span class="mord cjk_fallback mtight">层</span><span class="mord cjk_fallback mtight">资</span><span class="mord mtight"><span class="mord cjk_fallback mtight">产</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">指</span><span class="mord mtight"><span class="mord cjk_fallback mtight">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">存</span><span class="mord cjk_fallback mtight">入</span><span class="mord cjk_fallback mtight">数</span><span class="mord cjk_fallback mtight">量</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.45110799999999995em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">指</span><span class="mord"><span class="mord cjk_fallback">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><br>
+所以我们不需要考虑更新指数2</p>
+<p>但是有一点要注意 此时有了新的供应 那么流动性就增加了 流动性利率就会变化 所以还要更新流动性利率</p>
+<p>同时对于不是区块第一笔交易 这笔交易没有利息收入 就更加不用考虑更新指数</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mi>n</mi></msub><mo>=</mo><mi mathvariant="normal">指</mi><msub><mi mathvariant="normal">数</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>∗</mo><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mi mathvariant="normal">流</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">性</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>∗</mo><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">
+指数_n = 指数_{n-1}*{(1+ 流动性利率*time)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5168699999999999em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">指</span><span class="mord"><span class="mord cjk_fallback">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.673611em;vertical-align:-0.208331em;"></span><span class="mord cjk_fallback">指</span><span class="mord"><span class="mord cjk_fallback">数</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord cjk_fallback">流</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">性</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mclose">)</span></span></span></span></span></p>
+<pre><code>if (currentLiquidityRate &gt; 0) {//如果流动性利率等于0 利息为0也不需要计算
+     //先计算 1 + 流动性利率*时间
+      uint256 cumulatedLiquidityInterest =
+        MathUtils.calculateLinearInterest(currentLiquidityRate, timestamp);
+    //相乘    
+      newLiquidityIndex = cumulatedLiquidityInterest.rayMul(liquidityIndex);
+      require(newLiquidityIndex &lt;= type(uint128).max, Errors.RL_LIQUIDITY_INDEX_OVERFLOW);
+    //更新
+      reserve.liquidityIndex = uint128(newLiquidityIndex);
+
+</code></pre>
+<h2 id="debttoken">DebtToken</h2>
+<p>AAVE 拥有两种DebtToken 债务代币<br>
+将所有借出的资产 通过DebtToken来记录<br>
+同时债务Token也是与原生资产1:1<br>
+同dToken也是会变化的 记录的原始借款 通过浮动借贷指数来计算<br>
+如果用户没有归还和清算 DebtToken是只会增加的<br>
+两种token都应该使用对应的指数来表示</p>
+<p>同时这两个token没有 transfer 方法</p>
+<h3 id="浮动借贷指数">浮动借贷指数</h3>
+<p>variableBorrowIndex<br>
+对于每一个token都有一个浮动借贷指数</p>
+<p>因为用户借贷后这个浮动利率是会不断变化的 类似于挖矿的收益率<br>
+类似于流动性指数<br>
+这个浮动借贷指数是一个累计值<br>
+类似于汇率 表示每单位的原始借款 可以兑换多少<br>
+当用户供应和销毁时 dToken中会记录原始借贷的数值</p>
+<blockquote>
+<p>例如 当 指数为2时 借出100个usdc</p>
+</blockquote>
+<pre><code>    //最终记录 铸造50个债务token
+    uint256 amountScaled = amount.rayDiv(index);
+    require(amountScaled != 0, Errors.CT_INVALID_MINT_AMOUNT);
+    _mint(onBehalfOf, amountScaled);
+
+</code></pre>
+<p><strong>更新公式</strong><br>
+同流动性指数一般 借入偿还可以忽视</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">浮</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">指</mi><mi mathvariant="normal">数</mi><mo>=</mo><mi mathvariant="normal">总</mi><mi mathvariant="normal">浮</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">/</mi><mi mathvariant="normal">底</mi><mi mathvariant="normal">层</mi><mi mathvariant="normal">资</mi><mi mathvariant="normal">产</mi></mrow><annotation encoding="application/x-tex">
+浮动借贷指数 = 总浮动借贷/底层资产
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">浮</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">贷</span><span class="mord cjk_fallback">指</span><span class="mord cjk_fallback">数</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">浮</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">贷</span><span class="mord">/</span><span class="mord cjk_fallback">底</span><span class="mord cjk_fallback">层</span><span class="mord cjk_fallback">资</span><span class="mord cjk_fallback">产</span></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">浮</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mo>=</mo><mi mathvariant="normal">本</mi><mi mathvariant="normal">息</mi><mo>+</mo><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">浮</mi><mi mathvariant="normal">动</mi></mrow><annotation encoding="application/x-tex">
+总浮动借贷 = 本息 + 借贷浮动
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">浮</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">贷</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">息</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">贷</span><span class="mord cjk_fallback">浮</span><span class="mord cjk_fallback">动</span></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">本</mi><mi mathvariant="normal">息</mi><mo>=</mo><mi mathvariant="normal">本</mi><mi mathvariant="normal">金</mi><mo>∗</mo><mi mathvariant="normal">（</mi><mn>1</mn><mo>+</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><msup><mi mathvariant="normal">）</mi><mrow><mi mathvariant="normal">时</mi><mi mathvariant="normal">间</mi></mrow></msup></mrow><annotation encoding="application/x-tex">
+本息=本金*（1+利率）^{时间}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">息</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">金</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">（</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.363em;vertical-align:0em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mord"><span class="mord cjk_fallback">）</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.363em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">时</span><span class="mord cjk_fallback mtight">间</span></span></span></span></span></span></span></span></span></span></span></span><br>
+这里指数使用的是复利</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi><mi>a</mi><mi>r</mi><mi>i</mi><mi>a</mi><mi>b</mi><mi>l</mi><mi>e</mi><mi>B</mi><mi>o</mi><mi>r</mi><mi>r</mi><mi>o</mi><mi>w</mi><mi>I</mi><mi>n</mi><mi>d</mi><mi>e</mi><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><mi>v</mi><mi>a</mi><mi>r</mi><mi>i</mi><mi>a</mi><mi>b</mi><mi>l</mi><mi>e</mi><mi>B</mi><mi>o</mi><mi>r</mi><mi>r</mi><mi>o</mi><mi>w</mi><mi>I</mi><mi>n</mi><mi>d</mi><mi>e</mi><msub><mi>x</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>∗</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>v</mi><mi>a</mi><mi>r</mi><mi>i</mi><mi>a</mi><mi>b</mi><mi>l</mi><mi>e</mi><mi>B</mi><mi>o</mi><mi>r</mi><mi>r</mi><mi>o</mi><mi>w</mi><mi>R</mi><mi>a</mi><mi>t</mi><msub><mi>e</mi><mi>n</mi></msub><msup><mi mathvariant="normal">）</mi><mrow><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi></mrow></msup></mrow><annotation encoding="application/x-tex">
+variableBorrowIndex_n = variableBorrowIndex_{n-1} * (1+ variableBorrowRate_n）^{ time} 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.902771em;vertical-align:-0.208331em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.974664em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mord mathdefault">a</span><span class="mord mathdefault">b</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord cjk_fallback">）</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">e</span></span></span></span></span></span></span></span></span></span></span></span><br>
+代码</p>
+<pre><code>      if (scaledVariableDebt != 0) {
+        //计算期间复利
+        uint256 cumulatedVariableBorrowInterest =
+          MathUtils.calculateCompoundedInterest(reserve.currentVariableBorrowRate, timestamp);
+        newVariableBorrowIndex = cumulatedVariableBorrowInterest.rayMul(variableBorrowIndex);
+        require(
+          newVariableBorrowIndex &lt;= type(uint128).max,
+          Errors.RL_VARIABLE_BORROW_INDEX_OVERFLOW
+        );
+        reserve.variableBorrowIndex = uint128(newVariableBorrowIndex);
+      }
+</code></pre>
+<h3 id="稳定借贷指数"><s>稳定借贷指数</s></h3>
+<p>在AAVE中没有记录这个稳定借贷指数<br>
+之所以 供应和浮动可以使用这个指数来计算 是因为在每一个时刻所有用户的利率是相同的<br>
+而稳定借贷利率 对于用户来说是各不相同的<br>
+所以用户的借款应该用<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">本</mi><mi mathvariant="normal">息</mi><mo>=</mo><mi mathvariant="normal">本</mi><mi mathvariant="normal">金</mi><mo>∗</mo><mi mathvariant="normal">（</mi><mn>1</mn><mo>+</mo><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><msup><mi mathvariant="normal">）</mi><mrow><mi mathvariant="normal">时</mi><mi mathvariant="normal">间</mi></mrow></msup></mrow><annotation encoding="application/x-tex">
+    本息=本金*（1+利率）^{时间}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">息</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord cjk_fallback">本</span><span class="mord cjk_fallback">金</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">（</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.363em;vertical-align:0em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mord"><span class="mord cjk_fallback">）</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.363em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">时</span><span class="mord cjk_fallback mtight">间</span></span></span></span></span></span></span></span></span></span></span></span><br>
+借贷<br>
+在借入时 用户的底层借贷应该是<br>
+底层借贷n = 底层借贷n-1 + 利息 + 借出数量<br>
+那么 需要mint的数量 就是</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">利</mi><mi mathvariant="normal">息</mi><mo>+</mo><mi mathvariant="normal">借</mi><mi mathvariant="normal">出</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">量</mi></mrow><annotation encoding="application/x-tex">
+利息 + 借出数量
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">息</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">出</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">量</span></span></span></span><br>
+代码</p>
+<pre><code>uint256 balanceIncrease = balanceOf(user).sub(previousPrincipalBalance);
+_mint(onBehalfOf, amount.add(balanceIncrease), vars.previousSupply);
+</code></pre>
+<p>偿还</p>
+<p>同时 原本使用利率 对于TotalSupply是不需要更新的 只需要更新index就可以<br>
+由于在没有记录index<br>
+直接更新底层资产就好了<br>
+更新的公式就是</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mi>o</mi><mi>t</mi><mi>a</mi><mi>l</mi><mi>S</mi><mi>u</mi><mi>p</mi><mi>p</mi><mi>l</mi><msub><mi>y</mi><mi>n</mi></msub><mo>=</mo><mi>T</mi><mi>o</mi><mi>t</mi><mi>a</mi><mi>l</mi><mi>S</mi><mi>u</mi><mi>p</mi><mi>p</mi><mi>l</mi><msub><mi>y</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>∗</mo><mi mathvariant="normal">（</mi><mi mathvariant="normal">平</mi><mi mathvariant="normal">均</mi><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">贷</mi><mi mathvariant="normal">利</mi><mi mathvariant="normal">率</mi><mo>+</mo><mn>1</mn><msup><mi mathvariant="normal">）</mi><mrow><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi></mrow></msup></mrow><annotation encoding="application/x-tex">
+    TotalSupply_n =  TotalSupply_{n-1}*（平均稳定借贷利率+1）^{time}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">u</span><span class="mord mathdefault">p</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.902771em;vertical-align:-0.208331em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault">u</span><span class="mord mathdefault">p</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord cjk_fallback">（</span><span class="mord cjk_fallback">平</span><span class="mord cjk_fallback">均</span><span class="mord cjk_fallback">稳</span><span class="mord cjk_fallback">定</span><span class="mord cjk_fallback">借</span><span class="mord cjk_fallback">贷</span><span class="mord cjk_fallback">利</span><span class="mord cjk_fallback">率</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.824664em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord cjk_fallback">）</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">e</span></span></span></span></span></span></span></span></span></span></span></span><br>
+代码</p>
+<pre><code>    // （平均稳定借贷利率+1）^time
+    uint256 cumulatedInterest =
+      MathUtils.calculateCompoundedInterest(avgRate, _totalSupplyTimestamp);
+    //相乘
+    return principalSupply.rayMul(cumulatedInterest);
+</code></pre>
+<h2 id="风险清算">风险清算</h2>
+<p>对于超额抵押的项目，每个币种的抵押价值比率是不同的，并且如果用户资不抵债就会触发清算，<br>
+我们拿USDC举例<br>
+来源:https://docs.aave.com/risk/v/aave-v2/asset-risk/risk-parameters</p>
+<table>
+<thead>
+<tr>
+<th>风险</th>
+<th>USDC</th>
+<th>WBTC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loan To Value 质押价值比率</td>
+<td>86%</td>
+<td>70%</td>
+</tr>
+<tr>
+<td>Liquidation Threshold 清算阈值</td>
+<td>88%</td>
+<td>75%</td>
+</tr>
+<tr>
+<td>Liquidation Bonus 清算奖励</td>
+<td>5%</td>
+<td>6.5%</td>
+</tr>
+<tr>
+<td>Reserve Factor  储备金利率</td>
+<td>10%</td>
+<td>20%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>质押价值比率<br>
+表示供应一单位可以最大借出多少单位<br>
+表示你抵押了1000的USDC 只能借出860美元的BTC</p>
+</li>
+<li>
+<p>清算阈值<br>
+表示如果你的总供应*清算阈值 不能小于 总借款<br>
+说白了就是你的不能超过清算阈值</p>
+</li>
+<li>
+<p>清算奖励<br>
+清算人在清算时将会按1:1+清算奖励的方式，来获取用户的抵押品</p>
+</li>
+</ul>
+<h2 id="dao-储备金">DAO 储备金</h2>
+<p>AAVE 每一个token都有一个储备因子 对于收益会有一部分转移到储备中<br>
+作为风险激励<br>
+reserveFactor</p>
+<p>收益 = 流动性利率 * 总流动性* 时间<br>
+收益 = 现在总借贷总和 - 前总借贷总和</p>
+<p>aave中是通过 借贷总和来相减</p>
+<p>公式</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">收</mi><mi mathvariant="normal">益</mi><mo>=</mo><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">总</mi><mi mathvariant="normal">借</mi><msub><mi mathvariant="normal">贷</mi><mi>n</mi></msub><mo>+</mo><mi mathvariant="normal">浮</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><msub><mi mathvariant="normal">贷</mi><mi>n</mi></msub><mo>−</mo><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi><mi mathvariant="normal">总</mi><mi mathvariant="normal">借</mi><msub><mi mathvariant="normal">贷</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mi mathvariant="normal">浮</mi><mi mathvariant="normal">动</mi><mi mathvariant="normal">借</mi><msub><mi mathvariant="normal">贷</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">
+收益 = 稳定总借贷_n + 浮动借贷_n - 稳定总借贷_{n-1} + 浮动借贷_{n-1} 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">收</span><span class="mord cjk_fallback">益</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">稳</span><span class="mord cjk_fallback">定</span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">借</span><span class="mord"><span class="mord cjk_fallback">贷</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord cjk_fallback">浮</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">借</span><span class="mord"><span class="mord cjk_fallback">贷</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.791661em;vertical-align:-0.208331em;"></span><span class="mord cjk_fallback">稳</span><span class="mord cjk_fallback">定</span><span class="mord cjk_fallback">总</span><span class="mord cjk_fallback">借</span><span class="mord"><span class="mord cjk_fallback">贷</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.509439em;vertical-align:-0.208331em;"></span><span class="mord cjk_fallback">浮</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">借</span><span class="mord"><span class="mord cjk_fallback">贷</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span><br>
+代码</p>
+<pre><code>    (
+      //本
+      vars.principalStableDebt,
+      //本+息
+      vars.currentStableDebt,
+      //平均稳定利率
+      vars.avgStableRate,
+      //时间
+      vars.stableSupplyUpdatedTimestamp
+    ) = IStableDebtToken(reserve.stableDebtTokenAddress).getSupplyData();
+    //计算之前的浮动累计
+    vars.previousVariableDebt = scaledVariableDebt.rayMul(previousVariableBorrowIndex);
+
+    //计算之前的浮动累计+浮动利息
+    vars.currentVariableDebt = scaledVariableDebt.rayMul(newVariableBorrowIndex);
+
+    //计算这个期间稳定借贷的利息
+    vars.cumulatedStableInterest = MathUtils.calculateCompoundedInterest(
+      vars.avgStableRate,
+      vars.stableSupplyUpdatedTimestamp,
+      timestamp
+    );
+    //稳定债务*复利
+    vars.previousStableDebt = vars.principalStableDebt.rayMul(vars.cumulatedStableInterest);
+    //应该收取的利息
+
+    //当前累计浮动-之前浮动+当前累计稳定- 之前累计（复利）
+    vars.totalDebtAccrued = vars
+      .currentVariableDebt
+      .add(vars.currentStableDebt)
+      .sub(vars.previousVariableDebt)
+      .sub(vars.previousStableDebt);
+    //相乘
+    vars.amountToMint = vars.totalDebtAccrued.percentMul(vars.reserveFactor);
+    
+</code></pre>
+<p>储备金对利率的影响<br>
+这里的储备金是将 期间收益通过mint的方式分配给储备金地址</p>
+<p>那么分配给其他用户的利息也会减少 在上面的流动性利率中被扣除的部分利率就用到了这里</p>
+<h2 id="健康因子">健康因子</h2>
+<p>当健康因子小于1，那么用户的债务就会被清算</p>
+<p>表示如果你的每一个 供应*清算阈值 小于 总借款，那么就会被清算</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">健</mi><mi mathvariant="normal">康</mi><mi mathvariant="normal">因</mi><mi mathvariant="normal">子</mi><mo>=</mo><mfrac><mrow><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi mathvariant="normal">供</mi><msub><mi mathvariant="normal">应</mi><mi>k</mi></msub><mo>∗</mo><mi mathvariant="normal">清</mi><mi mathvariant="normal">算</mi><mi mathvariant="normal">阈</mi><msub><mi mathvariant="normal">值</mi><mi>k</mi></msub></mrow><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">借</mi><mi mathvariant="normal">款</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+健康因子 = \frac{\sum\limits_{k=1}^n供应_k*清算阈值_k}{总借款}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">健</span><span class="mord cjk_fallback">康</span><span class="mord cjk_fallback">因</span><span class="mord cjk_fallback">子</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.373907em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.028907em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">借</span><span class="mord cjk_fallback mtight">款</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-4.0485235em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop op-limits mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4005478571428571em;"><span style="top:-1.8379664285714286em;margin-left:0em;"><span class="pstrut" style="height:2.75em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-2.7500050000000003em;"><span class="pstrut" style="height:2.75em;"></span><span><span class="mop op-symbol small-op mtight">∑</span></span></span><span style="top:-3.700005em;margin-left:0em;"><span class="pstrut" style="height:2.75em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.0550335714285715em;"><span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord cjk_fallback mtight">供</span><span class="mord mtight"><span class="mord cjk_fallback mtight">应</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">清</span><span class="mord cjk_fallback mtight">算</span><span class="mord cjk_fallback mtight">阈</span><span class="mord mtight"><span class="mord cjk_fallback mtight">值</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">健</mi><mi mathvariant="normal">康</mi><mi mathvariant="normal">因</mi><mi mathvariant="normal">子</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">总</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">供</mi><mi mathvariant="normal">应</mi><mo>∗</mo><mi mathvariant="normal">平</mi><mi mathvariant="normal">均</mi><mi mathvariant="normal">清</mi><mi mathvariant="normal">算</mi><mi mathvariant="normal">阈</mi><mi mathvariant="normal">值</mi></mrow><mrow><mi mathvariant="normal">浮</mi><mi mathvariant="normal">动</mi><mo>+</mo><mi mathvariant="normal">稳</mi><mi mathvariant="normal">定</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+健康因子 = \frac{总的供应*平均清算阈值}{浮动+稳定}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mord cjk_fallback">健</span><span class="mord cjk_fallback">康</span><span class="mord cjk_fallback">因</span><span class="mord cjk_fallback">子</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.123027em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.719696em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">浮</span><span class="mord cjk_fallback mtight">动</span><span class="mbin mtight">+</span><span class="mord cjk_fallback mtight">稳</span><span class="mord cjk_fallback mtight">定</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总</span><span class="mord cjk_fallback mtight">的</span><span class="mord cjk_fallback mtight">供</span><span class="mord cjk_fallback mtight">应</span><span class="mbin mtight">∗</span><span class="mord cjk_fallback mtight">平</span><span class="mord cjk_fallback mtight">均</span><span class="mord cjk_fallback mtight">清</span><span class="mord cjk_fallback mtight">算</span><span class="mord cjk_fallback mtight">阈</span><span class="mord cjk_fallback mtight">值</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><br>
+代码</p>
+<pre><code>    vars.healthFactor = calculateHealthFactorFromBalances(
+      vars.totalCollateralInETH,
+      vars.totalDebtInETH,
+      vars.avgLiquidationThreshold
+    );
+    if (totalDebtInETH == 0) return uint256(-1);
+    //健康因子 = 总质押*平均清算阈值/总负债
+    return (totalCollateralInETH.percentMul(liquidationThreshold)).wadDiv(totalDebtInETH);
+
+</code></pre>
+
+                  </div>
+                  <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li><a href="#aave-v2">AAVE V2</a></li>
+<li><a href="#%E7%BB%8F%E6%B5%8E%E6%A8%A1%E5%9E%8B">经济模型</a>
+<ul>
+<li><a href="#%E8%B5%84%E4%BA%A7%E5%88%A9%E7%94%A8%E7%8E%87">资产利用率</a></li>
+<li><a href="#%E7%A8%B3%E5%AE%9A%E6%B5%AE%E5%8A%A8-%E5%88%A9%E7%8E%87">稳定/浮动 利率</a></li>
+<li><a href="#%E5%B9%B3%E5%9D%87%E7%A8%B3%E5%AE%9A%E5%80%9F%E6%AC%BE%E5%88%A9%E7%8E%87">平均稳定借款利率</a></li>
+<li><a href="#%E5%BD%93%E5%89%8D%E6%B5%81%E5%8A%A8%E6%80%A7%E5%88%A9%E7%8E%87">当前流动性利率</a></li>
+<li><a href="#atoken">aToken</a>
+<ul>
+<li><a href="#atoken-%E5%8F%98%E5%8C%96">aToken 变化</a></li>
+<li><a href="#%E6%B5%81%E5%8A%A8%E6%80%A7%E6%8C%87%E6%95%B0">流动性指数</a></li>
+</ul>
+</li>
+<li><a href="#debttoken">DebtToken</a>
+<ul>
+<li><a href="#%E6%B5%AE%E5%8A%A8%E5%80%9F%E8%B4%B7%E6%8C%87%E6%95%B0">浮动借贷指数</a></li>
+<li><a href="#%E7%A8%B3%E5%AE%9A%E5%80%9F%E8%B4%B7%E6%8C%87%E6%95%B0"><s>稳定借贷指数</s></a></li>
+</ul>
+</li>
+<li><a href="#%E9%A3%8E%E9%99%A9%E6%B8%85%E7%AE%97">风险清算</a></li>
+<li><a href="#dao-%E5%82%A8%E5%A4%87%E9%87%91">DAO 储备金</a></li>
+<li><a href="#%E5%81%A5%E5%BA%B7%E5%9B%A0%E5%AD%90">健康因子</a></li>
+</ul>
+</li>
+</ul>
+
+                  </div>
+                </div>
+
+                <div class="page-count">
+                  
+
+                      
+                </div>
+                <div class="post-pagination inner">
+                  
+                    <div class="prev-post">
+                      <div>
+                        <a href="https://ckp-0217.github.io/post/aave-v2/">上一篇 AAVE V2</a>
+
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="next-post">
+                      <div>
+                        <a href="https://ckp-0217.github.io/post/jiao-yi-xin-xi-jie-xi/">下一篇 交易信息解析</a>
+
+                      </div>
+                    </div>
+                    
+                     
+                </div>
+
+          </div>
+
+
+      </div>
+
+      <!-- back to top -->
+      <button oneclik="topFunction()" id="BackToTop">
+        TOP
+      </button>
+
+      <div class="post-comment inner">
+        <div class="post-comment">
+          
+
+
+
+
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    <section>
+      <h2>Follow</h2>
+      <ul class="icons">
+        
+          
+          <li>
+            <a href="https://github.com/ckp-0217" target="_blank">
+              <i class="icon brands style2 fab fa-github"></i>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </section>
+    <ul class="copyright">
+      <li>
+        <a href="https://ckp-0217.github.io/atom.xml" target="_blank">
+          RSS
+        </a> 
+      </li>
+      <li>ckp0217@foxmail.com</li>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://ckp-0217.github.io/media/scripts/jquery.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/browser.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/breakpoints.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/util.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/main.js"></script>
+  
+    <script src="https://ckp-0217.github.io/media/scripts/prism.js"></script>
+    <script>
+      Prism.highlightAll();
+    </script>
+    
+      <script>
+        post_scroll();
+        back_to_top();
+      </script>
+</body>
+
+</html>
