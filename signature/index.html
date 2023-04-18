@@ -469,12 +469,12 @@
       });
     }
     function addNonceIfNotPresent(parsedFunction) {
-      const lastIndex = parsedFunction.length - 1;
-      const lastElement = parsedFunction[lastIndex];
+      const hasNonce = parsedFunction.some((element) => element.name === "nonce");
 
-      if (lastElement.name !== "nonce") {
+      if (!hasNonce) {
         parsedFunction.push({ name: "nonce", type: "uint256" });
       }
+
       return parsedFunction;
     }
     // 为每个复制按钮添加事件监听器
