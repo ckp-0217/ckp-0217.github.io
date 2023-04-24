@@ -40,11 +40,11 @@
       background-color: #4CAF50;
       border: none;
       color: white;
-      padding: 12px 20px;
+      padding: 10px 16px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      font-size: 16px;
+      font-size: 14px;
       margin: 10px 2px;
       cursor: pointer;
       border-radius: 4px;
@@ -54,7 +54,6 @@
     .output-container {
       margin-bottom: 20px;
     }
-
 
     .output-container p {
       margin: 0;
@@ -75,7 +74,25 @@
       align-items: center;
       margin-bottom: 20px;
     }
+
+    .content-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-row,
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .left-column,
+    .right-column {
+      width: 48%;
+    }
   </style>
+
 </head>
 
 <body class="is-preload">
@@ -161,51 +178,79 @@
           <p id="wallet-address">钱包地址：-</p>
         </div>
 
+        <div class="content-wrapper">
+          <div class="top-row">
+            <div class="left-column">
+              <h2>解析函数 <button id="copy-step1">复制</button> <button id="paste-step1">粘贴</button></h2>
+              <textarea id="contract-function" rows="4" cols="50" placeholder="请粘贴智能合约函数"></textarea>
+              <button id="parse-function-btn">解析函数</button>
+              <div id="inputs-container"></div>
+            </div>
+            <div class="right-column">
+              <h2>生成Domain Data<button id="copy-step2">复制</button> <button id="paste-step2">粘贴</button></h2>
+              <div class="input-container">
+                <label for="contractName">合约名称:</label>
+                <input type="text" id="contractName" name="contractName">
+              </div>
+              <div class="input-container">
+                <label for="version">版本:</label>
+                <input type="text" id="version" name="version">
+              </div>
+              <div class="input-container">
+                <label for="chainId">链ID:</label>
+                <input type="text" id="chainId" name="chainId">
+              </div>
+              <div class="input-container">
+                <label for="verifyingContract">验证合约:</label>
+                <input type="text" id="verifyingContract" name="verifyingContract">
+              </div>
+              <div class="input-container">
+                <label for="privateKey">私钥:</label>
+                <input type="text" id="privateKey" name="privateKey">
+              </div>
 
-        <h2>步骤1：解析函数 <button id="copy-step1">复制</button> <button id="paste-step1">粘贴</button></h2>
-        <textarea id="contract-function" rows="4" cols="50" placeholder="请粘贴智能合约函数"></textarea>
-        <button id="parse-function-btn">解析函数</button>
-        <div id="inputs-container"></div>
-
-        <h2>步骤2：生成Domain Data<button id="copy-step2">复制</button> <button id="paste-step2">粘贴</button></h2>
-        <div class="input-container">
-          <label for="contractName">合约名称:</label>
-          <input type="text" id="contractName" name="contractName">
+              <button id="generate-signature">生成签名</button>
+            </div>
+          </div>
+          <div class="bottom-row">
+            <div class="left-column">
+              <h2>签名结果<button id="copy-step3">复制</button> <button id="paste-step3">粘贴</button></h2>
+              <div class="output-container">
+                <p id="signature-output">signature：-</p>
+                <p id="v-output">v: -</p>
+                <p id="r-output">r: -</p>
+                <p id="s-output">s: -</p>
+                <p id="method-output">method: -</p>
+                <p id="domain-output">domain：-</p>
+                <p id="types-output">type：-</p>
+                <p id="message-output">message：-</p>
+              </div>
+            </div>
+            <div class="right-column">
+              <h2>反解析</h2>
+              <div class="input-container">
+                <label for="input-signature">输入签名:</label>
+                <input type="text" id="input-signature" name="input-signature">
+              </div>
+              <div class="input-container">
+                <label for="input-v">输入v:</label>
+                <input type="text" id="input-v" name="input-v">
+              </div>
+              <div class="input-container">
+                <label for="input-r">输入r:</label>
+                <input type="text" id="input-r" name="input-r">
+              </div>
+              <div class="input-container">
+                <label for="input-s">输入s:</label>
+                <input type="text" id="input-s" name="input-s">
+              </div>
+              <button id="recover-address">解析地址</button>
+              <p id="recovered-address">解析出的地址：-</p>
+            </div>
+          </div>
         </div>
-        <div class="input-container">
-          <label for="version">版本:</label>
-          <input type="text" id="version" name="version">
-        </div>
-        <div class="input-container">
-          <label for="chainId">链ID:</label>
-          <input type="text" id="chainId" name="chainId">
-        </div>
-        <div class="input-container">
-          <label for="verifyingContract">验证合约:</label>
-          <input type="text" id="verifyingContract" name="verifyingContract">
-        </div>
-        <div class="input-container">
-          <label for="privateKey">私钥:</label>
-          <input type="text" id="privateKey" name="privateKey">
-        </div>
-
-        <button id="generate-signature">生成签名</button>
-
-        <h2>步骤3：签名结果<button id="copy-step3">复制</button> <button id="paste-step3">粘贴</button></h2>
-        <div class="output-container">
-          <p id="signature-output">签名结果：-</p>
-          <p id="v-output">v: -</p>
-          <p id="r-output">r: -</p>
-          <p id="s-output">s: -</p>
-          <p id="recoveredAddress-output">恢复的地址：-</p>
-          <p id="domain-output">域：-</p>
-          <p id="types-output">类型：-</p>
-          <p id="message-output">消息：-</p>
-        </div>
-
-
-
       </div>
+
     </div>
 
     <!-- Footer -->
@@ -365,20 +410,22 @@
         const vOutput = document.getElementById("v-output");
         const rOutput = document.getElementById("r-output");
         const sOutput = document.getElementById("s-output");
-        const recoveredAddressOutput = document.getElementById("recoveredAddress-output");
         const domainOutput = document.getElementById("domain-output");
         const typesOutput = document.getElementById("types-output");
         const messageOutput = document.getElementById("message-output");
+        const contractFunction = document.getElementById("contract-function");
+        const methodOutput = document.getElementById("method-output");
 
         // 更新显示的值
-        signatureOutput.textContent = "签名结果：" + signature;
+        signatureOutput.textContent = "signature：" + signature;
         vOutput.textContent = "v: " + v;
         rOutput.textContent = "r: " + r;
         sOutput.textContent = "s: " + s;
-        recoveredAddressOutput.textContent = "恢复的地址：" + recoveredAddress;
-        domainOutput.textContent = "域：" + JSON.stringify(domainData.domain, null, 2);
-        typesOutput.textContent = "类型：" + JSON.stringify(domainData.types, null, 2);
-        messageOutput.textContent = "消息：" + JSON.stringify(values, null, 2);
+        domainOutput.textContent = "domain：" + JSON.stringify(domainData.domain, null, 2);
+        typesOutput.textContent = "type：" + JSON.stringify(domainData.types, null, 2);
+        messageOutput.textContent = "message：" + JSON.stringify(values, null, 2);
+        methodOutput.textContent = "method：" + contractFunction.value;
+
       } catch (error) {
         console.error(error);
         alert("签名生成失败");
@@ -512,7 +559,7 @@
           vOutput: document.getElementById("v-output").textContent,
           rOutput: document.getElementById("r-output").textContent,
           sOutput: document.getElementById("s-output").textContent,
-          recoveredAddressOutput: document.getElementById("recoveredAddress-output").textContent,
+          methodOutput: document.getElementById("method-output").textContent,
           domainOutput: document.getElementById("domain-output").textContent,
           typesOutput: document.getElementById("types-output").textContent,
           messageOutput: document.getElementById("message-output").textContent
@@ -552,11 +599,66 @@
         document.getElementById("v-output").textContent = outputData.vOutput;
         document.getElementById("r-output").textContent = outputData.rOutput;
         document.getElementById("s-output").textContent = outputData.sOutput;
-        document.getElementById("recoveredAddress-output").textContent = outputData.recoveredAddressOutput;
+        document.getElementById("method-output").textContent = outputData.methodOutput;
         document.getElementById("domain-output").textContent = outputData.domainOutput;
         document.getElementById("types-output").textContent = outputData.typesOutput;
         document.getElementById("message-output").textContent = outputData.messageOutput;
       }
+    }
+    const recoverAddressBtn = document.getElementById("recover-address");
+    recoverAddressBtn.addEventListener("click", () => {
+      const inputSignature = document.getElementById("input-signature").value;
+      const inputV = document.getElementById("input-v").value;
+      const inputR = document.getElementById("input-r").value;
+      const inputS = document.getElementById("input-s").value;
+
+      let signature;
+      if (inputSignature) {
+        signature = inputSignature;
+      } else {
+        signature = ethers.utils.joinSignature({ v: inputV, r: inputR, s: inputS });
+      }
+
+      try {
+        const domainData = {
+          domain: {
+            name: document.getElementById("contractName").value,
+            version: document.getElementById("version").value,
+            chainId: document.getElementById("chainId").value,
+            verifyingContract: document.getElementById("verifyingContract").value,
+          },
+          types: {
+            [functionInputs.functionName]: functionInputs.parameters,
+          },
+        };
+
+        let values = {};
+        inputsContainer.querySelectorAll("input").forEach((input) => {
+          values[input.name] = input.value;
+        });
+
+        const recoveredAddress = ethers.utils.verifyTypedData(domainData.domain, domainData.types, values, signature);
+        const recoveredAddressOutput = document.getElementById("recovered-address");
+
+        // 更新显示的值
+        recoveredAddressOutput.textContent = "解析出的地址：" + recoveredAddress;
+      } catch (error) {
+        console.error(error);
+        alert("解析地址失败");
+      }
+
+    });
+    function parseFunctionSignatureAndCreateInputs(functionName, types) {
+      // 解析函数签名并生成参数输入框
+      let parameters = types[functionName].map((param) => {
+        return {
+          name: param.name,
+          type: param.type,
+        };
+      });
+
+      // 根据参数列表创建输入框
+      createInputFields(parameters);
     }
 
   </script>
