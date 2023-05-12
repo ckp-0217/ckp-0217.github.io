@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="区块链、web3、金融、智能合约" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> Wild</title>
+  <link rel="shortcut icon" href="https://ckp-0217.github.io/favicon.ico?v=1677168066912">
+  <link rel="stylesheet" href="https://ckp-0217.github.io/styles/main.css">
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <style>
+    input,
+    button {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    button {
+      background-color:red;
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: red;
+    }
+
+    #chartContainer {
+      width: 100%;
+      height: 400px;
+    }
+
+    #rateInfo {
+      color: red;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Header -->
+    <header id="header">
+      <div class="inner">
+        <!-- Logo -->
+        <a href="https://ckp-0217.github.io" class="logo">
+
+          <span class="symbol"><img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/5899.png" alt="" />
+
+            <img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/wild.png" alt="" />
+
+
+          </span>
+
+
+
+          <div class="site-title">
+
+
+            <div style="font-size: 0.4em;">
+              区块链、web3、金融、智能合约
+            </div>
+
+          </div>
+
+        </a>
+        <div id="search" style="margin-top: 10px">
+          <div>
+            <form id="gridea-search-form" data-update="1677168066912" action="/search/index.html"><input
+                class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..." />
+            </form>
+          </div>
+        </div>
+
+
+        <!-- Nav -->
+        <nav>
+          <ul>
+            <li><a href="#menu">Menu</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+      <ul>
+
+
+        <li><a href="https://ckp-0217.github.io" class="menu">
+            主页
+          </a></li>
+
+
+
+        <li><a href="https://ckp-0217.github.io/archives" class="menu">
+            归档
+          </a></li>
+
+        <li><a href="https://ckp-0217.github.io/signature" class="menu">
+            签名
+          </a></li>
+
+
+
+        <li><a href="https://ckp-0217.github.io/tags" class="menu">
+            标签
+          </a></li>
+
+
+      </ul>
+    </nav>
+    <!-- Main -->
+    <div id="main">
+      <div class="inner">
+
+        <h1>定投预测</h1>
+
+        <div>
+          <label>本金: <input id="principal" type="number" value="20000"></label><br>
+          <label>月收益(%): <input id="monthlyReturn" type="number" value="1"></label><br>
+          <label>月通胀(%): <input id="monthlyInflation" type="number" value="0.5"></label><br>
+          <label>月定投: <input id="monthlyInvestment" type="number" value="2000"></label><br>
+          <label>总月份: <input id="totalMonths" type="number" value="12"></label><br>
+          <button onclick="calculate()">计算</button>
+        </div>
+
+        <div id="rateInfo"></div>
+
+        <canvas id="chartContainer"></canvas>
+
+
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <section>
+          <h2>Follow</h2>
+          <ul class="icons">
+
+
+            <li>
+              <a href="https://github.com/ckp-0217" target="_blank">
+                <i class="icon brands style2 fab fa-github"></i>
+              </a>
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </ul>
+        </section>
+        <ul class="copyright">
+          <li>
+            <a href="https://ckp-0217.github.io/atom.xml" target="_blank">
+              RSS
+            </a>
+          </li>
+          <li>ckp0217@foxmail.com</li>
+
+        </ul>
+      </div>
+    </footer>
+  </div>
+  <script>
+    let principal, monthlyReturn, monthlyInflation, monthlyInvestment, totalMonths;
+    let principalData = [], totalAssetData = [];
+
+    function calculate() {
+      principal = parseFloat(document.getElementById('principal').value);
+      monthlyReturn = parseFloat(document.getElementById('monthlyReturn').value) / 100;
+      monthlyInflation = parseFloat(document.getElementById('monthlyInflation').value) / 100;
+      monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value);
+      totalMonths = parseInt(document.getElementById('totalMonths').value);
+
+      principalData = [principal], totalAssetData = [principal], gainData = [0];
+      let cumulativePrincipal = principal;
+      let gainExceedPrincipalMonth = null;
+
+      for (let i = 0; i < totalMonths; i++) {
+        principal += monthlyInvestment;
+        let monthlyReturnAmount = principal * monthlyReturn;
+        principal += monthlyReturnAmount;
+        cumulativePrincipal += monthlyInvestment;
+        cumulativePrincipal *= (1 + monthlyInflation);
+        principalData.push(cumulativePrincipal);
+        totalAssetData.push(principal);
+        let gain = principal - cumulativePrincipal;
+        gainData.push(gain);
+        if (gainExceedPrincipalMonth === null && gain >= cumulativePrincipal) {
+          gainExceedPrincipalMonth = i + 1;
+        }
+      }
+
+      drawChart();
+      showRates(gainExceedPrincipalMonth);
+    }
+
+
+    function drawChart() {
+      var ctx = document.getElementById('chartContainer').getContext('2d');
+      if (window.myChart != undefined)
+        window.myChart.destroy();
+
+      window.myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Array.from({ length: totalMonths }, (_, i) => i + 1),
+          datasets: [{
+            label: '本金',
+            data: principalData,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+          }, {
+            label: '当前总资产',
+            data: totalAssetData,
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+          }, {
+            label: '收益',
+            data: gainData,
+            borderColor: 'rgb(153, 102, 255)',
+            tension: 0.1
+          }]
+        },
+      });
+    }
+
+
+    function showRates(gainExceedPrincipalMonth) {
+      let dailyReturn = Math.pow(1 + monthlyReturn, 1 / 30) - 1;
+      let dailyInflation = Math.pow(1 + monthlyInflation, 1 / 30) - 1;
+      let annualReturn = Math.pow(1 + monthlyReturn, 12) - 1;
+      let annualInflation = Math.pow(1 + monthlyInflation, 12) - 1;
+
+      let gainExceedPrincipalInfo = gainExceedPrincipalMonth !== null
+        ? `<p>收益超过本金在第 ${gainExceedPrincipalMonth} 个月</p>`
+        : `<p>在给定的时间内，收益没有超过本金</p>`;
+
+      document.getElementById('rateInfo').innerHTML = `
+      <p>日收益: ${(dailyReturn * 100).toFixed(2)}%</p>
+      <p>日通胀: ${(dailyInflation * 100).toFixed(2)}%</p>
+      <p>年收益: ${(annualReturn * 100).toFixed(2)}%</p>
+      <p>年通胀: ${(annualInflation * 100).toFixed(2)}%</p>
+      ${gainExceedPrincipalInfo}
+  `;
+    }
+  </script>
+  <!-- Scripts -->
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/jquery.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/browser.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/breakpoints.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/util.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  </div>
+  </div>
+</body>
+
+</html>
