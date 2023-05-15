@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>股票交易数据</title>
+    <style>
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        h2 {
+            color: #4a5568;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="holdings">
+        <h2>持仓</h2>
+    </div>
+    <div id="purchases">
+        <h2>买入</h2>
+    </div>
+    <div id="sales">
+        <h2>卖出</h2>
+    </div>
+    <div id="balance">
+        <h2>充值提现</h2>
+    </div>
+    <script>
+        function createPurchasesTable(purchasesData, containerId) {
+            var container = document.getElementById(containerId);
+            var table = document.createElement('table');
+            var header = document.createElement('tr');
+            var fields = Object.keys(purchasesData[0]).concat(["总值"]);
+            fields.forEach(function (key) {
+                var th = document.createElement('th');
+                th.textContent = key;
+                header.appendChild(th);
+            });
+            table.appendChild(header);
+            purchasesData.forEach(function (item) {
+                var row = document.createElement('tr');
+                fields.forEach(function (key) {
+                    var td = document.createElement('td');
+                    if (item.hasOwnProperty(key)) {
+                        td.textContent = item[key];
+                    } else {
+                        switch (key) {
+                            case "总值":
+                                td.textContent = item["成本价(每股)"] * item["数量"];
+                                break;
+                        }
+                    }
+                    row.appendChild(td);
+                });
+                table.appendChild(row);
+            });
+            container.appendChild(table);
+        }
+
+        function createSalesTable(salesData, containerId) {
+            var container = document.getElementById(containerId);
+            var table = document.createElement('table');
+            var header = document.createElement('tr');
+            var fields = Object.keys(salesData[0]).concat(["盈亏百分比", "盈亏值"]);
+            fields.forEach(function (key) {
+                var th = document.createElement('th');
+                th.textContent = key;
+                header.appendChild(th);
+            });
+            table.appendChild(header);
+            salesData.forEach(function (item) {
+                var row = document.createElement('tr');
+                fields.forEach(function (key) {
+                    var td = document.createElement('td');
+                    if (item.hasOwnProperty(key)) {
+                        td.textContent = item[key];
+                    } else {
+                        switch (key) {
+                            case "盈亏百分比":
+                                var costPrice = Number(item["成本价(每股)"]);
+                                var sellPrice = Number(item["卖出价"]);
+                                td.textContent = ((sellPrice / costPrice - 1) * 100).toFixed(2) + "%";
+                                console.log(costPrice,sellPrice)
+                                break;
+                            case "盈亏值":
+                                var costPrice = Number(item["成本价(每股)"]);
+                                var sellPrice = Number(item["卖出价"]);
+                                var quantity = Number(item["数量"]);
+                                td.textContent = (sellPrice - costPrice) * quantity;
+                                break;
+                        }
+                    }
+                    row.appendChild(td);
+                });
+                table.appendChild(row);
+            });
+            container.appendChild(table);
+        }
+
+        function createBalanceTable(balanceData, containerId) {
+            var container = document.getElementById(containerId);
+            var table = document.createElement('table');
+            var header = document.createElement('tr');
+            var fields = Object.keys(balanceData[0]);
+            fields.forEach(function (key) {
+                var th = document.createElement('th');
+                th.textContent = key;
+                header.appendChild(th);
+            });
+            table.appendChild(header);
+            balanceData.forEach(function (item) {
+                var row = document.createElement('tr');
+                fields.forEach(function (key) {
+                    var td = document.createElement('td');
+                    td.textContent = item[key];
+                    row.appendChild(td);
+                });
+                table.appendChild(row);
+            });
+            container.appendChild(table);
+        }
+        var balanceData = [
+            {
+                "冲提": 20000,
+                "时间": "2023-05-15T17:23:30"
+            },
+            {
+                "冲提": -5000,
+                "时间": "2023-05-16T10:15:45"
+            },
+            {
+                "冲提": 10000,
+                "时间": "2023-05-17T14:30:00"
+            },
+            {
+                "冲提": -2000,
+                "时间": "2023-05-18T11:20:30"
+            }
+        ];
+        var holdingsData = [
+            {
+                "股票名称": "苹果",
+                "股票代码": "AAPL",
+                "成本价(每股)": 150,
+                "数量": 50
+            },
+            {
+                "股票名称": "微软",
+                "股票代码": "MSFT",
+                "成本价(每股)": 200,
+                "数量": 30
+            }
+        ];
+
+        var purchasesData = [
+            {
+                "股票名称": "谷歌",
+                "股票代码": "GOOGL",
+                "成本价(每股)": 1800,
+                "数量": 10,
+                "时间": "2023-05-15T14:30:00Z"
+            },
+            {
+                "股票名称": "亚马逊",
+                "股票代码": "AMZN",
+                "成本价(每股)": 3300,
+                "数量": 5,
+                "时间": "2023-05-15T14:30:00Z"
+            }
+        ];
+
+        var salesData = [
+            {
+                "股票名称": "特斯拉",
+                "股票代码": "TSLA",
+                "成本价(每股)": 600,
+                "卖出价": 650,
+                "数量": 20,
+                "时间": "2023-05-15T14:30:00Z"
+            },
+            {
+                "股票名称": "阿里巴巴",
+                "股票代码": "BABA",
+                "成本价(每股)": 180,
+                "卖出价": 200,
+                "数量": 40,
+                "时间": "2023-05-15T14:30:00Z"
+            }
+        ];
+        createPurchasesTable(purchasesData, 'purchases');
+        createSalesTable(salesData, 'sales');
+        createBalanceTable(balanceData, 'balance');
+
+    </script>
+
+
+</body>
+
+</html>
