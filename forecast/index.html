@@ -288,10 +288,10 @@
         : `<p>在给定的时间内，收益没有超过本金</p>`;
 
       document.getElementById('rateInfo').innerHTML = `
-            <p>日收益: ${(dailyReturn * 100).toFixed(6)}%</p>
-            <p>日通胀: ${(dailyInflation * 100).toFixed(6)}%</p>
-            <p>年收益: ${(annualReturn * 100).toFixed(6)}%</p>
-            <p>年通胀: ${(annualInflation * 100).toFixed(6)}%</p>
+            <p>日收益: ${formatNumber((dailyReturn * 100))}%</p>
+            <p>日通胀: ${formatNumber((dailyInflation * 100))}%</p>
+            <p>年收益: ${formatNumber((annualReturn * 100))}%</p>
+            <p>年通胀: ${formatNumber((annualInflation * 100))}%</p>
             ${gainExceedPrincipalInfo}
         `;
     }
@@ -300,7 +300,7 @@
       if (!isNaN(monthlyReturn)) {
         let tradingDays = parseFloat(document.querySelector('input[name="tradingDays"]:checked').value);
         let dailyReturn = (Math.pow(1 + monthlyReturn / 100, 1 / tradingDays) - 1) * 100;
-        document.getElementById('dailyReturn').value = dailyReturn.toFixed(6);
+        document.getElementById('dailyReturn').value = formatNumber(dailyReturn);
       }
     }
 
@@ -309,10 +309,14 @@
       if (!isNaN(dailyReturn)) {
         let tradingDays = parseFloat(document.querySelector('input[name="tradingDays"]:checked').value);
         let monthlyReturn = Math.pow(1 + dailyReturn / 100, tradingDays) - 1;
-        document.getElementById('monthlyReturn').value = (monthlyReturn * 100).toFixed(6);
+        document.getElementById('monthlyReturn').value = formatNumber((monthlyReturn * 100));
       }
     }
-
+    function formatNumber(number) {
+    let fixedNumber = number.toFixed(6);
+    let trimmedNumber = fixedNumber.replace(/\.?0+$/, ''); // 去掉尾部多余的0
+    return trimmedNumber;
+}
   </script>
   <!-- Scripts -->
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
