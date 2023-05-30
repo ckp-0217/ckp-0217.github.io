@@ -22,7 +22,7 @@
     }
 
     button {
-      background-color:red;
+      background-color: red;
       border: none;
       color: white;
       text-align: center;
@@ -114,7 +114,7 @@
         <li><a href="https://ckp-0217.github.io/signature" class="menu">
             签名
           </a></li>
-          <li><a href="https://ckp-0217.github.io/forecast" class="menu">
+        <li><a href="https://ckp-0217.github.io/forecast" class="menu">
             预测
           </a></li>
 
@@ -134,16 +134,24 @@
 
         <div>
           <label>本金: <input id="principal" type="number" value="20000"></label><br>
-          <label>月收益(%): <input id="monthlyReturn" type="number" value="1"></label><br>
+          <label>月收益(%): <input id="monthlyReturn" type="number" value="1" oninput="updateDailyReturn()"></label><br>
+          <label>日收益(%): <input id="dailyReturn" type="number" value="0" oninput="updateMonthlyReturn()"></label><br>
           <label>月通胀(%): <input id="monthlyInflation" type="number" value="0.5"></label><br>
           <label>月定投: <input id="monthlyInvestment" type="number" value="2000"></label><br>
           <label>总月份: <input id="totalMonths" type="number" value="12"></label><br>
+          <label>交易规则:
+            <input type="radio" id="tradingDays_21.4" name="tradingDays" value="21.4" checked>
+            <label for="tradingDays_21.4">21.4交易日</label>
+            <input type="radio" id="tradingDays_30" name="tradingDays" value="30">
+            <label for="tradingDays_30">30交易日</label>
+          </label><br>
           <button onclick="calculate()">计算</button>
         </div>
 
         <div id="rateInfo"></div>
 
         <canvas id="chartContainer"></canvas>
+
 
 
       </div>
@@ -196,15 +204,17 @@
     </footer>
   </div>
   <script>
-    let principal, monthlyReturn, monthlyInflation, monthlyInvestment, totalMonths;
+    let principal, monthlyReturn, dailyReturn, monthlyInflation, monthlyInvestment, totalMonths, tradingDays;
     let principalData = [], totalAssetData = [];
 
     function calculate() {
       principal = parseFloat(document.getElementById('principal').value);
       monthlyReturn = parseFloat(document.getElementById('monthlyReturn').value) / 100;
+      dailyReturn = parseFloat(document.getElementById('dailyReturn').value) / 100;
       monthlyInflation = parseFloat(document.getElementById('monthlyInflation').value) / 100;
       monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value);
       totalMonths = parseInt(document.getElementById('totalMonths').value);
+      tradingDays = parseFloat(document.querySelector('input[name="tradingDays"]:checked').value);
 
       principalData = [principal], totalAssetData = [principal], gainData = [0];
       let cumulativePrincipal = principal;
@@ -212,7 +222,16 @@
 
       for (let i = 0; i < totalMonths; i++) {
         principal += monthlyInvestment;
-        let monthlyReturnAmount = principal * monthlyReturn;
+        let monthlyReturnAmount;
+        if (monthlyReturn) {
+          if (tradingDays === 21.4) {
+            monthlyReturnAmount = principal * monthlyReturn * 21.4 / 30;
+          } else {
+            monthlyReturnAmount = principal * monthlyReturn;
+          }
+        } else {
+          monthlyReturnAmount = principal * Math.pow(1 + dailyReturn, tradingDays) - 1;
+        }
         principal += monthlyReturnAmount;
         cumulativePrincipal += monthlyInvestment;
         cumulativePrincipal *= (1 + monthlyInflation);
@@ -228,7 +247,6 @@
       drawChart();
       showRates(gainExceedPrincipalMonth);
     }
-
 
     function drawChart() {
       var ctx = document.getElementById('chartContainer').getContext('2d');
@@ -259,10 +277,9 @@
       });
     }
 
-
     function showRates(gainExceedPrincipalMonth) {
-      let dailyReturn = Math.pow(1 + monthlyReturn, 1 / 30) - 1;
-      let dailyInflation = Math.pow(1 + monthlyInflation, 1 / 30) - 1;
+      let dailyReturn = Math.pow(1 + monthlyReturn, 1 / tradingDays) - 1;
+      let dailyInflation = Math.pow(1 + monthlyInflation, 1 / tradingDays) - 1;
       let annualReturn = Math.pow(1 + monthlyReturn, 12) - 1;
       let annualInflation = Math.pow(1 + monthlyInflation, 12) - 1;
 
@@ -271,13 +288,36 @@
         : `<p>在给定的时间内，收益没有超过本金</p>`;
 
       document.getElementById('rateInfo').innerHTML = `
-      <p>日收益: ${(dailyReturn * 100).toFixed(2)}%</p>
-      <p>日通胀: ${(dailyInflation * 100).toFixed(2)}%</p>
-      <p>年收益: ${(annualReturn * 100).toFixed(2)}%</p>
-      <p>年通胀: ${(annualInflation * 100).toFixed(2)}%</p>
-      ${gainExceedPrincipalInfo}
-  `;
+            <p>日收益: ${(dailyReturn * 100).toFixed(2)}%</p>
+            <p>日通胀: ${(dailyInflation * 100).toFixed(2)}%</p>
+            <p>年收益: ${(annualReturn * 100).toFixed(2)}%</p>
+            <p>年通胀: ${(annualInflation * 100).toFixed(2)}%</p>
+            ${gainExceedPrincipalInfo}
+        `;
     }
+    function updateDailyReturn() {
+      let monthlyReturn = parseFloat(document.getElementById('monthlyReturn').value);
+      if (!isNaN(monthlyReturn)) {
+        let tradingDays = parseFloat(document.querySelector('input[name="tradingDays"]:checked').value);
+        let dailyReturn = (Math.pow(1 + monthlyReturn / 100, 1 / tradingDays) - 1) * 100;
+        document.getElementById('dailyReturn').value = dailyReturn.toFixed(2);
+      }
+    }
+
+    function updateMonthlyReturn() {
+      let dailyReturn = parseFloat(document.getElementById('dailyReturn').value);
+      if (!isNaN(dailyReturn)) {
+        let tradingDays = parseFloat(document.querySelector('input[name="tradingDays"]:checked').value);
+        let monthlyReturn;
+        if (tradingDays === 21.4) {
+          monthlyReturn = (Math.pow(1 + dailyReturn / 100, 30 / 21.4) - 1) * 100;
+        } else {
+          monthlyReturn = dailyReturn * tradingDays;
+        }
+        document.getElementById('monthlyReturn').value = monthlyReturn.toFixed(2);
+      }
+    }
+
   </script>
   <!-- Scripts -->
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
