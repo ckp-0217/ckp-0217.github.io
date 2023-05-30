@@ -29,6 +29,9 @@
 </head>
 
 <body>
+    <div id="summary">
+        <h2>合计</h2>
+    </div>
     <div id="holdings">
         <h2>持仓</h2>
     </div>
@@ -96,7 +99,7 @@
                                 var costPrice = Number(item["成本价(每股)"]);
                                 var sellPrice = Number(item["卖出价"]);
                                 td.textContent = ((sellPrice / costPrice - 1) * 100).toFixed(2) + "%";
-                                console.log(costPrice,sellPrice)
+                                console.log(costPrice, sellPrice)
                                 break;
                             case "盈亏值":
                                 var costPrice = Number(item["成本价(每股)"]);
@@ -135,6 +138,106 @@
             });
             container.appendChild(table);
         }
+        function createHoldingsTable(holdingsData, containerId) {
+            var container = document.getElementById(containerId);
+            var table = document.createElement('table');
+            var header = document.createElement('tr');
+            var fields = Object.keys(holdingsData[0]).concat(["当前价", "持仓盈亏百分比", "盈亏值", "总值", "仓位比"]);
+            fields.forEach(function (key) {
+                var th = document.createElement('th');
+                th.textContent = key;
+                header.appendChild(th);
+            });
+            table.appendChild(header);
+            holdingsData.forEach(function (item) {
+                var row = document.createElement('tr');
+                fields.forEach(function (key) {
+                    var td = document.createElement('td');
+                    if (item.hasOwnProperty(key)) {
+                        td.textContent = item[key];
+                    } else {
+                        var costPrice = Number(item["成本价(每股)"]);
+                        var quantity = Number(item["数量"]);
+                        var currentPrice = Number(item["成本价(每股)"]);// getCurrentPrice(item["股票代码"]);  // This function needs to be implemented
+                        switch (key) {
+                            case "当前价":
+                                td.textContent = currentPrice;
+                                break;
+                            case "持仓盈亏百分比":
+                                td.textContent = ((currentPrice / costPrice - 1) * 100).toFixed(2) + "%";
+                                break;
+                            case "盈亏值":
+                                td.textContent = (currentPrice - costPrice) * quantity;
+                                break;
+                            case "总值":
+                                td.textContent = currentPrice * quantity;
+                                break;
+                            case "仓位比":
+                                // This assumes that we have a function to calculate the total assets
+                                var totalAssets = calculateTotalAssets();  // This function needs to be implemented
+                                td.textContent = ((currentPrice * quantity / totalAssets) * 100).toFixed(2) + "%";
+                                break;
+                        }
+                    }
+                    row.appendChild(td);
+                });
+                table.appendChild(row);
+            });
+            container.appendChild(table);
+        }
+        function calculateSummaryValues() {
+            // Calculate the values here
+            // These are just placeholder values
+            var totalCost = 0; // Total cost of all holdings
+            var totalHoldings = 0; // Total value of all holdings
+            var cash = 0; // Remaining cash
+
+            // Suppose we have the data arrays defined somewhere else
+            holdingsData.forEach(function (item) {
+                var costPrice = Number(item["成本价(每股)"]);
+                var quantity = Number(item["数量"]);
+                totalCost += costPrice * quantity;
+                totalHoldings += getCurrentPrice(item["股票代码"]) * quantity;
+            });
+
+            balanceData.forEach(function (item) {
+                cash += Number(item["冲提"]);
+            });
+
+            return {
+                "总成本": totalCost,
+                "总持有": totalHoldings,
+                "剩余现金": cash
+            };
+        }
+
+        function createSummaryTable(containerId) {
+            var summaryValues = calculateSummaryValues();
+
+            var container = document.getElementById(containerId);
+            var table = document.createElement('table');
+            var header = document.createElement('tr');
+            var fields = Object.keys(summaryValues);
+            fields.forEach(function (key) {
+                var th = document.createElement('th');
+                th.textContent = key;
+                header.appendChild(th);
+            });
+            table.appendChild(header);
+
+            var row = document.createElement('tr');
+            fields.forEach(function (key) {
+                var td = document.createElement('td');
+                td.textContent = summaryValues[key];
+                row.appendChild(td);
+            });
+            table.appendChild(row);
+
+            container.appendChild(table);
+        }
+
+        // Call this function to create the table
+
         var balanceData = [
             {
                 "冲提": 20000,
@@ -206,6 +309,8 @@
         createPurchasesTable(purchasesData, 'purchases');
         createSalesTable(salesData, 'sales');
         createBalanceTable(balanceData, 'balance');
+        createHoldingsTable(holdingsData, 'holdings');
+        createSummaryTable('summary');
 
     </script>
 
