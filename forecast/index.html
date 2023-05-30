@@ -308,13 +308,8 @@
       let dailyReturn = parseFloat(document.getElementById('dailyReturn').value);
       if (!isNaN(dailyReturn)) {
         let tradingDays = parseFloat(document.querySelector('input[name="tradingDays"]:checked').value);
-        let monthlyReturn;
-        if (tradingDays === 21.4) {
-          monthlyReturn = (Math.pow(1 + dailyReturn / 100, 30 / 21.4) - 1) * 100;
-        } else {
-          monthlyReturn = dailyReturn * tradingDays;
-        }
-        document.getElementById('monthlyReturn').value = monthlyReturn.toFixed(2);
+        let monthlyReturn = Math.pow(1 + dailyReturn / 100, tradingDays) - 1;
+        document.getElementById('monthlyReturn').value = (monthlyReturn * 100).toFixed(2);
       }
     }
 
