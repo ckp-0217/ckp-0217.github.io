@@ -224,11 +224,9 @@
         principal += monthlyInvestment;
         let monthlyReturnAmount;
         if (monthlyReturn) {
-          if (tradingDays === 21.4) {
-            monthlyReturnAmount = principal * monthlyReturn * 21.4 / 30;
-          } else {
+
             monthlyReturnAmount = principal * monthlyReturn;
-          }
+          
         } else {
           monthlyReturnAmount = principal * Math.pow(1 + dailyReturn, tradingDays) - 1;
         }
