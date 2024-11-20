@@ -20,77 +20,69 @@
       margin-bottom: 1em;
     }
 
-    h1,
-    h2 {
-      color: #333;
-    }
+    #main {
+            font-family: 'Arial', sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    input,
-    textarea {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      font-size: 14px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+        h2 {
+            text-align: center;
+            color: #343a40;
+        }
 
-    button {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 10px 16px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      margin: 10px 2px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
+        .input-group {
+            margin-bottom: 20px;
+        }
 
-    .input-container,
-    .output-container {
-      margin-bottom: 20px;
-    }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #495057;
+        }
 
-    .output-container p {
-      margin: 0;
-      padding: 5px;
-      background-color: #f2f2f2;
-      word-wrap: break-word;
-      white-space: pre-wrap;
-    }
+        .input-group input[type="range"] {
+            width: 100%;
+        }
 
-    #connect-wallet {
-      font-size: 14px;
-      padding: 8px 16px;
-      margin-right: 10px;
-    }
+        .input-group input[type="number"] {
+            width: calc(100% - 10px);
+            padding: 5px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
 
-    #wallet-container {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+        .output {
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    .content-wrapper {
-      display: flex;
-      flex-direction: column;
-    }
+        .output p {
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #212529;
+        }
 
-    .top-row,
-    .bottom-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
+        span {
+            font-weight: bold;
+            color: #007bff;
+        }
 
-    .left-column,
-    .right-column {
-      width: 48%;
-    }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #868e96;
+        }
+
   </style>
 
 </head>
@@ -174,83 +166,65 @@
     <!-- Main -->
     <div id="main">
       <div class="inner">
-        <h1>自定义EIP712签名</h1>
-        <div id="wallet-container">
-          <button id="connect-wallet">连接钱包</button>
-          <p id="wallet-address">钱包地址：-</p>
-        </div>
-
-        <div class="content-wrapper">
-          <div class="top-row">
-            <div class="left-column">
-              <h2>解析函数 <button id="copy-step1">复制</button> <button id="paste-step1">粘贴</button></h2>
-              <textarea id="contract-function" rows="4" cols="50" placeholder="请粘贴智能合约函数"></textarea>
-              <button id="parse-function-btn">解析函数</button>
-              <div id="inputs-container"></div>
-            </div>
-            <div class="right-column">
-              <h2>生成Domain Data<button id="copy-step2">复制</button> <button id="paste-step2">粘贴</button></h2>
-              <div class="input-container">
-                <label for="contractName">合约名称:</label>
-                <input type="text" id="contractName" name="contractName">
-              </div>
-              <div class="input-container">
-                <label for="version">版本:</label>
-                <input type="text" id="version" name="version">
-              </div>
-              <div class="input-container">
-                <label for="chainId">链ID:</label>
-                <input type="text" id="chainId" name="chainId">
-              </div>
-              <div class="input-container">
-                <label for="verifyingContract">验证合约:</label>
-                <input type="text" id="verifyingContract" name="verifyingContract">
-              </div>
-              <div class="input-container">
-                <label for="privateKey">私钥:</label>
-                <input type="text" id="privateKey" name="privateKey">
-              </div>
-
-              <button id="generate-signature">生成签名</button>
-            </div>
+          <h2>盈亏比</h2>
+      
+          <div class="input-group">
+              <label for="profitLossRatio">盈亏比</label>
+              <input type="range" id="profitLossRatio" min="1" max="5" step="0.1" value="3">
+              <span id="profitLossRatioValue">3</span>
           </div>
-          <div class="bottom-row">
-            <div class="left-column">
-              <h2>签名结果<button id="copy-step3">复制</button> <button id="paste-step3">粘贴</button></h2>
-              <div class="output-container">
-                <p id="signature-output">signature：-</p>
-                <p id="v-output">v: -</p>
-                <p id="r-output">r: -</p>
-                <p id="s-output">s: -</p>
-                <p id="method-output">method: -</p>
-                <p id="domain-output">domain：-</p>
-                <p id="types-output">type：-</p>
-                <p id="message-output">message：-</p>
-              </div>
-            </div>
-            <div class="right-column">
-              <h2>反解析</h2>
-              <div class="input-container">
-                <label for="input-signature">输入签名:</label>
-                <input type="text" id="input-signature" name="input-signature">
-              </div>
-              <div class="input-container">
-                <label for="input-v">输入v:</label>
-                <input type="text" id="input-v" name="input-v">
-              </div>
-              <div class="input-container">
-                <label for="input-r">输入r:</label>
-                <input type="text" id="input-r" name="input-r">
-              </div>
-              <div class="input-container">
-                <label for="input-s">输入s:</label>
-                <input type="text" id="input-s" name="input-s">
-              </div>
-              <button id="recover-address">解析地址</button>
-              <p id="recovered-address">解析出的地址：-</p>
-            </div>
+      
+          <div class="input-group">
+              <label for="profitLossPercent">百分比</label>
+              <input type="range" id="profitLossPercent" min="0" max="10" step="0.1" value="2.5">
+              <span id="profitLossPercentValue">2.5%</span>
           </div>
-        </div>
+      
+          <div class="input-group">
+              <label for="price">价格</label>
+              <input type="number" id="price" value="100" step="0.01">
+          </div>
+      
+          <div class="output">
+              <p>止盈价格: <span id="takeProfitPrice"></span></p>
+              <p>止损价格: <span id="stopLossPrice"></span></p>
+          </div>
+      
+          <script>
+              const priceInput = document.getElementById('price');
+              const profitLossRatioInput = document.getElementById('profitLossRatio');
+              const profitLossPercentInput = document.getElementById('profitLossPercent');
+              const profitLossRatioValue = document.getElementById('profitLossRatioValue');
+              const profitLossPercentValue = document.getElementById('profitLossPercentValue');
+              const takeProfitPrice = document.getElementById('takeProfitPrice');
+              const stopLossPrice = document.getElementById('stopLossPrice');
+      
+              function calculatePrices() {
+                  const price = parseFloat(priceInput.value);
+                  const ratio = parseFloat(profitLossRatioInput.value);
+                  const percent = parseFloat(profitLossPercentInput.value);
+      
+                  const takeProfit = price * (1 + (percent * ratio / 100));
+                  const stopLoss = price * (1 - (percent / 100));
+      
+                  takeProfitPrice.textContent = takeProfit.toFixed(2) ;
+                  stopLossPrice.textContent = stopLoss.toFixed(2) ;
+              }
+      
+              priceInput.addEventListener('input', calculatePrices);
+              profitLossRatioInput.addEventListener('input', () => {
+                  profitLossRatioValue.textContent = profitLossRatioInput.value;
+                  calculatePrices();
+              });
+              profitLossPercentInput.addEventListener('input', () => {
+                  profitLossPercentValue.textContent = profitLossPercentInput.value + '%';
+                  calculatePrices();
+              });
+      
+              // 初始计算价格
+              calculatePrices();
+          </script>
+      
       </div>
 
     </div>
@@ -300,370 +274,6 @@
       </div>
     </footer>
   </div>
-  <script>
-    const { ethers } = window;
-    console.log("window.ethereum 对象：", window.ethereum);
-    document.getElementById("connect-wallet").addEventListener("click", async () => {
-      if (typeof window.ethereum !== "undefined") {
-        try {
-          // 请求用户授权
-          const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-
-          if (accounts.length > 0) {
-            // 成功连接到钱包
-            const userAddress = accounts[0];
-            console.log("已连接的钱包地址：", userAddress);
-
-            // 更新显示钱包地址的元素的文本内容
-            document.getElementById("wallet-address").textContent = "钱包地址：" + userAddress;
-          } else {
-            console.error("未找到任何账户");
-          }
-        } catch (error) {
-          console.error("用户拒绝了连接请求", error);
-        }
-      } else {
-        console.error("请安装MetaMask或其他兼容的钱包插件");
-      }
-    });
-
-    let contractFunction = document.getElementById("contract-function");
-    let parseFunctionBtn = document.getElementById("parse-function-btn");
-    let inputsContainer = document.getElementById("inputs-container");
-
-    let functionInputs = [];
-
-
-
-    parseFunctionBtn.addEventListener("click", () => {
-      functionInputs = parseFunctionSignature(contractFunction.value.trim());
-      if (functionInputs) {
-
-        createInputFields(functionInputs.parameters);
-      } else {
-        alert("解析错误，请检查智能合约函数");
-      }
-    });
-
-    let generateSignatureBtn = document.getElementById("generate-signature");
-    generateSignatureBtn.addEventListener("click", async () => {
-      const contractName = document.getElementById("contractName").value;
-      const version = document.getElementById("version").value;
-      const chainId = document.getElementById("chainId").value;
-      const verifyingContract = document.getElementById("verifyingContract").value;
-
-      const domainData = {
-        domain: {
-          name: contractName,
-          version: version,
-          chainId: chainId,
-          verifyingContract: verifyingContract,
-        },
-        types: {
-          [functionInputs.functionName]: functionInputs.parameters,
-        },
-      };
-
-
-
-      // Add custom types for the function inputs
-      domainData.types[functionInputs.functionName] = functionInputs.parameters;
-
-      // Collect input values
-      let values = {};
-      inputsContainer.querySelectorAll("input").forEach((input) => {
-        values[input.name] = input.value;
-      });
-
-      try {
-        const privateKeyInput = document.getElementById("privateKey");
-        let signature = '';
-        if (privateKeyInput.value) {
-          // 如果privateKey输入框有值，使用私钥进行签名
-          signature = await signWithPrivateKey(privateKeyInput.value, domainData.domain, domainData.types, values);
-        } else {
-
-          // Connect to MetaMask and generate the signature
-          if (typeof window.ethereum !== "undefined") {
-            await window.ethereum.request({ method: "eth_requestAccounts" });
-
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            const address = await signer.getAddress();
-            //切换链id
-            const inputChainId = document.getElementById('chainId').value;
-            const providerChainId = window.ethereum ? await window.ethereum.request({ method: 'eth_chainId' }) : '0x0';
-
-            if (inputChainId !== providerChainId) {
-              await switchToNetwork(inputChainId);
-            }
-            signature = await signer._signTypedData(domainData.domain, domainData.types, values);
-          } else {
-            alert("请安装MetaMask插件");
-          }
-        }
-
-        console.log("签名结果：", signature);
-        const { v, r, s } = ethers.utils.splitSignature(signature);
-        const recoveredAddress = ethers.utils.verifyTypedData(domainData.domain, domainData.types, values, { v, r, s });
-        console.log(recoveredAddress)
-        // 假设这些变量已经成功获取到了值
-        const signatureOutput = document.getElementById("signature-output");
-        const vOutput = document.getElementById("v-output");
-        const rOutput = document.getElementById("r-output");
-        const sOutput = document.getElementById("s-output");
-        const domainOutput = document.getElementById("domain-output");
-        const typesOutput = document.getElementById("types-output");
-        const messageOutput = document.getElementById("message-output");
-        const contractFunction = document.getElementById("contract-function");
-        const methodOutput = document.getElementById("method-output");
-
-        // 更新显示的值
-        signatureOutput.textContent = "signature：" + signature;
-        vOutput.textContent = "v: " + v;
-        rOutput.textContent = "r: " + r;
-        sOutput.textContent = "s: " + s;
-        domainOutput.textContent = "domain：" + JSON.stringify(domainData.domain, null, 2);
-        typesOutput.textContent = "type：" + JSON.stringify(domainData.types, null, 2);
-        messageOutput.textContent = "message：" + JSON.stringify(values, null, 2);
-        methodOutput.textContent = "method：" + contractFunction.value;
-
-      } catch (error) {
-        console.error(error);
-        alert("签名生成失败");
-      }
-    });
-    async function switchToNetwork(chainId) {
-      try {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: `0x${parseInt(chainId).toString(16)}` }],
-        });
-      } catch (error) {
-        console.error('Failed to switch chain:', error);
-        alert("Metamask缺少该id的链");
-        return
-      }
-    }
-    function parseFunctionSignature(signature) {
-      const regex = /^function\s+(\w+)\(([\w\s,_]+)\)/;
-      const matches = signature.match(regex);
-
-      console.log("正则表达式匹配结果：", matches);
-
-      if (!matches || matches.length !== 3) {
-        return null;
-      }
-
-      const functionName = matches[1];
-      const parameters = matches[2]
-        .split(",")
-        .map((param) => param.trim())
-        .map((param) => {
-          const [type, name, last] = param.split(/\s+/);
-          console.log(type, name)
-
-          return { name: name === 'memory' && last !== undefined ? last : name, type };
-
-        });
-
-      console.log("解析后的函数名称和参数：", { functionName, parameters });
-      return { functionName, parameters };
-    }
-    async function signWithPrivateKey(privateKey, domain, types, message) {
-      // 使用私钥创建一个新的Wallet实例
-      const wallet = new ethers.Wallet(privateKey);
-      console.log("domain: ", domain)
-      console.log("types: ", types)
-      console.log("message: ", message)
-
-
-      // 使用Wallet实例对typedData进行签名
-      const signature = await wallet._signTypedData(domain, types, message);
-      return signature;
-    }
-
-    function createInputFields(inputs) {
-      inputsContainer.innerHTML = "";
-
-      console.log("传入createInputFields的inputs变量：", inputs);
-
-      if (!Array.isArray(inputs)) {
-        console.error("输入不是数组");
-        return;
-      }
-      inputs = addNonceIfNotPresent(inputs)
-
-
-      console.log(inputs);
-      inputs.forEach((input) => {
-        if (input.type === "uint") {
-          input.type = "uint256";
-        }
-        const container = document.createElement("div");
-        container.classList.add("input-container");
-
-        const label = document.createElement("label");
-        label.setAttribute("for", input.name);
-        label.textContent = `${input.type} ${input.name}:`;
-        container.appendChild(label);
-
-        const inputElement = document.createElement("input");
-        inputElement.type = "text";
-        inputElement.id = input.name;
-        inputElement.name = input.name;
-        container.appendChild(inputElement);
-
-        inputsContainer.appendChild(container);
-      });
-    }
-    function addNonceIfNotPresent(parsedFunction) {
-      const hasNonce = parsedFunction.some((element) => element.name === "nonce");
-
-      if (!hasNonce) {
-        parsedFunction.push({ name: "nonce", type: "uint256" });
-      }
-
-      return parsedFunction;
-    }
-    // 为每个复制按钮添加事件监听器
-    document.getElementById("copy-step1").addEventListener("click", copyStepToClipboard.bind(null, "step1"));
-    document.getElementById("copy-step2").addEventListener("click", copyStepToClipboard.bind(null, "step2"));
-    document.getElementById("copy-step3").addEventListener("click", copyStepToClipboard.bind(null, "step3"));
-
-    // 复制步骤文本到剪贴板的函数
-    function copyStepToClipboard(step) {
-      const textToCopy = getStepText(step);
-      const textArea = document.createElement("textarea");
-      textArea.value = textToCopy;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand("Copy");
-      document.body.removeChild(textArea);
-    }
-
-    // 根据不同的步骤获取相应的文本内容
-    function getStepText(step) {
-      let textToCopy = "";
-      if (step === "step1") {
-        textToCopy = document.getElementById("contract-function").value;
-      } else if (step === "step2") {
-        textToCopy = JSON.stringify({
-          contractName: document.getElementById("contractName").value,
-          version: document.getElementById("version").value,
-          chainId: document.getElementById("chainId").value,
-          verifyingContract: document.getElementById("verifyingContract").value,
-          privateKey: document.getElementById("privateKey").value
-        }, null, 2);
-      } else if (step === "step3") {
-        textToCopy = JSON.stringify({
-          signatureOutput: document.getElementById("signature-output").textContent,
-          vOutput: document.getElementById("v-output").textContent,
-          rOutput: document.getElementById("r-output").textContent,
-          sOutput: document.getElementById("s-output").textContent,
-          methodOutput: document.getElementById("method-output").textContent,
-          domainOutput: document.getElementById("domain-output").textContent,
-          typesOutput: document.getElementById("types-output").textContent,
-          messageOutput: document.getElementById("message-output").textContent
-        }, null, 2);
-      }
-      return textToCopy;
-    }
-    // 为每个粘贴按钮添加事件监听器
-    document.getElementById("paste-step1").addEventListener("click", pasteFromClipboardToStep.bind(null, "step1"));
-    document.getElementById("paste-step2").addEventListener("click", pasteFromClipboardToStep.bind(null, "step2"));
-    document.getElementById("paste-step3").addEventListener("click", pasteFromClipboardToStep.bind(null, "step3"));
-
-    // 将剪贴板中的内容粘贴到相应的步骤
-    async function pasteFromClipboardToStep(step) {
-      try {
-        const clipboardText = await navigator.clipboard.readText();
-        setStepText(step, clipboardText);
-      } catch (err) {
-        console.error("无法粘贴文本: ", err);
-      }
-    }
-
-    // 将文本粘贴到相应的步骤
-    function setStepText(step, text) {
-      if (step === "step1") {
-        document.getElementById("contract-function").value = text;
-      } else if (step === "step2") {
-        const inputData = JSON.parse(text);
-        document.getElementById("contractName").value = inputData.contractName;
-        document.getElementById("version").value = inputData.version;
-        document.getElementById("chainId").value = inputData.chainId;
-        document.getElementById("verifyingContract").value = inputData.verifyingContract;
-        document.getElementById("privateKey").value = inputData.privateKey;
-      } else if (step === "step3") {
-        const outputData = JSON.parse(text);
-        document.getElementById("signature-output").textContent = outputData.signatureOutput;
-        document.getElementById("v-output").textContent = outputData.vOutput;
-        document.getElementById("r-output").textContent = outputData.rOutput;
-        document.getElementById("s-output").textContent = outputData.sOutput;
-        document.getElementById("method-output").textContent = outputData.methodOutput;
-        document.getElementById("domain-output").textContent = outputData.domainOutput;
-        document.getElementById("types-output").textContent = outputData.typesOutput;
-        document.getElementById("message-output").textContent = outputData.messageOutput;
-      }
-    }
-    const recoverAddressBtn = document.getElementById("recover-address");
-    recoverAddressBtn.addEventListener("click", () => {
-      const inputSignature = document.getElementById("input-signature").value;
-      const inputV = document.getElementById("input-v").value;
-      const inputR = document.getElementById("input-r").value;
-      const inputS = document.getElementById("input-s").value;
-
-      let signature;
-      if (inputSignature) {
-        signature = inputSignature;
-      } else {
-        signature = ethers.utils.joinSignature({ v: inputV, r: inputR, s: inputS });
-      }
-
-      try {
-        const domainData = {
-          domain: {
-            name: document.getElementById("contractName").value,
-            version: document.getElementById("version").value,
-            chainId: document.getElementById("chainId").value,
-            verifyingContract: document.getElementById("verifyingContract").value,
-          },
-          types: {
-            [functionInputs.functionName]: functionInputs.parameters,
-          },
-        };
-
-        let values = {};
-        inputsContainer.querySelectorAll("input").forEach((input) => {
-          values[input.name] = input.value;
-        });
-
-        const recoveredAddress = ethers.utils.verifyTypedData(domainData.domain, domainData.types, values, signature);
-        const recoveredAddressOutput = document.getElementById("recovered-address");
-
-        // 更新显示的值
-        recoveredAddressOutput.textContent = "解析出的地址：" + recoveredAddress;
-      } catch (error) {
-        console.error(error);
-        alert("解析地址失败");
-      }
-
-    });
-    function parseFunctionSignatureAndCreateInputs(functionName, types) {
-      // 解析函数签名并生成参数输入框
-      let parameters = types[functionName].map((param) => {
-        return {
-          name: param.name,
-          type: param.type,
-        };
-      });
-
-      // 根据参数列表创建输入框
-      createInputFields(parameters);
-    }
-
-  </script>
   <!-- Scripts -->
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
   <script src="https://ckp-0217.github.io/media/scripts/jquery.min.js"></script>
