@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://ckp-0217.github.io</id>
+    <title>Wild</title>
+    <updated>2025-01-15T13:32:01.584Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://ckp-0217.github.io"/>
+    <link rel="self" href="https://ckp-0217.github.io/atom.xml"/>
+    <subtitle>区块链、web3、金融、智能合约</subtitle>
+    <logo>https://ckp-0217.github.io/images/avatar.png</logo>
+    <icon>https://ckp-0217.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2025, Wild</rights>
+    <entry>
+        <title type="html"><![CDATA[Dune使用]]></title>
+        <id>https://ckp-0217.github.io/post/dune-shi-yong/</id>
+        <link href="https://ckp-0217.github.io/post/dune-shi-yong/">
+        </link>
+        <updated>2023-05-29T12:54:41.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Web3J 合约包装器与交易预估]]></title>
+        <id>https://ckp-0217.github.io/post/web3j-he-yue-bao-zhuang-qi-yu-jiao-yi-yu-gu/</id>
+        <link href="https://ckp-0217.github.io/post/web3j-he-yue-bao-zhuang-qi-yu-jiao-yi-yu-gu/">
+        </link>
+        <updated>2023-02-12T14:04:01.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[C3线性化算法与solidity 多重继承]]></title>
+        <id>https://ckp-0217.github.io/post/c3-xian-xing-hua-suan-fa-yu-solidity-duo-chong-ji-cheng/</id>
+        <link href="https://ckp-0217.github.io/post/c3-xian-xing-hua-suan-fa-yu-solidity-duo-chong-ji-cheng/">
+        </link>
+        <updated>2023-02-04T09:24:18.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[AAVE V2]]></title>
+        <id>https://ckp-0217.github.io/post/aave-v2/</id>
+        <link href="https://ckp-0217.github.io/post/aave-v2/">
+        </link>
+        <updated>2023-01-30T16:52:20.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[AAVE V2 经济模型]]></title>
+        <id>https://ckp-0217.github.io/post/aave-v2-jing-ji-mo-xing/</id>
+        <link href="https://ckp-0217.github.io/post/aave-v2-jing-ji-mo-xing/">
+        </link>
+        <updated>2023-01-30T16:27:18.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[交易信息解析]]></title>
+        <id>https://ckp-0217.github.io/post/jiao-yi-xin-xi-jie-xi/</id>
+        <link href="https://ckp-0217.github.io/post/jiao-yi-xin-xi-jie-xi/">
+        </link>
+        <updated>2023-01-15T15:21:21.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Geth获取交易信息]]></title>
+        <id>https://ckp-0217.github.io/post/geth-huo-qu-jiao-yi-xin-xi/</id>
+        <link href="https://ckp-0217.github.io/post/geth-huo-qu-jiao-yi-xin-xi/">
+        </link>
+        <updated>2023-01-15T15:20:01.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Call Data 解析]]></title>
+        <id>https://ckp-0217.github.io/post/call-data-jie-xi/</id>
+        <link href="https://ckp-0217.github.io/post/call-data-jie-xi/">
+        </link>
+        <updated>2023-01-10T13:14:21.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[测试方法]]></title>
+        <id>https://ckp-0217.github.io/post/ce-shi-fang-fa/</id>
+        <link href="https://ckp-0217.github.io/post/ce-shi-fang-fa/">
+        </link>
+        <updated>2023-01-03T16:28:19.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hardhat常用扩展插件]]></title>
+        <id>https://ckp-0217.github.io/post/hardhat-chang-yong-kuo-zhan-cha-jian/</id>
+        <link href="https://ckp-0217.github.io/post/hardhat-chang-yong-kuo-zhan-cha-jian/">
+        </link>
+        <updated>2023-01-03T14:41:50.000Z</updated>
+    </entry>
+</feed>

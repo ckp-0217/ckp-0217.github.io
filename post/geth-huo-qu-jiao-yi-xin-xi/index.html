@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="区块链、web3、金融、智能合约" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Geth获取交易信息 | Wild</title>
+<link rel="shortcut icon" href="https://ckp-0217.github.io/favicon.ico?v=1736947583191">
+<link rel="stylesheet" href="https://ckp-0217.github.io/styles/main.css">
+
+
+    <link rel="canonical" href="https://ckp-0217.github.io/post/geth-huo-qu-jiao-yi-xin-xi/" />
+    <meta name="socialText" content="" />
+    <meta name="description" content="geth
+Geth是Go Ethereum 以太坊客户端
+Geth提供了JSON-RPC API, 可以用来与它进行通信, 例如，使用 web3.js 库来访问以太坊网络, web3j库访问以太坊网络，或者使用第三方应用来与以太坊网络进行交..." />
+    <meta name="referrer" content="always" />
+    
+      <link rel="stylesheet" href="https://ckp-0217.github.io/media/css/katex.min.css">
+      <script defer src="https://ckp-0217.github.io/media/scripts/katex.min.js"></script>
+      <script defer src="https://ckp-0217.github.io/media/scripts/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+      
+        
+          <link rel="stylesheet" href="https://ckp-0217.github.io/media/css/prism.css">
+          
+            
+                
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://ckp-0217.github.io" class="logo">
+      
+          <span class="symbol"><img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/5899.png" alt="" />
+            
+                <img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/wild.png" alt="" />
+                
+                
+          </span>
+          
+
+
+            <div class="site-title">
+              
+              
+                <div style="font-size: 0.4em;">
+                  区块链、web3、金融、智能合约
+                </div>
+
+            </div>
+
+    </a>
+    <div id="search" style="margin-top: 10px" >
+      <div>
+        <form id="gridea-search-form" data-update="1736947583191" action="/search/index.html"><input
+            class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..." />
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+      
+          <li><a href="https://ckp-0217.github.io" class="menu">
+              主页
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/archives" class="menu">
+              归档
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/tags" class="menu">
+              标签
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/signature" class="menu">
+              签名
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/forecast" class="menu">
+              预测
+            </a></li>
+          
+            
+  </ul>
+</nav>
+      <!-- Main -->
+      <div id="main">
+        <div class="tags-container-sticky">
+  
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/zhi-ya-jie-dai/">
+                      质押借贷 <span style="color:#ed556a;font-weight: 1000;">
+                          3
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/YpOF8hrMn/">
+                      DeFi <span style="color:#ed556a;font-weight: 1000;">
+                          5
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/yuan-ma-fen-xi/">
+                      源码分析 <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/jiao-yi-jie-xi/">
+                      交易解析 <span style="color:#ed556a;font-weight: 1000;">
+                          3
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/nft/">
+                      NFT <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/idIT1Ofe5/">
+                      开发工具 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/jin-rong-li-lun/">
+                      金融理论 <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/an-quan/">
+                      安全 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/shen-ji/">
+                      审计 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/dai-li-sheng-ji/">
+                      代理升级 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/CHkr7jZdg/">
+                      智能合约 <span style="color:#ed556a;font-weight: 1000;">
+                          5
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/he-yue-ce-shi/">
+                      合约测试 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+</div>
+          <div class="inner">
+            <div class="post-pagetitle">
+              <h1>
+                Geth获取交易信息
+              </h1>
+            </div>
+            <div class="post-info">
+              <time class="post-time">
+                2023-01-15
+              </time>
+              <span class="read-times">
+                8 min read
+              </span>
+              
+                <a href="https://ckp-0217.github.io/tag/jiao-yi-jie-xi/" class="post-tags">
+                  # 交易解析
+                </a>
+                
+            </div>
+            
+                <div class="post-content-wrapper">
+                  <div class="post-content">
+                    <h2 id="geth">geth</h2>
+<p>Geth是Go Ethereum 以太坊客户端<br>
+Geth提供了JSON-RPC API, 可以用来与它进行通信, 例如，使用 web3.js 库来访问以太坊网络, web3j库访问以太坊网络，或者使用第三方应用来与以太坊网络进行交互。</p>
+<h2 id="查询交易api">查询交易API</h2>
+<p>JSON-RPC API<br>
+https://ethereum.org/zh/developers/docs/apis/json-rpc/#json-rpc-methods<br>
+这里列几个常用的</p>
+<h3 id="eth_gettransactionbyhash">eth_getTransactionByHash</h3>
+<p>获取交易信息</p>
+<pre><code>let trace = provider.getTransactionReceipt(hash)
+</code></pre>
+<pre><code>{
+    &quot;blockHash&quot;: &quot;0xe070ef484eede316d29598820a186c1d787bc5b1f327564b949091844d87da16&quot;,
+    &quot;blockNumber&quot;: &quot;0x7e6fc5&quot;,
+    &quot;from&quot;: &quot;0x1dafb831733b4332da6ed5238d87c9a976a3dc76&quot;,
+    &quot;gas&quot;: &quot;0x2c5fd&quot;,
+    &quot;gasPrice&quot;: &quot;0x10c3abce7&quot;,
+    &quot;maxFeePerGas&quot;: &quot;0x10c3abce7&quot;,
+    &quot;maxPriorityFeePerGas&quot;: &quot;0x10c3abce7&quot;,
+    &quot;hash&quot;: &quot;0xaadf0c945c7e48e5479e1248e56ca389ac6208e4a082d4dec6ca146995e0f10d&quot;,
+    &quot;input&quot;: &quot;0x04e45aaf000000000000000000000000c4ab977d75ee811aa686566e405f9a58b219fff7000000000000000000000000b47849de92014345f32150ddfc735ba596afd1f700000000000000000000000000000000000000000000000000000000000001f40000000000000000000000001dafb831733b4332da6ed5238d87c9a976a3dc7600000000000000000000000000000000000000000000000821ab0d44149800000000000000000000000000000000000000000000000000000000002fe72ef1900000000000000000000000000000000000000000000000000000000000000000&quot;,
+    &quot;nonce&quot;: &quot;0x7fa&quot;,
+    &quot;to&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+    &quot;transactionIndex&quot;: &quot;0x14&quot;,
+    &quot;value&quot;: &quot;0x0&quot;,
+    &quot;type&quot;: &quot;0x2&quot;,
+    &quot;accessList&quot;: [],
+    &quot;chainId&quot;: &quot;0x5&quot;,
+    &quot;v&quot;: &quot;0x0&quot;,
+    &quot;r&quot;: &quot;0x57d8915301bb311d108a513cf6aef1012c9312fd77a458ef9ffda63793c6b3fe&quot;,
+    &quot;s&quot;: &quot;0x6b7357731c5deb2bd02bf2cef1bbd7ef410ddc715755cc9487ee4405ef9010fe&quot;
+}
+blockHash：DATA，32 字节 - 此交易所在区块的哈希。 当它是待处理区块时，则为 null。
+blockNumber：QUANTITY - 此交易所在的区块号。 当它是待处理区块时，则为 null。
+from：DATA，20 字节 - 发送者的地址。
+gas：QUANTITY - 发送者提供的燃料。
+gasPrice：QUANTITY - 发送者提供的燃料价格，以 Wei 为单位。
+hash：DATA，32 字节 - 交易的哈希。
+input：DATA - 与交易一起发送的数据。
+nonce：QUANTITY - 发送者在此交易之前进行的交易数量。
+to：DATA，20 字节 - 接收者的地址。 当它是合约创建交易时，则为 null。
+transactionIndex：QUANTITY - 表示区块中的交易索引位置的整数。 当它是待处理区块时，则为 null。
+value：QUANTITY - 传输的价值，以 Wei 为单位。
+v：QUANTITY - ECDSA 恢复 ID
+r：QUANTITY - ECDSA 签名 r
+s：QUANTITY - ECDSA 签名 s
+</code></pre>
+<h3 id="eth_gettransactionreceipt">eth_getTransactionReceipt</h3>
+<p>获取交易回执</p>
+<pre><code>let trace = provider.send(&quot;eth_getTransactionReceipt&quot;, [hash]);
+</code></pre>
+<pre><code>{
+    &quot;blockHash&quot;: &quot;0xe070ef484eede316d29598820a186c1d787bc5b1f327564b949091844d87da16&quot;,
+    &quot;blockNumber&quot;: &quot;0x7e6fc5&quot;,
+    &quot;contractAddress&quot;: null,
+    &quot;cumulativeGasUsed&quot;: &quot;0x194aa9&quot;,
+    &quot;effectiveGasPrice&quot;: &quot;0x10c3abce7&quot;,
+    &quot;from&quot;: &quot;0x1dafb831733b4332da6ed5238d87c9a976a3dc76&quot;,
+    &quot;gasUsed&quot;: &quot;0x18986&quot;,
+    &quot;logs&quot;: [
+        {
+            &quot;address&quot;: &quot;0xb47849de92014345f32150ddfc735ba596afd1f7&quot;,
+            &quot;topics&quot;: [
+                &quot;0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef&quot;,
+                &quot;0x0000000000000000000000006019682c766d787745a0f6ee04b9980bae49b0b5&quot;,
+                &quot;0x0000000000000000000000001dafb831733b4332da6ed5238d87c9a976a3dc76&quot;
+            ],
+            &quot;data&quot;: &quot;0x0000000000000000000000000000000000000000000000000000002fe72ef190&quot;,
+            &quot;blockNumber&quot;: &quot;0x7e6fc5&quot;,
+            &quot;transactionHash&quot;: &quot;0xaadf0c945c7e48e5479e1248e56ca389ac6208e4a082d4dec6ca146995e0f10d&quot;,
+            &quot;transactionIndex&quot;: &quot;0x14&quot;,
+            &quot;blockHash&quot;: &quot;0xe070ef484eede316d29598820a186c1d787bc5b1f327564b949091844d87da16&quot;,
+            &quot;logIndex&quot;: &quot;0x11&quot;,
+            &quot;removed&quot;: false
+        },
+        {
+            &quot;address&quot;: &quot;0xc4ab977d75ee811aa686566e405f9a58b219fff7&quot;,
+            &quot;topics&quot;: [
+                &quot;0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef&quot;,
+                &quot;0x0000000000000000000000001dafb831733b4332da6ed5238d87c9a976a3dc76&quot;,
+                &quot;0x0000000000000000000000006019682c766d787745a0f6ee04b9980bae49b0b5&quot;
+            ],
+            &quot;data&quot;: &quot;0x00000000000000000000000000000000000000000000000821ab0d4414980000&quot;,
+            &quot;blockNumber&quot;: &quot;0x7e6fc5&quot;,
+            &quot;transactionHash&quot;: &quot;0xaadf0c945c7e48e5479e1248e56ca389ac6208e4a082d4dec6ca146995e0f10d&quot;,
+            &quot;transactionIndex&quot;: &quot;0x14&quot;,
+            &quot;blockHash&quot;: &quot;0xe070ef484eede316d29598820a186c1d787bc5b1f327564b949091844d87da16&quot;,
+            &quot;logIndex&quot;: &quot;0x12&quot;,
+            &quot;removed&quot;: false
+        },
+        {
+            &quot;address&quot;: &quot;0x6019682c766d787745a0f6ee04b9980bae49b0b5&quot;,
+            &quot;topics&quot;: [
+                &quot;0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67&quot;,
+                &quot;0x00000000000000000000000068b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+                &quot;0x0000000000000000000000001dafb831733b4332da6ed5238d87c9a976a3dc76&quot;
+            ],
+            &quot;data&quot;: &quot;0xffffffffffffffffffffffffffffffffffffffffffffffffffffffd018d10e7000000000000000000000000000000000000000000000000821ab0d441498000000000000000000000000000000000000000069728854d02b05dd4e5e3c36e9880000000000000000000000000000000000000000000000bf4f71d6404b59e16e0000000000000000000000000000000000000000000000000000000000031d2d&quot;,
+            &quot;blockNumber&quot;: &quot;0x7e6fc5&quot;,
+            &quot;transactionHash&quot;: &quot;0xaadf0c945c7e48e5479e1248e56ca389ac6208e4a082d4dec6ca146995e0f10d&quot;,
+            &quot;transactionIndex&quot;: &quot;0x14&quot;,
+            &quot;blockHash&quot;: &quot;0xe070ef484eede316d29598820a186c1d787bc5b1f327564b949091844d87da16&quot;,
+            &quot;logIndex&quot;: &quot;0x13&quot;,
+            &quot;removed&quot;: false
+        }
+    ],
+    &quot;logsBloom&quot;: &quot;0x00000000000000000000000000000000000000040000000000000000200000000000000000000000000000000000000100000000000020000000000000000000000000000000000800000009000008000000000000080000000000000000000000000000000000000400000000000000000000000000000080000018000801000000000000000000000800000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000002004000000000000000000000004000000000000000000100000000000000020000000000000000000000080000000000000000000000000000000000&quot;,
+    &quot;status&quot;: &quot;0x1&quot;,
+    &quot;to&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+    &quot;transactionHash&quot;: &quot;0xaadf0c945c7e48e5479e1248e56ca389ac6208e4a082d4dec6ca146995e0f10d&quot;,
+    &quot;transactionIndex&quot;: &quot;0x14&quot;,
+    &quot;type&quot;: &quot;0x2&quot;
+}
+transactionHash：DATA，32 字节- 交易的哈希。
+transactionIndex：QUANTITY - 表示区块中的交易索引位置的整数。
+blockHash：DATA，32 字节 - 此交易所在区块的哈希。
+blockNumber：QUANTITY - 此交易所在的区块号。
+from：DATA，20 字节 - 发送者的地址。
+to：DATA，20 字节 - 接收者的地址。 当它是合约创建交易时，则为 null。
+cumulativeGasUsed：QUANTITY - 当在区块中执行此交易时使用的燃料总量。
+gasUsed：QUANTITY - 仅此特定交易使用的燃料数量。
+contractAddress：DATA，20 字节 - 如果交易是合约创建，则为创建的合约地址，否则为 null。
+logs：Array - 此交易生成的日志对象数组。
+logsBloom：DATA，256 字符 - 轻量客户端用于快速检索相关日志的 bloom 过滤器。 它还返回以下两者之一：
+root：DATA 32 字节的交易后 stateroot（拜占庭之前）
+status：QUANTITY - 1（成功）或 0（失败）
+</code></pre>
+<h3 id="debug_tracetransaction">debug_traceTransaction</h3>
+<h4 id="calltracer">callTracer</h4>
+<p>获取全部的调用信息</p>
+<pre><code>let trace = provider.send(&quot;debug_traceTransaction&quot;, [hash,{tracer: 'callTracer',tracerConfig: { onlyTopCall: false,withLog: true }}]);
+</code></pre>
+<pre><code>tracer:跟踪器 这里使用的是call跟踪器
+tracerConfig:
+{
+    onlyTopCall： true 指示跟踪器仅处理主（顶级）调用，而不处理任何子调用。
+    withLog： true 指示跟踪器还收集每次调用期间发出的日志。
+}
+</code></pre>
+<pre><code>{
+    &quot;type&quot;: &quot;CALL&quot;,
+    &quot;from&quot;: &quot;0x73f451a0a409f83600b8c4c1dfa71203d9fde2f2&quot;,
+    &quot;to&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+    &quot;value&quot;: &quot;0x9184e72a000&quot;,
+    &quot;gas&quot;: &quot;0x285fa&quot;,
+    &quot;gasUsed&quot;: &quot;0x1f7fe&quot;,
+    &quot;input&quot;: &quot;0x5ae401dc0000000000000000000000000000000000000000000000000000000063be1b8c00000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000e404e45aaf000000000000000000000000b4fbf271143f4fbf7b91a5ded31805e42b2208d6000000000000000000000000d87ba7a50b2e7e660f678a895e4b72e7cb4ccd9c00000000000000000000000000000000000000000000000000000000000001f400000000000000000000000073f451a0a409f83600b8c4c1dfa71203d9fde2f2000000000000000000000000000000000000000000000000000009184e72a00000000000000000000000000000000000000000000000000000000008391d0a29000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&quot;,
+    &quot;output&quot;: &quot;0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000843a395bc&quot;,
+    &quot;calls&quot;: [
+        {
+            &quot;type&quot;: &quot;DELEGATECALL&quot;,
+            &quot;from&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+            &quot;to&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+            &quot;gas&quot;: &quot;0x276db&quot;,
+            &quot;gasUsed&quot;: &quot;0x1ef7c&quot;,
+            &quot;input&quot;: &quot;0x04e45aaf000000000000000000000000b4fbf271143f4fbf7b91a5ded31805e42b2208d6000000000000000000000000d87ba7a50b2e7e660f678a895e4b72e7cb4ccd9c00000000000000000000000000000000000000000000000000000000000001f400000000000000000000000073f451a0a409f83600b8c4c1dfa71203d9fde2f2000000000000000000000000000000000000000000000000000009184e72a00000000000000000000000000000000000000000000000000000000008391d0a290000000000000000000000000000000000000000000000000000000000000000&quot;,
+            &quot;output&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000843a395bc&quot;,
+            &quot;calls&quot;: [
+                {
+                    &quot;type&quot;: &quot;CALL&quot;,
+                    &quot;from&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+                    &quot;to&quot;: &quot;0x951b8635a3d7aa2fd659ab93cb81710536d90043&quot;,
+                    &quot;value&quot;: &quot;0x0&quot;,
+                    &quot;gas&quot;: &quot;0x25214&quot;,
+                    &quot;gasUsed&quot;: &quot;0x1d298&quot;,
+                    &quot;input&quot;: &quot;0x128acb0800000000000000000000000073f451a0a409f83600b8c4c1dfa71203d9fde2f20000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000009184e72a00000000000000000000000000000000000000000000000000000000001000276a400000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000004000000000000000000000000073f451a0a409f83600b8c4c1dfa71203d9fde2f2000000000000000000000000000000000000000000000000000000000000002bb4fbf271143f4fbf7b91a5ded31805e42b2208d60001f4d87ba7a50b2e7e660f678a895e4b72e7cb4ccd9c000000000000000000000000000000000000000000&quot;,
+                    &quot;output&quot;: &quot;0x000000000000000000000000000000000000000000000000000009184e72a000fffffffffffffffffffffffffffffffffffffffffffffffffffffff7bc5c6a44&quot;,
+                    &quot;calls&quot;: [
+                        {
+                            &quot;type&quot;: &quot;CALL&quot;,
+                            &quot;from&quot;: &quot;0x951b8635a3d7aa2fd659ab93cb81710536d90043&quot;,
+                            &quot;to&quot;: &quot;0xd87ba7a50b2e7e660f678a895e4b72e7cb4ccd9c&quot;,
+                            &quot;value&quot;: &quot;0x0&quot;,
+                            &quot;gas&quot;: &quot;0x1ba22&quot;,
+                            &quot;gasUsed&quot;: &quot;0x752e&quot;,
+                            &quot;input&quot;: &quot;0xa9059cbb00000000000000000000000073f451a0a409f83600b8c4c1dfa71203d9fde2f20000000000000000000000000000000000000000000000000000000843a395bc&quot;,
+                            &quot;output&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000001&quot;
+                        },
+                        {
+                            &quot;type&quot;: &quot;STATICCALL&quot;,
+                            &quot;from&quot;: &quot;0x951b8635a3d7aa2fd659ab93cb81710536d90043&quot;,
+                            &quot;to&quot;: &quot;0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6&quot;,
+                            &quot;gas&quot;: &quot;0x139c5&quot;,
+                            &quot;gasUsed&quot;: &quot;0x9f8&quot;,
+                            &quot;input&quot;: &quot;0x70a08231000000000000000000000000951b8635a3d7aa2fd659ab93cb81710536d90043&quot;,
+                            &quot;output&quot;: &quot;0x0000000000000000000000000000000000000000000000001090f43c283b84c3&quot;
+                        },
+                        {
+                            &quot;type&quot;: &quot;CALL&quot;,
+                            &quot;from&quot;: &quot;0x951b8635a3d7aa2fd659ab93cb81710536d90043&quot;,
+                            &quot;to&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+                            &quot;value&quot;: &quot;0x0&quot;,
+                            &quot;gas&quot;: &quot;0x12cde&quot;,
+                            &quot;gasUsed&quot;: &quot;0x9f04&quot;,
+                            &quot;input&quot;: &quot;0xfa461e33000000000000000000000000000000000000000000000000000009184e72a000fffffffffffffffffffffffffffffffffffffffffffffffffffffff7bc5c6a44000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000004000000000000000000000000073f451a0a409f83600b8c4c1dfa71203d9fde2f2000000000000000000000000000000000000000000000000000000000000002bb4fbf271143f4fbf7b91a5ded31805e42b2208d60001f4d87ba7a50b2e7e660f678a895e4b72e7cb4ccd9c000000000000000000000000000000000000000000&quot;,
+                            &quot;output&quot;: &quot;0x&quot;,
+                            &quot;calls&quot;: [
+                                {
+                                    &quot;type&quot;: &quot;CALL&quot;,
+                                    &quot;from&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+                                    &quot;to&quot;: &quot;0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6&quot;,
+                                    &quot;value&quot;: &quot;0x9184e72a000&quot;,
+                                    &quot;gas&quot;: &quot;0x10211&quot;,
+                                    &quot;gasUsed&quot;: &quot;0x5dc2&quot;,
+                                    &quot;input&quot;: &quot;0xd0e30db0&quot;,
+                                    &quot;output&quot;: &quot;0x&quot;
+                                },
+                                {
+                                    &quot;type&quot;: &quot;CALL&quot;,
+                                    &quot;from&quot;: &quot;0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45&quot;,
+                                    &quot;to&quot;: &quot;0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6&quot;,
+                                    &quot;value&quot;: &quot;0x0&quot;,
+                                    &quot;gas&quot;: &quot;0xa421&quot;,
+                                    &quot;gasUsed&quot;: &quot;0x1853&quot;,
+                                    &quot;input&quot;: &quot;0xa9059cbb000000000000000000000000951b8635a3d7aa2fd659ab93cb81710536d90043000000000000000000000000000000000000000000000000000009184e72a000&quot;,
+                                    &quot;output&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000001&quot;
+                                }
+                            ]
+                        },
+                        {
+                            &quot;type&quot;: &quot;STATICCALL&quot;,
+                            &quot;from&quot;: &quot;0x951b8635a3d7aa2fd659ab93cb81710536d90043&quot;,
+                            &quot;to&quot;: &quot;0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6&quot;,
+                            &quot;gas&quot;: &quot;0x8ddd&quot;,
+                            &quot;gasUsed&quot;: &quot;0x228&quot;,
+                            &quot;input&quot;: &quot;0x70a08231000000000000000000000000951b8635a3d7aa2fd659ab93cb81710536d90043&quot;,
+                            &quot;output&quot;: &quot;0x0000000000000000000000000000000000000000000000001090fd5476ae24c3&quot;
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+</code></pre>
+<h4 id="prestatetracer">prestateTracer</h4>
+<p>用于追踪slot差异</p>
+<pre><code>    let trace = provider.send(&quot;debug_traceTransaction&quot;, [hash, { tracer: 'prestateTracer', tracerConfig: { diffMode: True } }]);
+
+</code></pre>
+<pre><code>可以返回slot前后的变化
+{
+  post: {
+    0x35a9f94af726f07b5162df7e828cc9dc8439e7d0: {
+      nonce: 1135
+    }
+  },
+  pre: {
+    0x35a9f94af726f07b5162df7e828cc9dc8439e7d0: {
+      balance: &quot;0x7a48429e177130a&quot;,
+      nonce: 1134
+    }
+  }
+}
+</code></pre>
+
+                  </div>
+                  <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#geth">geth</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E4%BA%A4%E6%98%93api">查询交易API</a>
+<ul>
+<li><a href="#eth_gettransactionbyhash">eth_getTransactionByHash</a></li>
+<li><a href="#eth_gettransactionreceipt">eth_getTransactionReceipt</a></li>
+<li><a href="#debug_tracetransaction">debug_traceTransaction</a>
+<ul>
+<li><a href="#calltracer">callTracer</a></li>
+<li><a href="#prestatetracer">prestateTracer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                  </div>
+                </div>
+
+                <div class="page-count">
+                  
+
+                      
+                </div>
+                <div class="post-pagination inner">
+                  
+                    <div class="prev-post">
+                      <div>
+                        <a href="https://ckp-0217.github.io/post/jiao-yi-xin-xi-jie-xi/">上一篇 交易信息解析</a>
+
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="next-post">
+                      <div>
+                        <a href="https://ckp-0217.github.io/post/call-data-jie-xi/">下一篇 Call Data 解析</a>
+
+                      </div>
+                    </div>
+                    
+                     
+                </div>
+
+          </div>
+
+
+      </div>
+
+      <!-- back to top -->
+      <button oneclik="topFunction()" id="BackToTop">
+        TOP
+      </button>
+
+      <div class="post-comment inner">
+        <div class="post-comment">
+          
+
+
+
+
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    <section>
+      <h2>Follow</h2>
+      <ul class="icons">
+        
+          
+          <li>
+            <a href="https://github.com/ckp-0217" target="_blank">
+              <i class="icon brands style2 fab fa-github"></i>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </section>
+    <ul class="copyright">
+      <li>
+        <a href="https://ckp-0217.github.io/atom.xml" target="_blank">
+          RSS
+        </a> 
+      </li>
+      <li>ckp0217@foxmail.com</li>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://ckp-0217.github.io/media/scripts/jquery.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/browser.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/breakpoints.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/util.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/main.js"></script>
+  
+    <script src="https://ckp-0217.github.io/media/scripts/prism.js"></script>
+    <script>
+      Prism.highlightAll();
+    </script>
+    
+      <script>
+        post_scroll();
+        back_to_top();
+      </script>
+</body>
+
+</html>

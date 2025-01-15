@@ -1,0 +1,4351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+<meta name="description" content="区块链、web3、金融、智能合约" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Slither 检查文档 | Wild</title>
+<link rel="shortcut icon" href="https://ckp-0217.github.io/favicon.ico?v=1736947583191">
+<link rel="stylesheet" href="https://ckp-0217.github.io/styles/main.css">
+
+
+    <link rel="canonical" href="https://ckp-0217.github.io/post/slither-jian-cha-wen-dang/" />
+    <meta name="socialText" content="" />
+    <meta name="description" content="Public Detectors
+List of public detectors
+Storage ABIEncoderV2 Array
+Configuration
+
+Check: abiencoderv2-array
+Severity: ..." />
+    <meta name="referrer" content="always" />
+    
+      <link rel="stylesheet" href="https://ckp-0217.github.io/media/css/katex.min.css">
+      <script defer src="https://ckp-0217.github.io/media/scripts/katex.min.js"></script>
+      <script defer src="https://ckp-0217.github.io/media/scripts/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+      
+        
+          <link rel="stylesheet" href="https://ckp-0217.github.io/media/css/prism.css">
+          
+            
+                
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+
+    <!-- Header -->
+<header id="header">
+  <div class="inner">
+    <!-- Logo -->
+    <a href="https://ckp-0217.github.io" class="logo">
+      
+          <span class="symbol"><img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/5899.png" alt="" />
+            
+                <img src="https://ckpdebucket.oss-cn-hangzhou.aliyuncs.com/wild.png" alt="" />
+                
+                
+          </span>
+          
+
+
+            <div class="site-title">
+              
+              
+                <div style="font-size: 0.4em;">
+                  区块链、web3、金融、智能合约
+                </div>
+
+            </div>
+
+    </a>
+    <div id="search" style="margin-top: 10px" >
+      <div>
+        <form id="gridea-search-form" data-update="1736947583191" action="/search/index.html"><input
+            class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..." />
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Nav -->
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+  <ul>
+    
+      
+          <li><a href="https://ckp-0217.github.io" class="menu">
+              主页
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/archives" class="menu">
+              归档
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/tags" class="menu">
+              标签
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/signature" class="menu">
+              签名
+            </a></li>
+          
+            
+      
+          <li><a href="https://ckp-0217.github.io/forecast" class="menu">
+              预测
+            </a></li>
+          
+            
+  </ul>
+</nav>
+      <!-- Main -->
+      <div id="main">
+        <div class="tags-container-sticky">
+  
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/zhi-ya-jie-dai/">
+                      质押借贷 <span style="color:#ed556a;font-weight: 1000;">
+                          3
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/YpOF8hrMn/">
+                      DeFi <span style="color:#ed556a;font-weight: 1000;">
+                          5
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/yuan-ma-fen-xi/">
+                      源码分析 <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/jiao-yi-jie-xi/">
+                      交易解析 <span style="color:#ed556a;font-weight: 1000;">
+                          3
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/nft/">
+                      NFT <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/idIT1Ofe5/">
+                      开发工具 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/jin-rong-li-lun/">
+                      金融理论 <span style="color:#ed556a;font-weight: 1000;">
+                          1
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/an-quan/">
+                      安全 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/shen-ji/">
+                      审计 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/dai-li-sheng-ji/">
+                      代理升级 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+            
+                  
+        
+          
+                
+          
+            
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+            
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/CHkr7jZdg/">
+                      智能合约 <span style="color:#ed556a;font-weight: 1000;">
+                          5
+                        </span>
+                    </a>
+                    
+    
+      
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+                  
+        
+          
+                
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+        
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+                
+          
+                
+          
+                
+                  
+        
+          
+            
+                  
+        
+          
+            
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+                  
+        
+          
+                
+                  
+                    <a class="tag" href="https://ckp-0217.github.io/tag/he-yue-ce-shi/">
+                      合约测试 <span style="color:#ed556a;font-weight: 1000;">
+                          2
+                        </span>
+                    </a>
+                    
+</div>
+          <div class="inner">
+            <div class="post-pagetitle">
+              <h1>
+                Slither 检查文档
+              </h1>
+            </div>
+            <div class="post-info">
+              <time class="post-time">
+                2022-08-16
+              </time>
+              <span class="read-times">
+                42 min read
+              </span>
+              
+            </div>
+            
+                <div class="post-content-wrapper">
+                  <div class="post-content">
+                    <h1 id="public-detectors">Public Detectors</h1>
+<p>List of public detectors</p>
+<h2 id="storage-abiencoderv2-array"><s>Storage ABIEncoderV2 Array</s></h2>
+<h3 id="configuration">Configuration</h3>
+<ul>
+<li>Check: <code>abiencoderv2-array</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description">Description</h3>
+<p><code>solc</code> versions <code>0.4.7</code>-<code>0.5.9</code> contain a <a href="https://blog.ethereum.org/2019/06/25/solidity-storage-array-bugs">compiler bug</a> leading to incorrect ABI encoder usage.<br>
+<strong>编译器问题</strong></p>
+<h3 id="exploit-scenario">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+    uint[2][3] bad_arr = [[1, 2], [3, 4], [5, 6]];
+    
+    /* Array of arrays passed to abi.encode is vulnerable */
+    function bad() public {                                                                                          
+        bytes memory b = abi.encode(bad_arr);
+    }
+}
+</code></pre>
+<p><code>abi.encode(bad_arr)</code> in a call to <code>bad()</code> will incorrectly encode the array as <code>[[1, 2], [2, 3], [3, 4]]</code> and lead to unintended behavior.</p>
+<h3 id="recommendation">Recommendation</h3>
+<p>Use a compiler &gt;= <code>0.5.10</code>.</p>
+<h2 id="arbitrary-from-in-transferfrom">Arbitrary <code>from</code> in transferFrom</h2>
+<h3 id="configuration-2">Configuration</h3>
+<ul>
+<li>Check: <code>arbitrary-send-erc20</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-2">Description</h3>
+<p>Detect when <code>msg.sender</code> is not used as <code>from</code> in transferFrom.<br>
+<strong>通过合约转账使用 <code>transferFrom</code> 资金来源 <code>from</code> 应该是调用者 <code>msg.sender</code></strong></p>
+<h3 id="exploit-scenario-2">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    function a(address from, address to, uint256 amount) public {
+        erc20.transferFrom(from, to, am);
+    }
+</code></pre>
+<p>Alice approves this contract to spend her ERC20 tokens. Bob can call <code>a</code> and specify Alice's address as the <code>from</code> parameter in <code>transferFrom</code>, allowing him to transfer Alice's tokens to himself.</p>
+<h3 id="recommendation-2">Recommendation</h3>
+<p>Use <code>msg.sender</code> as <code>from</code> in transferFrom.</p>
+<h2 id="modifying-storage-array-by-value">Modifying storage array by value</h2>
+<h3 id="configuration-3">Configuration</h3>
+<ul>
+<li>Check: <code>array-by-reference</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-3">Description</h3>
+<p>Detect arrays passed to a function that expects reference to a storage array<br>
+<strong>检查 方法中的storage array的正确使用</strong></p>
+<h3 id="exploit-scenario-3">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Memory {
+    uint[1] public x; // storage
+
+    function f() public {
+        f1(x); // update x
+        f2(x); // do not update x
+    }
+
+    function f1(uint[1] storage arr) internal { // by reference
+        arr[0] = 1;
+    }
+
+    function f2(uint[1] arr) internal { // by value
+        arr[0] = 2;
+    }
+}
+</code></pre>
+<p>Bob calls <code>f()</code>. Bob assumes that at the end of the call <code>x[0]</code> is 2, but it is 1.<br>
+As a result, Bob's usage of the contract is incorrect.</p>
+<h3 id="recommendation-3">Recommendation</h3>
+<p>Ensure the correct usage of <code>memory</code> and <code>storage</code> in the function parameters. Make all the locations explicit.</p>
+<h2 id="incorrect-shift-in-assembly">Incorrect shift in assembly.</h2>
+<h3 id="configuration-4">Configuration</h3>
+<ul>
+<li>Check: <code>incorrect-shift</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-4">Description</h3>
+<p>Detect if the values in a shift operation are reversed<br>
+检查位移 左右值错误</p>
+<h3 id="exploit-scenario-4">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract C {
+    function f() internal returns (uint a) {
+        assembly {
+            a := shr(a, 8)
+        }
+    }
+}
+</code></pre>
+<p>The shift statement will right-shift the constant 8 by <code>a</code> bits</p>
+<h3 id="recommendation-4">Recommendation</h3>
+<p>Swap the order of parameters.</p>
+<h2 id="multiple-constructor-schemes">Multiple constructor schemes</h2>
+<h3 id="configuration-5">Configuration</h3>
+<ul>
+<li>Check: <code>multiple-constructors</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-5">Description</h3>
+<p>Detect multiple constructor definitions in the same contract (using new and old schemes).<br>
+重复构造器</p>
+<h3 id="exploit-scenario-5">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+    uint x;
+    constructor() public {
+        x = 0;
+    }
+    function A() public {
+        x = 1;
+    }
+    
+    function test() public returns(uint) {
+        return x;
+    }
+}
+</code></pre>
+<p>In Solidity <a href="https://github.com/ethereum/solidity/releases/tag/v0.4.23">0.4.22</a>, a contract with both constructor schemes will compile. The first constructor will take precedence over the second, which may be unintended.</p>
+<h3 id="recommendation-5">Recommendation</h3>
+<p>Only declare one constructor, preferably using the new scheme <code>constructor(...)</code> instead of <code>function &lt;contractName&gt;(...)</code>.</p>
+<h2 id="name-reused">Name reused</h2>
+<h3 id="configuration-6">Configuration</h3>
+<ul>
+<li>Check: <code>name-reused</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-6">Description</h3>
+<p>If a codebase has two contracts the similar names, the compilation artifacts<br>
+will not contain one of the contracts with the duplicate name.<br>
+命名重复</p>
+<h3 id="exploit-scenario-6">Exploit Scenario:</h3>
+<p>Bob's <code>truffle</code> codebase has two contracts named <code>ERC20</code>.<br>
+When <code>truffle compile</code> runs, only one of the two contracts will generate artifacts in <code>build/contracts</code>.<br>
+As a result, the second contract cannot be analyzed.</p>
+<h3 id="recommendation-6">Recommendation</h3>
+<p>Rename the contract.</p>
+<h2 id="protected-variables">Protected Variables</h2>
+<h3 id="configuration-7">Configuration</h3>
+<ul>
+<li>Check: <code>protected-vars</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-7">Description</h3>
+<p>Detect unprotected variable that are marked protected<br>
+权限控制 未做保护</p>
+<h3 id="exploit-scenario-7">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Buggy{
+
+    /// @custom:security write-protection=&quot;onlyOwner()&quot;
+    address owner;
+
+    function set_protected() public onlyOwner(){
+        owner = msg.sender;
+    }
+
+    function set_not_protected() public{
+        owner = msg.sender;
+    }
+}    
+</code></pre>
+<p><code>owner</code> must be always written by function using <code>onlyOwner</code> (<code>write-protection=&quot;onlyOwner()&quot;</code>), however anyone can call <code>set_not_protected</code>.</p>
+<h3 id="recommendation-7">Recommendation</h3>
+<p>Add access controls to the vulnerable function</p>
+<h2 id="public-mappings-with-nested-variables">Public mappings with nested variables</h2>
+<h3 id="configuration-8">Configuration</h3>
+<ul>
+<li>Check: <code>public-mappings-nested</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-8">Description</h3>
+<p>Prior to Solidity 0.5, a public mapping with nested structures returned <a href="https://github.com/ethereum/solidity/issues/5520">incorrect values</a>.</p>
+<h3 id="exploit-scenario-8">Exploit Scenario:</h3>
+<p>Bob interacts with a contract that has a public mapping with nested structures. The values returned by the mapping are incorrect, breaking Bob's usage</p>
+<h3 id="recommendation-8">Recommendation</h3>
+<p>Do not use public mapping with nested structures.</p>
+<h2 id="right-to-left-override-character">Right-to-Left-Override character</h2>
+<h3 id="configuration-9">Configuration</h3>
+<ul>
+<li>Check: <code>rtlo</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-9">Description</h3>
+<p>An attacker can manipulate the logic of the contract by using a right-to-left-override character (<code>U+202E)</code>.</p>
+<h3 id="exploit-scenario-9">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Token
+{
+
+    address payable o; // owner
+    mapping(address =&gt; uint) tokens;
+
+    function withdraw() external returns(uint)
+    {
+        uint amount = tokens[msg.sender];
+        address payable d = msg.sender;
+        tokens[msg.sender] = 0;
+        _withdraw(/*owner‮/*noitanitsed*/ d, o/*‭
+		        /*value */, amount);
+    }
+
+    function _withdraw(address payable fee_receiver, address payable destination, uint value) internal
+    {
+		fee_receiver.transfer(1);
+		destination.transfer(value);
+    }
+}
+</code></pre>
+<p><code>Token</code> uses the right-to-left-override character when calling <code>_withdraw</code>. As a result, the fee is incorrectly sent to <code>msg.sender</code>, and the token balance is sent to the owner.</p>
+<h3 id="recommendation-9">Recommendation</h3>
+<p>Special control characters must not be allowed.</p>
+<h2 id="state-variable-shadowing">State variable shadowing</h2>
+<h3 id="configuration-10">Configuration</h3>
+<ul>
+<li>Check: <code>shadowing-state</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-10">Description</h3>
+<p>Detection of state variables shadowed.</p>
+<h3 id="exploit-scenario-10">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract BaseContract{
+    address owner;
+
+    modifier isOwner(){
+        require(owner == msg.sender);
+        _;
+    }
+
+}
+
+contract DerivedContract is BaseContract{
+    address owner;
+
+    constructor(){
+        owner = msg.sender;
+    }
+
+    function withdraw() isOwner() external{
+        msg.sender.transfer(this.balance);
+    }
+}
+</code></pre>
+<p><code>owner</code> of <code>BaseContract</code> is never assigned and the modifier <code>isOwner</code> does not work.</p>
+<h3 id="recommendation-10">Recommendation</h3>
+<p>Remove the state variable shadowing.</p>
+<h2 id="suicidal">Suicidal</h2>
+<h3 id="configuration-11">Configuration</h3>
+<ul>
+<li>Check: <code>suicidal</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-11">Description</h3>
+<p>Unprotected call to a function executing <code>selfdestruct</code>/<code>suicide</code>.</p>
+<h3 id="exploit-scenario-11">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Suicidal{
+    function kill() public{
+        selfdestruct(msg.sender);
+    }
+}
+</code></pre>
+<p>Bob calls <code>kill</code> and destructs the contract.</p>
+<h3 id="recommendation-11">Recommendation</h3>
+<p>Protect access to all sensitive functions.</p>
+<h2 id="uninitialized-state-variables">Uninitialized state variables</h2>
+<h3 id="configuration-12">Configuration</h3>
+<ul>
+<li>Check: <code>uninitialized-state</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-12">Description</h3>
+<p>Uninitialized state variables.</p>
+<h3 id="exploit-scenario-12">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Uninitialized{
+    address destination;
+
+    function transfer() payable public{
+        destination.transfer(msg.value);
+    }
+}
+</code></pre>
+<p>Bob calls <code>transfer</code>. As a result, the Ether are sent to the address <code>0x0</code> and are lost.</p>
+<h3 id="recommendation-12">Recommendation</h3>
+<p>Initialize all the variables. If a variable is meant to be initialized to zero, explicitly set it to zero to improve code readability.</p>
+<h2 id="uninitialized-storage-variables">Uninitialized storage variables</h2>
+<h3 id="configuration-13">Configuration</h3>
+<ul>
+<li>Check: <code>uninitialized-storage</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-13">Description</h3>
+<p>An uninitialized storage variable will act as a reference to the first state variable, and can override a critical variable.</p>
+<h3 id="exploit-scenario-13">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Uninitialized{
+    address owner = msg.sender;
+
+    struct St{
+        uint a;
+    }
+
+    function func() {
+        St st;
+        st.a = 0x0;
+    }
+}
+</code></pre>
+<p>Bob calls <code>func</code>. As a result, <code>owner</code> is overridden to <code>0</code>.</p>
+<h3 id="recommendation-13">Recommendation</h3>
+<p>Initialize all storage variables.</p>
+<h2 id="unprotected-upgradeable-contract">Unprotected upgradeable contract</h2>
+<h3 id="configuration-14">Configuration</h3>
+<ul>
+<li>Check: <code>unprotected-upgrade</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-14">Description</h3>
+<p>Detects logic contract that can be destructed.</p>
+<h3 id="exploit-scenario-14">Exploit Scenario:</h3>
+<pre><code>```solidity
+contract Buggy is Initializable{
+    address payable owner;
+
+    function initialize() external initializer{
+        require(owner == address(0));
+        owner = msg.sender;
+    }
+    function kill() external{
+        require(msg.sender == owner);
+        selfdestruct(owner);
+    }
+}
+```
+Buggy is an upgradeable contract. Anyone can call initialize on the logic contract, and destruct the contract.
+</code></pre>
+<h3 id="recommendation-14">Recommendation</h3>
+<p>Add a constructor to ensure <code>initialize</code> cannot be called on the logic contract.</p>
+<h2 id="arbitrary-from-in-transferfrom-used-with-permit">Arbitrary <code>from</code> in transferFrom used with permit</h2>
+<h3 id="configuration-15">Configuration</h3>
+<ul>
+<li>Check: <code>arbitrary-send-erc20-permit</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-15">Description</h3>
+<p>Detect when <code>msg.sender</code> is not used as <code>from</code> in transferFrom and permit is used.</p>
+<h3 id="exploit-scenario-15">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    function bad(address from, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s, address to) public {
+        erc20.permit(from, address(this), value, deadline, v, r, s);
+        erc20.transferFrom(from, to, value);
+    }
+</code></pre>
+<p>If an ERC20 token does not implement permit and has a fallback function e.g. WETH, transferFrom allows an attacker to transfer all tokens approved for this contract.</p>
+<h3 id="recommendation-15">Recommendation</h3>
+<p>Ensure that the underlying ERC20 token correctly implements a permit function.</p>
+<h2 id="functions-that-send-ether-to-arbitrary-destinations">Functions that send Ether to arbitrary destinations</h2>
+<h3 id="configuration-16">Configuration</h3>
+<ul>
+<li>Check: <code>arbitrary-send-eth</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-16">Description</h3>
+<p>Unprotected call to a function sending Ether to an arbitrary address.</p>
+<h3 id="exploit-scenario-16">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract ArbitrarySendEth{
+    address destination;
+    function setDestination(){
+        destination = msg.sender;
+    }
+
+    function withdraw() public{
+        destination.transfer(this.balance);
+    }
+}
+</code></pre>
+<p>Bob calls <code>setDestination</code> and <code>withdraw</code>. As a result he withdraws the contract's balance.</p>
+<h3 id="recommendation-16">Recommendation</h3>
+<p>Ensure that an arbitrary user cannot withdraw unauthorized funds.</p>
+<h2 id="array-length-assignment">Array Length Assignment</h2>
+<h3 id="configuration-17">Configuration</h3>
+<ul>
+<li>Check: <code>controlled-array-length</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-17">Description</h3>
+<p>Detects the direct assignment of an array's length.</p>
+<h3 id="exploit-scenario-17">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+	uint[] testArray; // dynamic size array
+
+	function f(uint usersCount) public {
+		// ...
+		testArray.length = usersCount;
+		// ...
+	}
+
+	function g(uint userIndex, uint val) public {
+		// ...
+		testArray[userIndex] = val;
+		// ...
+	}
+}
+</code></pre>
+<p>Contract storage/state-variables are indexed by a 256-bit integer.<br>
+The user can set the array length to <code>2**256-1</code> in order to index all storage slots.<br>
+In the example above, one could call the function <code>f</code> to set the array length, then call the function <code>g</code> to control any storage slot desired.<br>
+Note that storage slots here are indexed via a hash of the indexers; nonetheless, all storage will still be accessible and could be controlled by the attacker.</p>
+<h3 id="recommendation-17">Recommendation</h3>
+<p>Do not allow array lengths to be set directly set; instead, opt to add values as needed.<br>
+Otherwise, thoroughly review the contract to ensure a user-controlled variable cannot reach an array length assignment.</p>
+<h2 id="controlled-delegatecall">Controlled Delegatecall</h2>
+<h3 id="configuration-18">Configuration</h3>
+<ul>
+<li>Check: <code>controlled-delegatecall</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-18">Description</h3>
+<p><code>Delegatecall</code> or <code>callcode</code> to an address controlled by the user.</p>
+<h3 id="exploit-scenario-18">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Delegatecall{
+    function delegate(address to, bytes data){
+        to.delegatecall(data);
+    }
+}
+</code></pre>
+<p>Bob calls <code>delegate</code> and delegates the execution to his malicious contract. As a result, Bob withdraws the funds of the contract and destructs it.</p>
+<h3 id="recommendation-18">Recommendation</h3>
+<p>Avoid using <code>delegatecall</code>. Use only trusted destinations.</p>
+<h2 id="payable-functions-using-delegatecall-inside-a-loop">Payable functions using <code>delegatecall</code> inside a loop</h2>
+<h3 id="configuration-19">Configuration</h3>
+<ul>
+<li>Check: <code>delegatecall-loop</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-19">Description</h3>
+<p>Detect the use of <code>delegatecall</code> inside a loop in a payable function.</p>
+<h3 id="exploit-scenario-19">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract DelegatecallInLoop{
+
+    mapping (address =&gt; uint256) balances;
+
+    function bad(address[] memory receivers) public payable {
+        for (uint256 i = 0; i &lt; receivers.length; i++) {
+            address(this).delegatecall(abi.encodeWithSignature(&quot;addBalance(address)&quot;, receivers[i]));
+        }
+    }
+
+    function addBalance(address a) public payable {
+        balances[a] += msg.value;
+    } 
+
+}
+</code></pre>
+<p>When calling <code>bad</code> the same <code>msg.value</code> amount will be accredited multiple times.</p>
+<h3 id="recommendation-19">Recommendation</h3>
+<p>Carefully check that the function called by <code>delegatecall</code> is not payable/doesn't use <code>msg.value</code>.</p>
+<h2 id="msgvalue-inside-a-loop"><code>msg.value</code> inside a loop</h2>
+<h3 id="configuration-20">Configuration</h3>
+<ul>
+<li>Check: <code>msg-value-loop</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-20">Description</h3>
+<p>Detect the use of <code>msg.value</code> inside a loop.</p>
+<h3 id="exploit-scenario-20">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract MsgValueInLoop{
+
+    mapping (address =&gt; uint256) balances;
+
+    function bad(address[] memory receivers) public payable {
+        for (uint256 i=0; i &lt; receivers.length; i++) {
+            balances[receivers[i]] += msg.value;
+        }
+    }
+
+}
+</code></pre>
+<h3 id="recommendation-20">Recommendation</h3>
+<p>Track msg.value through a local variable and decrease its amount on every iteration/usage.</p>
+<h2 id="reentrancy-vulnerabilities">Reentrancy vulnerabilities</h2>
+<h3 id="configuration-21">Configuration</h3>
+<ul>
+<li>Check: <code>reentrancy-eth</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-21">Description</h3>
+<p>Detection of the <a href="https://github.com/trailofbits/not-so-smart-contracts/tree/master/reentrancy">reentrancy bug</a>.<br>
+Do not report reentrancies that don't involve Ether (see <code>reentrancy-no-eth</code>)</p>
+<h3 id="exploit-scenario-21">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    function withdrawBalance(){
+        // send userBalance[msg.sender] Ether to msg.sender
+        // if mgs.sender is a contract, it will call its fallback function
+        if( ! (msg.sender.call.value(userBalance[msg.sender])() ) ){
+            throw;
+        }
+        userBalance[msg.sender] = 0;
+    }
+</code></pre>
+<p>Bob uses the re-entrancy bug to call <code>withdrawBalance</code> two times, and withdraw more than its initial deposit to the contract.</p>
+<h3 id="recommendation-21">Recommendation</h3>
+<p>Apply the <a href="http://solidity.readthedocs.io/en/v0.4.21/security-considerations.html#re-entrancy"><code>check-effects-interactions pattern</code></a>.</p>
+<h2 id="storage-signed-integer-array">Storage Signed Integer Array</h2>
+<h3 id="configuration-22">Configuration</h3>
+<ul>
+<li>Check: <code>storage-array</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-22">Description</h3>
+<p><code>solc</code> versions <code>0.4.7</code>-<code>0.5.10</code> contain <a href="https://blog.ethereum.org/2019/06/25/solidity-storage-array-bugs">a compiler bug</a><br>
+leading to incorrect values in signed integer arrays.</p>
+<h3 id="exploit-scenario-22">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+	int[3] ether_balances; // storage signed integer array
+	function bad0() private {
+		// ...
+		ether_balances = [-1, -1, -1];
+		// ...
+	}
+}
+</code></pre>
+<p><code>bad0()</code> uses a (storage-allocated) signed integer array state variable to store the ether balances of three accounts.<br>
+<code>-1</code> is supposed to indicate uninitialized values but the Solidity bug makes these as <code>1</code>, which could be exploited by the accounts.</p>
+<h3 id="recommendation-22">Recommendation</h3>
+<p>Use a compiler version &gt;= <code>0.5.10</code>.</p>
+<h2 id="unchecked-transfer">Unchecked transfer</h2>
+<h3 id="configuration-23">Configuration</h3>
+<ul>
+<li>Check: <code>unchecked-transfer</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-23">Description</h3>
+<p>The return value of an external transfer/transferFrom call is not checked</p>
+<h3 id="exploit-scenario-23">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Token {
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success);
+}
+contract MyBank{  
+    mapping(address =&gt; uint) balances;
+    Token token;
+    function deposit(uint amount) public{
+        token.transferFrom(msg.sender, address(this), amount);
+        balances[msg.sender] += amount;
+    }
+}
+</code></pre>
+<p>Several tokens do not revert in case of failure and return false. If one of these tokens is used in <code>MyBank</code>, <code>deposit</code> will not revert if the transfer fails, and an attacker can call <code>deposit</code> for free..</p>
+<h3 id="recommendation-23">Recommendation</h3>
+<p>Use <code>SafeERC20</code>, or ensure that the transfer/transferFrom return value is checked.</p>
+<h2 id="weak-prng">Weak PRNG</h2>
+<h3 id="configuration-24">Configuration</h3>
+<ul>
+<li>Check: <code>weak-prng</code></li>
+<li>Severity: <code>High</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-24">Description</h3>
+<p>Weak PRNG due to a modulo on <code>block.timestamp</code>, <code>now</code> or <code>blockhash</code>. These can be influenced by miners to some extent so they should be avoided.</p>
+<h3 id="exploit-scenario-24">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Game {
+
+    uint reward_determining_number;
+
+    function guessing() external{
+      reward_determining_number = uint256(block.blockhash(10000)) % 10;
+    }
+}
+</code></pre>
+<p>Eve is a miner. Eve calls <code>guessing</code> and re-orders the block containing the transaction.<br>
+As a result, Eve wins the game.</p>
+<h3 id="recommendation-24">Recommendation</h3>
+<p>Do not use <code>block.timestamp</code>, <code>now</code> or <code>blockhash</code> as a source of randomness</p>
+<h2 id="domain-separator-collision">Domain separator collision</h2>
+<h3 id="configuration-25">Configuration</h3>
+<ul>
+<li>Check: <code>domain-separator-collision</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-25">Description</h3>
+<p>An ERC20 token has a function whose signature collides with EIP-2612's DOMAIN_SEPARATOR(), causing unanticipated behavior for contracts using <code>permit</code> functionality.</p>
+<h3 id="exploit-scenario-25">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Contract{
+    function some_collisions() external() {}
+}
+</code></pre>
+<p><code>some_collision</code> clashes with EIP-2612's DOMAIN_SEPARATOR() and will interfere with contract's using <code>permit</code>.</p>
+<h3 id="recommendation-25">Recommendation</h3>
+<p>Remove or rename the function that collides with DOMAIN_SEPARATOR().</p>
+<h2 id="dangerous-enum-conversion">Dangerous enum conversion</h2>
+<h3 id="configuration-26">Configuration</h3>
+<ul>
+<li>Check: <code>enum-conversion</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-26">Description</h3>
+<p>Detect out-of-range <code>enum</code> conversion (<code>solc</code> &lt; <code>0.4.5</code>).</p>
+<h3 id="exploit-scenario-26">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    pragma solidity 0.4.2;
+    contract Test{
+    
+    enum E{a}
+    
+    function bug(uint a) public returns(E){
+        return E(a);   
+    }
+}
+</code></pre>
+<p>Attackers can trigger unexpected behaviour by calling <code>bug(1)</code>.</p>
+<h3 id="recommendation-26">Recommendation</h3>
+<p>Use a recent compiler version. If <code>solc</code> &lt;<code>0.4.5</code> is required, check the <code>enum</code> conversion range.</p>
+<h2 id="incorrect-erc20-interface">Incorrect erc20 interface</h2>
+<h3 id="configuration-27">Configuration</h3>
+<ul>
+<li>Check: <code>erc20-interface</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-27">Description</h3>
+<p>Incorrect return values for <code>ERC20</code> functions. A contract compiled with Solidity &gt; 0.4.22 interacting with these functions will fail to execute them, as the return value is missing.</p>
+<h3 id="exploit-scenario-27">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Token{
+    function transfer(address to, uint value) external;
+    //...
+}
+</code></pre>
+<p><code>Token.transfer</code> does not return a boolean. Bob deploys the token. Alice creates a contract that interacts with it but assumes a correct <code>ERC20</code> interface implementation. Alice's contract is unable to interact with Bob's contract.</p>
+<h3 id="recommendation-27">Recommendation</h3>
+<p>Set the appropriate return values and types for the defined <code>ERC20</code> functions.</p>
+<h2 id="incorrect-erc721-interface">Incorrect erc721 interface</h2>
+<h3 id="configuration-28">Configuration</h3>
+<ul>
+<li>Check: <code>erc721-interface</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-28">Description</h3>
+<p>Incorrect return values for <code>ERC721</code> functions. A contract compiled with solidity &gt; 0.4.22 interacting with these functions will fail to execute them, as the return value is missing.</p>
+<h3 id="exploit-scenario-28">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Token{
+    function ownerOf(uint256 _tokenId) external view returns (bool);
+    //...
+}
+</code></pre>
+<p><code>Token.ownerOf</code> does not return an address like <code>ERC721</code> expects. Bob deploys the token. Alice creates a contract that interacts with it but assumes a correct <code>ERC721</code> interface implementation. Alice's contract is unable to interact with Bob's contract.</p>
+<h3 id="recommendation-28">Recommendation</h3>
+<p>Set the appropriate return values and vtypes for the defined <code>ERC721</code> functions.</p>
+<h2 id="dangerous-strict-equalities">Dangerous strict equalities</h2>
+<h3 id="configuration-29">Configuration</h3>
+<ul>
+<li>Check: <code>incorrect-equality</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-29">Description</h3>
+<p>Use of strict equalities that can be easily manipulated by an attacker.</p>
+<h3 id="exploit-scenario-29">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Crowdsale{
+    function fund_reached() public returns(bool){
+        return this.balance == 100 ether;
+    }
+</code></pre>
+<p><code>Crowdsale</code> relies on <code>fund_reached</code> to know when to stop the sale of tokens.<br>
+<code>Crowdsale</code> reaches 100 Ether. Bob sends 0.1 Ether. As a result, <code>fund_reached</code> is always false and the <code>crowdsale</code> never ends.</p>
+<h3 id="recommendation-29">Recommendation</h3>
+<p>Don't use strict equality to determine if an account has enough Ether or tokens.</p>
+<h2 id="contracts-that-lock-ether">Contracts that lock Ether</h2>
+<h3 id="configuration-30">Configuration</h3>
+<ul>
+<li>Check: <code>locked-ether</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-30">Description</h3>
+<p>Contract with a <code>payable</code> function, but without a withdrawal capacity.</p>
+<h3 id="exploit-scenario-30">Exploit Scenario:</h3>
+<pre><code class="language-solidity">pragma solidity 0.4.24;
+contract Locked{
+    function receive() payable public{
+    }
+}
+</code></pre>
+<p>Every Ether sent to <code>Locked</code> will be lost.</p>
+<h3 id="recommendation-30">Recommendation</h3>
+<p>Remove the payable attribute or add a withdraw function.</p>
+<h2 id="deletion-on-mapping-containing-a-structure">Deletion on mapping containing a structure</h2>
+<h3 id="configuration-31">Configuration</h3>
+<ul>
+<li>Check: <code>mapping-deletion</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-31">Description</h3>
+<p>A deletion in a structure containing a mapping will not delete the mapping (see the <a href="https://solidity.readthedocs.io/en/latest/types.html##delete">Solidity documentation</a>). The remaining data may be used to compromise the contract.</p>
+<h3 id="exploit-scenario-31">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    struct BalancesStruct{
+        address owner;
+        mapping(address =&gt; uint) balances;
+    }
+    mapping(address =&gt; BalancesStruct) public stackBalance;
+
+    function remove() internal{
+         delete stackBalance[msg.sender];
+    }
+</code></pre>
+<p><code>remove</code> deletes an item of <code>stackBalance</code>.<br>
+The mapping <code>balances</code> is never deleted, so <code>remove</code> does not work as intended.</p>
+<h3 id="recommendation-31">Recommendation</h3>
+<p>Use a lock mechanism instead of a deletion to disable structure containing a mapping.</p>
+<h2 id="state-variable-shadowing-from-abstract-contracts">State variable shadowing from abstract contracts</h2>
+<h3 id="configuration-32">Configuration</h3>
+<ul>
+<li>Check: <code>shadowing-abstract</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-32">Description</h3>
+<p>Detection of state variables shadowed from abstract contracts.</p>
+<h3 id="exploit-scenario-32">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract BaseContract{
+    address owner;
+}
+
+contract DerivedContract is BaseContract{
+    address owner;
+}
+</code></pre>
+<p><code>owner</code> of <code>BaseContract</code> is shadowed in <code>DerivedContract</code>.</p>
+<h3 id="recommendation-32">Recommendation</h3>
+<p>Remove the state variable shadowing.</p>
+<h2 id="tautology-or-contradiction">Tautology or contradiction</h2>
+<h3 id="configuration-33">Configuration</h3>
+<ul>
+<li>Check: <code>tautology</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-33">Description</h3>
+<p>Detects expressions that are tautologies or contradictions.</p>
+<h3 id="exploit-scenario-33">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+	function f(uint x) public {
+		// ...
+        if (x &gt;= 0) { // bad -- always true
+           // ...
+        }
+		// ...
+	}
+
+	function g(uint8 y) public returns (bool) {
+		// ...
+        return (y &lt; 512); // bad!
+		// ...
+	}
+}
+</code></pre>
+<p><code>x</code> is a <code>uint256</code>, so <code>x &gt;= 0</code> will be always true.<br>
+<code>y</code> is a <code>uint8</code>, so <code>y &lt;512</code> will be always true.</p>
+<h3 id="recommendation-33">Recommendation</h3>
+<p>Fix the incorrect comparison by changing the value type or the comparison.</p>
+<h2 id="write-after-write">Write after write</h2>
+<h3 id="configuration-34">Configuration</h3>
+<ul>
+<li>Check: <code>write-after-write</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-34">Description</h3>
+<p>Detects variables that are written but never read and written again.</p>
+<h3 id="exploit-scenario-34">Exploit Scenario:</h3>
+<pre><code>```solidity
+contract Buggy{
+    function my_func() external initializer{
+        // ...
+        a = b;
+        a = c;
+        // ..
+    }
+}
+```
+`a` is first asigned to `b`, and then to `c`. As a result the first write does nothing.
+</code></pre>
+<h3 id="recommendation-34">Recommendation</h3>
+<p>Fix or remove the writes.</p>
+<h2 id="misuse-of-a-boolean-constant">Misuse of a Boolean constant</h2>
+<h3 id="configuration-35">Configuration</h3>
+<ul>
+<li>Check: <code>boolean-cst</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-35">Description</h3>
+<p>Detects the misuse of a Boolean constant.</p>
+<h3 id="exploit-scenario-35">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+	function f(uint x) public {
+		// ...
+        if (false) { // bad!
+           // ...
+        }
+		// ...
+	}
+
+	function g(bool b) public returns (bool) {
+		// ...
+        return (b || true); // bad!
+		// ...
+	}
+}
+</code></pre>
+<p>Boolean constants in code have only a few legitimate uses.<br>
+Other uses (in complex expressions, as conditionals) indicate either an error or, most likely, the persistence of faulty code.</p>
+<h3 id="recommendation-35">Recommendation</h3>
+<p>Verify and simplify the condition.</p>
+<h2 id="constant-functions-using-assembly-code">Constant functions using assembly code</h2>
+<h3 id="configuration-36">Configuration</h3>
+<ul>
+<li>Check: <code>constant-function-asm</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-36">Description</h3>
+<p>Functions declared as <code>constant</code>/<code>pure</code>/<code>view</code> using assembly code.</p>
+<p><code>constant</code>/<code>pure</code>/<code>view</code> was not enforced prior to Solidity 0.5.<br>
+Starting from Solidity 0.5, a call to a <code>constant</code>/<code>pure</code>/<code>view</code> function uses the <code>STATICCALL</code> opcode, which reverts in case of state modification.</p>
+<p>As a result, a call to an <a href="https://solidity.readthedocs.io/en/develop/050-breaking-changes.html#interoperability-with-older-contracts">incorrectly labeled function may trap a contract compiled with Solidity 0.5</a>.</p>
+<h3 id="exploit-scenario-36">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Constant{
+    uint counter;
+    function get() public view returns(uint){
+       counter = counter +1;
+       return counter
+    }
+}
+</code></pre>
+<p><code>Constant</code> was deployed with Solidity 0.4.25. Bob writes a smart contract that interacts with <code>Constant</code> in Solidity 0.5.0.<br>
+All the calls to <code>get</code> revert, breaking Bob's smart contract execution.</p>
+<h3 id="recommendation-36">Recommendation</h3>
+<p>Ensure the attributes of contracts compiled prior to Solidity 0.5.0 are correct.</p>
+<h2 id="constant-functions-changing-the-state">Constant functions changing the state</h2>
+<h3 id="configuration-37">Configuration</h3>
+<ul>
+<li>Check: <code>constant-function-state</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-37">Description</h3>
+<p>Functions declared as <code>constant</code>/<code>pure</code>/<code>view</code> change the state.</p>
+<p><code>constant</code>/<code>pure</code>/<code>view</code> was not enforced prior to Solidity 0.5.<br>
+Starting from Solidity 0.5, a call to a <code>constant</code>/<code>pure</code>/<code>view</code> function uses the <code>STATICCALL</code> opcode, which reverts in case of state modification.</p>
+<p>As a result, a call to an <a href="https://solidity.readthedocs.io/en/develop/050-breaking-changes.html#interoperability-with-older-contracts">incorrectly labeled function may trap a contract compiled with Solidity 0.5</a>.</p>
+<h3 id="exploit-scenario-37">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Constant{
+    uint counter;
+    function get() public view returns(uint){
+       counter = counter +1;
+       return counter
+    }
+}
+</code></pre>
+<p><code>Constant</code> was deployed with Solidity 0.4.25. Bob writes a smart contract that interacts with <code>Constant</code> in Solidity 0.5.0.<br>
+All the calls to <code>get</code> revert, breaking Bob's smart contract execution.</p>
+<h3 id="recommendation-37">Recommendation</h3>
+<p>Ensure that attributes of contracts compiled prior to Solidity 0.5.0 are correct.</p>
+<h2 id="divide-before-multiply">Divide before multiply</h2>
+<h3 id="configuration-38">Configuration</h3>
+<ul>
+<li>Check: <code>divide-before-multiply</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-38">Description</h3>
+<p>Solidity integer division might truncate. As a result, performing multiplication before division can sometimes avoid loss of precision.</p>
+<h3 id="exploit-scenario-38">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+	function f(uint n) public {
+        coins = (oldSupply / n) * interest;
+    }
+}
+</code></pre>
+<p>If <code>n</code> is greater than <code>oldSupply</code>, <code>coins</code> will be zero. For example, with <code>oldSupply = 5; n = 10, interest = 2</code>, coins will be zero.<br>
+If <code>(oldSupply * interest / n)</code> was used, <code>coins</code> would have been <code>1</code>.<br>
+In general, it's usually a good idea to re-arrange arithmetic to perform multiplication before division, unless the limit of a smaller type makes this dangerous.</p>
+<h3 id="recommendation-38">Recommendation</h3>
+<p>Consider ordering multiplication before division.</p>
+<h2 id="reentrancy-vulnerabilities-2">Reentrancy vulnerabilities</h2>
+<h3 id="configuration-39">Configuration</h3>
+<ul>
+<li>Check: <code>reentrancy-no-eth</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-39">Description</h3>
+<p>Detection of the <a href="https://github.com/trailofbits/not-so-smart-contracts/tree/master/reentrancy">reentrancy bug</a>.<br>
+Do not report reentrancies that involve Ether (see <code>reentrancy-eth</code>).</p>
+<h3 id="exploit-scenario-39">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    function bug(){
+        require(not_called);
+        if( ! (msg.sender.call() ) ){
+            throw;
+        }
+        not_called = False;
+    }   
+</code></pre>
+<h3 id="recommendation-39">Recommendation</h3>
+<p>Apply the <a href="http://solidity.readthedocs.io/en/v0.4.21/security-considerations.html#re-entrancy"><code>check-effects-interactions</code> pattern</a>.</p>
+<h2 id="reused-base-constructors">Reused base constructors</h2>
+<h3 id="configuration-40">Configuration</h3>
+<ul>
+<li>Check: <code>reused-constructor</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-40">Description</h3>
+<p>Detects if the same base constructor is called with arguments from two different locations in the same inheritance hierarchy.</p>
+<h3 id="exploit-scenario-40">Exploit Scenario:</h3>
+<pre><code class="language-solidity">pragma solidity ^0.4.0;
+
+contract A{
+    uint num = 5;
+    constructor(uint x) public{
+        num += x;
+    }
+}
+
+contract B is A{
+    constructor() A(2) public { /* ... */ }
+}
+
+contract C is A {
+    constructor() A(3) public { /* ... */ }
+}
+
+contract D is B, C {
+    constructor() public { /* ... */ }
+}
+
+contract E is B {
+    constructor() A(1) public { /* ... */ }
+}
+</code></pre>
+<p>The constructor of <code>A</code> is called multiple times in <code>D</code> and <code>E</code>:</p>
+<ul>
+<li><code>D</code> inherits from <code>B</code> and <code>C</code>, both of which construct <code>A</code>.</li>
+<li><code>E</code> only inherits from <code>B</code>, but <code>B</code> and <code>E</code> construct <code>A</code>.<br>
+.</li>
+</ul>
+<h3 id="recommendation-40">Recommendation</h3>
+<p>Remove the duplicate constructor call.</p>
+<h2 id="dangerous-usage-of-txorigin">Dangerous usage of <code>tx.origin</code></h2>
+<h3 id="configuration-41">Configuration</h3>
+<ul>
+<li>Check: <code>tx-origin</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-41">Description</h3>
+<p><code>tx.origin</code>-based protection can be abused by a malicious contract if a legitimate user interacts with the malicious contract.</p>
+<h3 id="exploit-scenario-41">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract TxOrigin {
+    address owner = msg.sender;
+
+    function bug() {
+        require(tx.origin == owner);
+    }
+</code></pre>
+<p>Bob is the owner of <code>TxOrigin</code>. Bob calls Eve's contract. Eve's contract calls <code>TxOrigin</code> and bypasses the <code>tx.origin</code> protection.</p>
+<h3 id="recommendation-41">Recommendation</h3>
+<p>Do not use <code>tx.origin</code> for authorization.</p>
+<h2 id="unchecked-low-level-calls">Unchecked low-level calls</h2>
+<h3 id="configuration-42">Configuration</h3>
+<ul>
+<li>Check: <code>unchecked-lowlevel</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-42">Description</h3>
+<p>The return value of a low-level call is not checked.</p>
+<h3 id="exploit-scenario-42">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract MyConc{
+    function my_func(address payable dst) public payable{
+        dst.call.value(msg.value)(&quot;&quot;);
+    }
+}
+</code></pre>
+<p>The return value of the low-level call is not checked, so if the call fails, the Ether will be locked in the contract.<br>
+If the low level is used to prevent blocking operations, consider logging failed calls.</p>
+<h3 id="recommendation-42">Recommendation</h3>
+<p>Ensure that the return value of a low-level call is checked or logged.</p>
+<h2 id="unchecked-send">Unchecked Send</h2>
+<h3 id="configuration-43">Configuration</h3>
+<ul>
+<li>Check: <code>unchecked-send</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-43">Description</h3>
+<p>The return value of a <code>send</code> is not checked.</p>
+<h3 id="exploit-scenario-43">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract MyConc{
+    function my_func(address payable dst) public payable{
+        dst.send(msg.value);
+    }
+}
+</code></pre>
+<p>The return value of <code>send</code> is not checked, so if the send fails, the Ether will be locked in the contract.<br>
+If <code>send</code> is used to prevent blocking operations, consider logging the failed <code>send</code>.</p>
+<h3 id="recommendation-43">Recommendation</h3>
+<p>Ensure that the return value of <code>send</code> is checked or logged.</p>
+<h2 id="uninitialized-local-variables">Uninitialized local variables</h2>
+<h3 id="configuration-44">Configuration</h3>
+<ul>
+<li>Check: <code>uninitialized-local</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-44">Description</h3>
+<p>Uninitialized local variables.</p>
+<h3 id="exploit-scenario-44">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Uninitialized is Owner{
+    function withdraw() payable public onlyOwner{
+        address to;
+        to.transfer(this.balance)
+    }
+}
+</code></pre>
+<p>Bob calls <code>transfer</code>. As a result, all Ether is sent to the address <code>0x0</code> and is lost.</p>
+<h3 id="recommendation-44">Recommendation</h3>
+<p>Initialize all the variables. If a variable is meant to be initialized to zero, explicitly set it to zero to improve code readability.</p>
+<h2 id="unused-return">Unused return</h2>
+<h3 id="configuration-45">Configuration</h3>
+<ul>
+<li>Check: <code>unused-return</code></li>
+<li>Severity: <code>Medium</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-45">Description</h3>
+<p>The return value of an external call is not stored in a local or state variable.</p>
+<h3 id="exploit-scenario-45">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract MyConc{
+    using SafeMath for uint;   
+    function my_func(uint a, uint b) public{
+        a.add(b);
+    }
+}
+</code></pre>
+<p><code>MyConc</code> calls <code>add</code> of <code>SafeMath</code>, but does not store the result in <code>a</code>. As a result, the computation has no effect.</p>
+<h3 id="recommendation-45">Recommendation</h3>
+<p>Ensure that all the return values of the function calls are used.</p>
+<h2 id="incorrect-modifier">Incorrect modifier</h2>
+<h3 id="configuration-46">Configuration</h3>
+<ul>
+<li>Check: <code>incorrect-modifier</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-46">Description</h3>
+<p>If a modifier does not execute <code>_</code> or revert, the execution of the function will return the default value, which can be misleading for the caller.</p>
+<h3 id="exploit-scenario-46">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    modidfier myModif(){
+        if(..){
+           _;
+        }
+    }
+    function get() myModif returns(uint){
+
+    }
+</code></pre>
+<p>If the condition in <code>myModif</code> is false, the execution of <code>get()</code> will return 0.</p>
+<h3 id="recommendation-46">Recommendation</h3>
+<p>All the paths in a modifier must execute <code>_</code> or revert.</p>
+<h2 id="builtin-symbol-shadowing">Builtin Symbol Shadowing</h2>
+<h3 id="configuration-47">Configuration</h3>
+<ul>
+<li>Check: <code>shadowing-builtin</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-47">Description</h3>
+<p>Detection of shadowing built-in symbols using local variables, state variables, functions, modifiers, or events.</p>
+<h3 id="exploit-scenario-47">Exploit Scenario:</h3>
+<pre><code class="language-solidity">pragma solidity ^0.4.24;
+
+contract Bug {
+    uint now; // Overshadows current time stamp.
+
+    function assert(bool condition) public {
+        // Overshadows built-in symbol for providing assertions.
+    }
+
+    function get_next_expiration(uint earlier_time) private returns (uint) {
+        return now + 259200; // References overshadowed timestamp.
+    }
+}
+</code></pre>
+<p><code>now</code> is defined as a state variable, and shadows with the built-in symbol <code>now</code>. The function <code>assert</code> overshadows the built-in <code>assert</code> function. Any use of either of these built-in symbols may lead to unexpected results.</p>
+<h3 id="recommendation-47">Recommendation</h3>
+<p>Rename the local variables, state variables, functions, modifiers, and events that shadow a builtin symbol.</p>
+<h2 id="local-variable-shadowing">Local variable shadowing</h2>
+<h3 id="configuration-48">Configuration</h3>
+<ul>
+<li>Check: <code>shadowing-local</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-48">Description</h3>
+<p>Detection of shadowing using local variables.</p>
+<h3 id="exploit-scenario-48">Exploit Scenario:</h3>
+<pre><code class="language-solidity">pragma solidity ^0.4.24;
+
+contract Bug {
+    uint owner;
+
+    function sensitive_function(address owner) public {
+        // ...
+        require(owner == msg.sender);
+    }
+
+    function alternate_sensitive_function() public {
+        address owner = msg.sender;
+        // ...
+        require(owner == msg.sender);
+    }
+}
+</code></pre>
+<p><code>sensitive_function.owner</code> shadows <code>Bug.owner</code>. As a result, the use of <code>owner</code> in <code>sensitive_function</code> might be incorrect.</p>
+<h3 id="recommendation-48">Recommendation</h3>
+<p>Rename the local variables that shadow another component.</p>
+<h2 id="uninitialized-function-pointers-in-constructors">Uninitialized function pointers in constructors</h2>
+<h3 id="configuration-49">Configuration</h3>
+<ul>
+<li>Check: <code>uninitialized-fptr-cst</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-49">Description</h3>
+<p>solc versions <code>0.4.5</code>-<code>0.4.26</code> and <code>0.5.0</code>-<code>0.5.8</code> contain a compiler bug leading to unexpected behavior when calling uninitialized function pointers in constructors.</p>
+<h3 id="exploit-scenario-49">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract bad0 {
+
+  constructor() public {
+    /* Uninitialized function pointer */
+    function(uint256) internal returns(uint256) a;
+    a(10);
+  }
+
+}
+</code></pre>
+<p>The call to <code>a(10)</code> will lead to unexpected behavior because function pointer <code>a</code> is not initialized in the constructor.</p>
+<h3 id="recommendation-49">Recommendation</h3>
+<p>Initialize function pointers before calling. Avoid function pointers if possible.</p>
+<h2 id="pre-declaration-usage-of-local-variables">Pre-declaration usage of local variables</h2>
+<h3 id="configuration-50">Configuration</h3>
+<ul>
+<li>Check: <code>variable-scope</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-50">Description</h3>
+<p>Detects the possible usage of a variable before the declaration is stepped over (either because it is later declared, or declared in another scope).</p>
+<h3 id="exploit-scenario-50">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract C {
+    function f(uint z) public returns (uint) {
+        uint y = x + 9 + z; // 'z' is used pre-declaration
+        uint x = 7;
+
+        if (z % 2 == 0) {
+            uint max = 5;
+            // ...
+        }
+
+        // 'max' was intended to be 5, but it was mistakenly declared in a scope and not assigned (so it is zero).
+        for (uint i = 0; i &lt; max; i++) {
+            x += 1;
+        }
+
+        return x;
+    }
+}
+</code></pre>
+<p>In the case above, the variable <code>x</code> is used before its declaration, which may result in unintended consequences.<br>
+Additionally, the for-loop uses the variable <code>max</code>, which is declared in a previous scope that may not always be reached. This could lead to unintended consequences if the user mistakenly uses a variable prior to any intended declaration assignment. It also may indicate that the user intended to reference a different variable.</p>
+<h3 id="recommendation-50">Recommendation</h3>
+<p>Move all variable declarations prior to any usage of the variable, and ensure that reaching a variable declaration does not depend on some conditional if it is used unconditionally.</p>
+<h2 id="void-constructor">Void constructor</h2>
+<h3 id="configuration-51">Configuration</h3>
+<ul>
+<li>Check: <code>void-cst</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-51">Description</h3>
+<p>Detect the call to a constructor that is not implemented</p>
+<h3 id="exploit-scenario-51">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A{}
+contract B is A{
+    constructor() public A(){}
+}
+</code></pre>
+<p>When reading <code>B</code>'s constructor definition, we might assume that <code>A()</code> initiates the contract, but no code is executed.</p>
+<h3 id="recommendation-51">Recommendation</h3>
+<p>Remove the constructor call.</p>
+<h2 id="calls-inside-a-loop">Calls inside a loop</h2>
+<h3 id="configuration-52">Configuration</h3>
+<ul>
+<li>Check: <code>calls-loop</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-52">Description</h3>
+<p>Calls inside a loop might lead to a denial-of-service attack.</p>
+<h3 id="exploit-scenario-52">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract CallsInLoop{
+
+    address[] destinations;
+
+    constructor(address[] newDestinations) public{
+        destinations = newDestinations;
+    }
+
+    function bad() external{
+        for (uint i=0; i &lt; destinations.length; i++){
+            destinations[i].transfer(i);
+        }
+    }
+
+}
+</code></pre>
+<p>If one of the destinations has a fallback function that reverts, <code>bad</code> will always revert.</p>
+<h3 id="recommendation-52">Recommendation</h3>
+<p>Favor <a href="https://github.com/ethereum/wiki/wiki/Safety#favor-pull-over-push-for-external-calls">pull over push</a> strategy for external calls.</p>
+<h2 id="missing-events-access-control">Missing events access control</h2>
+<h3 id="configuration-53">Configuration</h3>
+<ul>
+<li>Check: <code>events-access</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-53">Description</h3>
+<p>Detect missing events for critical access control parameters</p>
+<h3 id="exploit-scenario-53">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract C {
+
+  modifier onlyAdmin {
+    if (msg.sender != owner) throw;
+    _;
+  }
+
+  function updateOwner(address newOwner) onlyAdmin external {
+    owner = newOwner;
+  }
+}
+</code></pre>
+<p><code>updateOwner()</code> has no event, so it is difficult to track off-chain owner changes.</p>
+<h3 id="recommendation-53">Recommendation</h3>
+<p>Emit an event for critical parameter changes.</p>
+<h2 id="missing-events-arithmetic">Missing events arithmetic</h2>
+<h3 id="configuration-54">Configuration</h3>
+<ul>
+<li>Check: <code>events-maths</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-54">Description</h3>
+<p>Detect missing events for critical arithmetic parameters.</p>
+<h3 id="exploit-scenario-54">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract C {
+
+    modifier onlyOwner {
+        if (msg.sender != owner) throw;
+        _;
+    }
+
+    function setBuyPrice(uint256 newBuyPrice) onlyOwner public {
+        buyPrice = newBuyPrice;
+    }
+
+    function buy() external {
+     ... // buyPrice is used to determine the number of tokens purchased
+    }    
+}
+</code></pre>
+<p><code>updateOwner()</code> has no event, so it is difficult to track off-chain changes in the buy price.</p>
+<h3 id="recommendation-54">Recommendation</h3>
+<p>Emit an event for critical parameter changes.</p>
+<h2 id="dangerous-unary-expressions">Dangerous unary expressions</h2>
+<h3 id="configuration-55">Configuration</h3>
+<ul>
+<li>Check: <code>incorrect-unary</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-55">Description</h3>
+<p>Unary expressions such as <code>x=+1</code> probably typos.</p>
+<h3 id="exploit-scenario-55">Exploit Scenario:</h3>
+<pre><code class="language-Solidity">contract Bug{
+    uint public counter;
+
+    function increase() public returns(uint){
+        counter=+1;
+        return counter;
+    }
+}
+</code></pre>
+<p><code>increase()</code> uses <code>=+</code> instead of <code>+=</code>, so <code>counter</code> will never exceed 1.</p>
+<h3 id="recommendation-55">Recommendation</h3>
+<p>Remove the unary expression.</p>
+<h2 id="missing-zero-address-validation">Missing zero address validation</h2>
+<h3 id="configuration-56">Configuration</h3>
+<ul>
+<li>Check: <code>missing-zero-check</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-56">Description</h3>
+<p>Detect missing zero address validation.</p>
+<h3 id="exploit-scenario-56">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract C {
+
+  modifier onlyAdmin {
+    if (msg.sender != owner) throw;
+    _;
+  }
+
+  function updateOwner(address newOwner) onlyAdmin external {
+    owner = newOwner;
+  }
+}
+</code></pre>
+<p>Bob calls <code>updateOwner</code> without specifying the <code>newOwner</code>, so Bob loses ownership of the contract.</p>
+<h3 id="recommendation-56">Recommendation</h3>
+<p>Check that the address is not zero.</p>
+<h2 id="reentrancy-vulnerabilities-3">Reentrancy vulnerabilities</h2>
+<h3 id="configuration-57">Configuration</h3>
+<ul>
+<li>Check: <code>reentrancy-benign</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-57">Description</h3>
+<p>Detection of the <a href="https://github.com/trailofbits/not-so-smart-contracts/tree/master/reentrancy">reentrancy bug</a>.<br>
+Only report reentrancy that acts as a double call (see <code>reentrancy-eth</code>, <code>reentrancy-no-eth</code>).</p>
+<h3 id="exploit-scenario-57">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    function callme(){
+        if( ! (msg.sender.call()() ) ){
+            throw;
+        }
+        counter += 1
+    }   
+</code></pre>
+<p><code>callme</code> contains a reentrancy. The reentrancy is benign because it's exploitation would have the same effect as two consecutive calls.</p>
+<h3 id="recommendation-57">Recommendation</h3>
+<p>Apply the <a href="http://solidity.readthedocs.io/en/v0.4.21/security-considerations.html#re-entrancy"><code>check-effects-interactions</code> pattern</a>.</p>
+<h2 id="reentrancy-vulnerabilities-4">Reentrancy vulnerabilities</h2>
+<h3 id="configuration-58">Configuration</h3>
+<ul>
+<li>Check: <code>reentrancy-events</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-58">Description</h3>
+<p>Detection of the <a href="https://github.com/trailofbits/not-so-smart-contracts/tree/master/reentrancy">reentrancy bug</a>.<br>
+Only report reentrancies leading to out-of-order events.</p>
+<h3 id="exploit-scenario-58">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    function bug(Called d){
+        counter += 1;
+        d.f();
+        emit Counter(counter);
+    }
+</code></pre>
+<p>If <code>d.()</code> re-enters, the <code>Counter</code> events will be shown in an incorrect order, which might lead to issues for third parties.</p>
+<h3 id="recommendation-58">Recommendation</h3>
+<p>Apply the <a href="http://solidity.readthedocs.io/en/v0.4.21/security-considerations.html#re-entrancy"><code>check-effects-interactions</code> pattern</a>.</p>
+<h2 id="block-timestamp">Block timestamp</h2>
+<h3 id="configuration-59">Configuration</h3>
+<ul>
+<li>Check: <code>timestamp</code></li>
+<li>Severity: <code>Low</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-59">Description</h3>
+<p>Dangerous usage of <code>block.timestamp</code>. <code>block.timestamp</code> can be manipulated by miners.</p>
+<h3 id="exploit-scenario-59">Exploit Scenario:</h3>
+<p>&quot;Bob's contract relies on <code>block.timestamp</code> for its randomness. Eve is a miner and manipulates <code>block.timestamp</code> to exploit Bob's contract.</p>
+<h3 id="recommendation-59">Recommendation</h3>
+<p>Avoid relying on <code>block.timestamp</code>.</p>
+<h2 id="assembly-usage">Assembly usage</h2>
+<h3 id="configuration-60">Configuration</h3>
+<ul>
+<li>Check: <code>assembly</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-60">Description</h3>
+<p>The use of assembly is error-prone and should be avoided.</p>
+<h3 id="recommendation-60">Recommendation</h3>
+<p>Do not use <code>evm</code> assembly.</p>
+<h2 id="assert-state-change">Assert state change</h2>
+<h3 id="configuration-61">Configuration</h3>
+<ul>
+<li>Check: <code>assert-state-change</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-61">Description</h3>
+<p>Incorrect use of <code>assert()</code>. See Solidity best <a href="https://solidity.readthedocs.io/en/latest/control-structures.html#id4">practices</a>.</p>
+<h3 id="exploit-scenario-60">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+
+  uint s_a;
+
+  function bad() public {
+    assert((s_a += 1) &gt; 10);
+  }
+}
+</code></pre>
+<p>The assert in <code>bad()</code> increments the state variable <code>s_a</code> while checking for the condition.</p>
+<h3 id="recommendation-61">Recommendation</h3>
+<p>Use <code>require</code> for invariants modifying the state.</p>
+<h2 id="boolean-equality">Boolean equality</h2>
+<h3 id="configuration-62">Configuration</h3>
+<ul>
+<li>Check: <code>boolean-equal</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-62">Description</h3>
+<p>Detects the comparison to boolean constants.</p>
+<h3 id="exploit-scenario-61">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract A {
+	function f(bool x) public {
+		// ...
+        if (x == true) { // bad!
+           // ...
+        }
+		// ...
+	}
+}
+</code></pre>
+<p>Boolean constants can be used directly and do not need to be compare to <code>true</code> or <code>false</code>.</p>
+<h3 id="recommendation-62">Recommendation</h3>
+<p>Remove the equality to the boolean constant.</p>
+<h2 id="deprecated-standards">Deprecated standards</h2>
+<h3 id="configuration-63">Configuration</h3>
+<ul>
+<li>Check: <code>deprecated-standards</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-63">Description</h3>
+<p>Detect the usage of deprecated standards.</p>
+<h3 id="exploit-scenario-62">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract ContractWithDeprecatedReferences {
+    // Deprecated: Change block.blockhash() -&gt; blockhash()
+    bytes32 globalBlockHash = block.blockhash(0);
+
+    // Deprecated: Change constant -&gt; view
+    function functionWithDeprecatedThrow() public constant {
+        // Deprecated: Change msg.gas -&gt; gasleft()
+        if(msg.gas == msg.value) {
+            // Deprecated: Change throw -&gt; revert()
+            throw;
+        }
+    }
+
+    // Deprecated: Change constant -&gt; view
+    function functionWithDeprecatedReferences() public constant {
+        // Deprecated: Change sha3() -&gt; keccak256()
+        bytes32 sha3Result = sha3(&quot;test deprecated sha3 usage&quot;);
+
+        // Deprecated: Change callcode() -&gt; delegatecall()
+        address(this).callcode();
+
+        // Deprecated: Change suicide() -&gt; selfdestruct()
+        suicide(address(0));
+    }
+}
+</code></pre>
+<h3 id="recommendation-63">Recommendation</h3>
+<p>Replace all uses of deprecated symbols.</p>
+<h2 id="unindexed-erc20-event-parameters">Unindexed ERC20 event parameters</h2>
+<h3 id="configuration-64">Configuration</h3>
+<ul>
+<li>Check: <code>erc20-indexed</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-64">Description</h3>
+<p>Detects whether events defined by the <code>ERC20</code> specification that should have some parameters as <code>indexed</code> are missing the <code>indexed</code> keyword.</p>
+<h3 id="exploit-scenario-63">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract ERC20Bad {
+    // ...
+    event Transfer(address from, address to, uint value);
+    event Approval(address owner, address spender, uint value);
+
+    // ...
+}
+</code></pre>
+<p><code>Transfer</code> and <code>Approval</code> events should have the 'indexed' keyword on their two first parameters, as defined by the <code>ERC20</code> specification.<br>
+Failure to include these keywords will exclude the parameter data in the transaction/block's bloom filter, so external tooling searching for these parameters may overlook them and fail to index logs from this token contract.</p>
+<h3 id="recommendation-64">Recommendation</h3>
+<p>Add the <code>indexed</code> keyword to event parameters that should include it, according to the <code>ERC20</code> specification.</p>
+<h2 id="function-initializing-state">Function Initializing State</h2>
+<h3 id="configuration-65">Configuration</h3>
+<ul>
+<li>Check: <code>function-init-state</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-65">Description</h3>
+<p>Detects the immediate initialization of state variables through function calls that are not pure/constant, or that use non-constant state variable.</p>
+<h3 id="exploit-scenario-64">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract StateVarInitFromFunction {
+
+    uint public v = set(); // Initialize from function (sets to 77)
+    uint public w = 5;
+    uint public x = set(); // Initialize from function (sets to 88)
+    address public shouldntBeReported = address(8);
+
+    constructor(){
+        // The constructor is run after all state variables are initialized.
+    }
+
+    function set() public  returns(uint)  {
+        // If this function is being used to initialize a state variable declared
+        // before w, w will be zero. If it is declared after w, w will be set.
+        if(w == 0) {
+            return 77;
+        }
+
+        return 88;
+    }
+}
+</code></pre>
+<p>In this case, users might intend a function to return a value a state variable can initialize with, without realizing the context for the contract is not fully initialized.<br>
+In the example above, the same function sets two different values for state variables because it checks a state variable that is not yet initialized in one case, and is initialized in the other.<br>
+Special care must be taken when initializing state variables from an immediate function call so as not to incorrectly assume the state is initialized.</p>
+<h3 id="recommendation-65">Recommendation</h3>
+<p>Remove any initialization of state variables via non-constant state variables or function calls. If variables must be set upon contract deployment, locate initialization in the constructor instead.</p>
+<h2 id="low-level-calls">Low-level calls</h2>
+<h3 id="configuration-66">Configuration</h3>
+<ul>
+<li>Check: <code>low-level-calls</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-66">Description</h3>
+<p>The use of low-level calls is error-prone. Low-level calls do not check for <a href="https://solidity.readthedocs.io/en/v0.4.25/control-structures.html#error-handling-assert-require-revert-and-exceptions">code existence</a> or call success.</p>
+<h3 id="recommendation-66">Recommendation</h3>
+<p>Avoid low-level calls. Check the call success. If the call is meant for a contract, check for code existence.</p>
+<h2 id="missing-inheritance">Missing inheritance</h2>
+<h3 id="configuration-67">Configuration</h3>
+<ul>
+<li>Check: <code>missing-inheritance</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-67">Description</h3>
+<p>Detect missing inheritance.</p>
+<h3 id="exploit-scenario-65">Exploit Scenario:</h3>
+<pre><code class="language-solidity">interface ISomething {
+    function f1() external returns(uint);
+}
+
+contract Something {
+    function f1() external returns(uint){
+        return 42;
+    }
+}
+</code></pre>
+<p><code>Something</code> should inherit from <code>ISomething</code>.</p>
+<h3 id="recommendation-67">Recommendation</h3>
+<p>Inherit from the missing interface or contract.</p>
+<h2 id="conformance-to-solidity-naming-conventions">Conformance to Solidity naming conventions</h2>
+<h3 id="configuration-68">Configuration</h3>
+<ul>
+<li>Check: <code>naming-convention</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-68">Description</h3>
+<p>Solidity defines a <a href="https://solidity.readthedocs.io/en/v0.4.25/style-guide.html#naming-conventions">naming convention</a> that should be followed.</p>
+<h4 id="rule-exceptions">Rule exceptions</h4>
+<ul>
+<li>Allow constant variable name/symbol/decimals to be lowercase (<code>ERC20</code>).</li>
+<li>Allow <code>_</code> at the beginning of the <code>mixed_case</code> match for private variables and unused parameters.</li>
+</ul>
+<h3 id="recommendation-68">Recommendation</h3>
+<p>Follow the Solidity <a href="https://solidity.readthedocs.io/en/v0.4.25/style-guide.html#naming-conventions">naming convention</a>.</p>
+<h2 id="different-pragma-directives-are-used">Different pragma directives are used</h2>
+<h3 id="configuration-69">Configuration</h3>
+<ul>
+<li>Check: <code>pragma</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-69">Description</h3>
+<p>Detect whether different Solidity versions are used.</p>
+<h3 id="recommendation-69">Recommendation</h3>
+<p>Use one Solidity version.</p>
+<h2 id="redundant-statements">Redundant Statements</h2>
+<h3 id="configuration-70">Configuration</h3>
+<ul>
+<li>Check: <code>redundant-statements</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-70">Description</h3>
+<p>Detect the usage of redundant statements that have no effect.</p>
+<h3 id="exploit-scenario-66">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract RedundantStatementsContract {
+
+    constructor() public {
+        uint; // Elementary Type Name
+        bool; // Elementary Type Name
+        RedundantStatementsContract; // Identifier
+    }
+
+    function test() public returns (uint) {
+        uint; // Elementary Type Name
+        assert; // Identifier
+        test; // Identifier
+        return 777;
+    }
+}
+</code></pre>
+<p>Each commented line references types/identifiers, but performs no action with them, so no code will be generated for such statements and they can be removed.</p>
+<h3 id="recommendation-70">Recommendation</h3>
+<p>Remove redundant statements if they congest code but offer no value.</p>
+<h2 id="incorrect-versions-of-solidity">Incorrect versions of Solidity</h2>
+<h3 id="configuration-71">Configuration</h3>
+<ul>
+<li>Check: <code>solc-version</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-71">Description</h3>
+<p><code>solc</code> frequently releases new compiler versions. Using an old version prevents access to new Solidity security checks.<br>
+We also recommend avoiding complex <code>pragma</code> statement.</p>
+<h3 id="recommendation-71">Recommendation</h3>
+<p>Deploy with any of the following Solidity versions:</p>
+<ul>
+<li>0.5.16 - 0.5.17</li>
+<li>0.6.11 - 0.6.12</li>
+<li>0.7.5 - 0.7.6</li>
+<li>0.8.16</li>
+</ul>
+<p>The recommendations take into account:</p>
+<ul>
+<li>Risks related to recent releases</li>
+<li>Risks of complex code generation changes</li>
+<li>Risks of new language features</li>
+<li>Risks of known bugs</li>
+</ul>
+<p>Use a simple pragma version that allows any of these versions.<br>
+Consider using the latest version of Solidity for testing.</p>
+<h2 id="unimplemented-functions">Unimplemented functions</h2>
+<h3 id="configuration-72">Configuration</h3>
+<ul>
+<li>Check: <code>unimplemented-functions</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-72">Description</h3>
+<p>Detect functions that are not implemented on derived-most contracts.</p>
+<h3 id="exploit-scenario-67">Exploit Scenario:</h3>
+<pre><code class="language-solidity">interface BaseInterface {
+    function f1() external returns(uint);
+    function f2() external returns(uint);
+}
+
+interface BaseInterface2 {
+    function f3() external returns(uint);
+}
+
+contract DerivedContract is BaseInterface, BaseInterface2 {
+    function f1() external returns(uint){
+        return 42;
+    }
+}
+</code></pre>
+<p><code>DerivedContract</code> does not implement <code>BaseInterface.f2</code> or <code>BaseInterface2.f3</code>.<br>
+As a result, the contract will not properly compile.<br>
+All unimplemented functions must be implemented on a contract that is meant to be used.</p>
+<h3 id="recommendation-72">Recommendation</h3>
+<p>Implement all unimplemented functions in any contract you intend to use directly (not simply inherit from).</p>
+<h2 id="unused-state-variable">Unused state variable</h2>
+<h3 id="configuration-73">Configuration</h3>
+<ul>
+<li>Check: <code>unused-state</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-73">Description</h3>
+<p>Unused state variable.</p>
+<h3 id="recommendation-73">Recommendation</h3>
+<p>Remove unused state variables.</p>
+<h2 id="costly-operations-inside-a-loop">Costly operations inside a loop</h2>
+<h3 id="configuration-74">Configuration</h3>
+<ul>
+<li>Check: <code>costly-loop</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-74">Description</h3>
+<p>Costly operations inside a loop might waste gas, so optimizations are justified.</p>
+<h3 id="exploit-scenario-68">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract CostlyOperationsInLoop{
+
+    uint loop_count = 100;
+    uint state_variable=0;
+
+    function bad() external{
+        for (uint i=0; i &lt; loop_count; i++){
+            state_variable++;
+        }
+    }
+
+    function good() external{
+      uint local_variable = state_variable;
+      for (uint i=0; i &lt; loop_count; i++){
+        local_variable++;
+      }
+      state_variable = local_variable;
+    }
+}
+</code></pre>
+<p>Incrementing <code>state_variable</code> in a loop incurs a lot of gas because of expensive <code>SSTOREs</code>, which might lead to an <code>out-of-gas</code>.</p>
+<h3 id="recommendation-74">Recommendation</h3>
+<p>Use a local variable to hold the loop computation result.</p>
+<h2 id="dead-code">Dead-code</h2>
+<h3 id="configuration-75">Configuration</h3>
+<ul>
+<li>Check: <code>dead-code</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-75">Description</h3>
+<p>Functions that are not sued.</p>
+<h3 id="exploit-scenario-69">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract Contract{
+    function dead_code() internal() {}
+}
+</code></pre>
+<p><code>dead_code</code> is not used in the contract, and make the code's review more difficult.</p>
+<h3 id="recommendation-75">Recommendation</h3>
+<p>Remove unused functions.</p>
+<h2 id="reentrancy-vulnerabilities-5">Reentrancy vulnerabilities</h2>
+<h3 id="configuration-76">Configuration</h3>
+<ul>
+<li>Check: <code>reentrancy-unlimited-gas</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-76">Description</h3>
+<p>Detection of the <a href="https://github.com/trailofbits/not-so-smart-contracts/tree/master/reentrancy">reentrancy bug</a>.<br>
+Only report reentrancy that is based on <code>transfer</code> or <code>send</code>.</p>
+<h3 id="exploit-scenario-70">Exploit Scenario:</h3>
+<pre><code class="language-solidity">    function callme(){
+        msg.sender.transfer(balances[msg.sender]):
+        balances[msg.sender] = 0;
+    }   
+</code></pre>
+<p><code>send</code> and <code>transfer</code> do not protect from reentrancies in case of gas price changes.</p>
+<h3 id="recommendation-76">Recommendation</h3>
+<p>Apply the <a href="http://solidity.readthedocs.io/en/v0.4.21/security-considerations.html#re-entrancy"><code>check-effects-interactions</code> pattern</a>.</p>
+<h2 id="variable-names-too-similar">Variable names too similar</h2>
+<h3 id="configuration-77">Configuration</h3>
+<ul>
+<li>Check: <code>similar-names</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-77">Description</h3>
+<p>Detect variables with names that are too similar.</p>
+<h3 id="exploit-scenario-71">Exploit Scenario:</h3>
+<p>Bob uses several variables with similar names. As a result, his code is difficult to review.</p>
+<h3 id="recommendation-77">Recommendation</h3>
+<p>Prevent variables from having similar names.</p>
+<h2 id="too-many-digits">Too many digits</h2>
+<h3 id="configuration-78">Configuration</h3>
+<ul>
+<li>Check: <code>too-many-digits</code></li>
+<li>Severity: <code>Informational</code></li>
+<li>Confidence: <code>Medium</code></li>
+</ul>
+<h3 id="description-78">Description</h3>
+<p>Literals with many digits are difficult to read and review.</p>
+<h3 id="exploit-scenario-72">Exploit Scenario:</h3>
+<pre><code class="language-solidity">contract MyContract{
+    uint 1_ether = 10000000000000000000; 
+}
+</code></pre>
+<p>While <code>1_ether</code> looks like <code>1 ether</code>, it is <code>10 ether</code>. As a result, it's likely to be used incorrectly.</p>
+<h3 id="recommendation-78">Recommendation</h3>
+<p>Use:</p>
+<ul>
+<li><a href="https://solidity.readthedocs.io/en/latest/units-and-global-variables.html#ether-units">Ether suffix</a>,</li>
+<li><a href="https://solidity.readthedocs.io/en/latest/units-and-global-variables.html#time-units">Time suffix</a>, or</li>
+<li><a href="https://solidity.readthedocs.io/en/latest/types.html#rational-and-integer-literals">The scientific notation</a></li>
+</ul>
+<h2 id="state-variables-that-could-be-declared-constant">State variables that could be declared constant</h2>
+<h3 id="configuration-79">Configuration</h3>
+<ul>
+<li>Check: <code>constable-states</code></li>
+<li>Severity: <code>Optimization</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-79">Description</h3>
+<p>Constant state variables should be declared constant to save gas.</p>
+<h3 id="recommendation-79">Recommendation</h3>
+<p>Add the <code>constant</code> attributes to state variables that never change.</p>
+<h2 id="public-function-that-could-be-declared-external">Public function that could be declared external</h2>
+<h3 id="configuration-80">Configuration</h3>
+<ul>
+<li>Check: <code>external-function</code></li>
+<li>Severity: <code>Optimization</code></li>
+<li>Confidence: <code>High</code></li>
+</ul>
+<h3 id="description-80">Description</h3>
+<p><code>public</code> functions that are never called by the contract should be declared <code>external</code>, and its immutable parameters should be located in <code>calldata</code> to save gas.</p>
+<h3 id="recommendation-80">Recommendation</h3>
+<p>Use the <code>external</code> attribute for functions never called from the contract, and change the location of immutable parameters to <code>calldata</code> to save gas.</p>
+
+                  </div>
+                  <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li><a href="#public-detectors">Public Detectors</a>
+<ul>
+<li><a href="#storage-abiencoderv2-array"><s>Storage ABIEncoderV2 Array</s></a>
+<ul>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#description">Description</a></li>
+<li><a href="#exploit-scenario">Exploit Scenario:</a></li>
+<li><a href="#recommendation">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#arbitrary-from-in-transferfrom">Arbitrary <code>from</code> in transferFrom</a>
+<ul>
+<li><a href="#configuration-2">Configuration</a></li>
+<li><a href="#description-2">Description</a></li>
+<li><a href="#exploit-scenario-2">Exploit Scenario:</a></li>
+<li><a href="#recommendation-2">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#modifying-storage-array-by-value">Modifying storage array by value</a>
+<ul>
+<li><a href="#configuration-3">Configuration</a></li>
+<li><a href="#description-3">Description</a></li>
+<li><a href="#exploit-scenario-3">Exploit Scenario:</a></li>
+<li><a href="#recommendation-3">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#incorrect-shift-in-assembly">Incorrect shift in assembly.</a>
+<ul>
+<li><a href="#configuration-4">Configuration</a></li>
+<li><a href="#description-4">Description</a></li>
+<li><a href="#exploit-scenario-4">Exploit Scenario:</a></li>
+<li><a href="#recommendation-4">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#multiple-constructor-schemes">Multiple constructor schemes</a>
+<ul>
+<li><a href="#configuration-5">Configuration</a></li>
+<li><a href="#description-5">Description</a></li>
+<li><a href="#exploit-scenario-5">Exploit Scenario:</a></li>
+<li><a href="#recommendation-5">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#name-reused">Name reused</a>
+<ul>
+<li><a href="#configuration-6">Configuration</a></li>
+<li><a href="#description-6">Description</a></li>
+<li><a href="#exploit-scenario-6">Exploit Scenario:</a></li>
+<li><a href="#recommendation-6">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#protected-variables">Protected Variables</a>
+<ul>
+<li><a href="#configuration-7">Configuration</a></li>
+<li><a href="#description-7">Description</a></li>
+<li><a href="#exploit-scenario-7">Exploit Scenario:</a></li>
+<li><a href="#recommendation-7">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#public-mappings-with-nested-variables">Public mappings with nested variables</a>
+<ul>
+<li><a href="#configuration-8">Configuration</a></li>
+<li><a href="#description-8">Description</a></li>
+<li><a href="#exploit-scenario-8">Exploit Scenario:</a></li>
+<li><a href="#recommendation-8">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#right-to-left-override-character">Right-to-Left-Override character</a>
+<ul>
+<li><a href="#configuration-9">Configuration</a></li>
+<li><a href="#description-9">Description</a></li>
+<li><a href="#exploit-scenario-9">Exploit Scenario:</a></li>
+<li><a href="#recommendation-9">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#state-variable-shadowing">State variable shadowing</a>
+<ul>
+<li><a href="#configuration-10">Configuration</a></li>
+<li><a href="#description-10">Description</a></li>
+<li><a href="#exploit-scenario-10">Exploit Scenario:</a></li>
+<li><a href="#recommendation-10">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#suicidal">Suicidal</a>
+<ul>
+<li><a href="#configuration-11">Configuration</a></li>
+<li><a href="#description-11">Description</a></li>
+<li><a href="#exploit-scenario-11">Exploit Scenario:</a></li>
+<li><a href="#recommendation-11">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#uninitialized-state-variables">Uninitialized state variables</a>
+<ul>
+<li><a href="#configuration-12">Configuration</a></li>
+<li><a href="#description-12">Description</a></li>
+<li><a href="#exploit-scenario-12">Exploit Scenario:</a></li>
+<li><a href="#recommendation-12">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#uninitialized-storage-variables">Uninitialized storage variables</a>
+<ul>
+<li><a href="#configuration-13">Configuration</a></li>
+<li><a href="#description-13">Description</a></li>
+<li><a href="#exploit-scenario-13">Exploit Scenario:</a></li>
+<li><a href="#recommendation-13">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#unprotected-upgradeable-contract">Unprotected upgradeable contract</a>
+<ul>
+<li><a href="#configuration-14">Configuration</a></li>
+<li><a href="#description-14">Description</a></li>
+<li><a href="#exploit-scenario-14">Exploit Scenario:</a></li>
+<li><a href="#recommendation-14">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#arbitrary-from-in-transferfrom-used-with-permit">Arbitrary <code>from</code> in transferFrom used with permit</a>
+<ul>
+<li><a href="#configuration-15">Configuration</a></li>
+<li><a href="#description-15">Description</a></li>
+<li><a href="#exploit-scenario-15">Exploit Scenario:</a></li>
+<li><a href="#recommendation-15">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#functions-that-send-ether-to-arbitrary-destinations">Functions that send Ether to arbitrary destinations</a>
+<ul>
+<li><a href="#configuration-16">Configuration</a></li>
+<li><a href="#description-16">Description</a></li>
+<li><a href="#exploit-scenario-16">Exploit Scenario:</a></li>
+<li><a href="#recommendation-16">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#array-length-assignment">Array Length Assignment</a>
+<ul>
+<li><a href="#configuration-17">Configuration</a></li>
+<li><a href="#description-17">Description</a></li>
+<li><a href="#exploit-scenario-17">Exploit Scenario:</a></li>
+<li><a href="#recommendation-17">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#controlled-delegatecall">Controlled Delegatecall</a>
+<ul>
+<li><a href="#configuration-18">Configuration</a></li>
+<li><a href="#description-18">Description</a></li>
+<li><a href="#exploit-scenario-18">Exploit Scenario:</a></li>
+<li><a href="#recommendation-18">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#payable-functions-using-delegatecall-inside-a-loop">Payable functions using <code>delegatecall</code> inside a loop</a>
+<ul>
+<li><a href="#configuration-19">Configuration</a></li>
+<li><a href="#description-19">Description</a></li>
+<li><a href="#exploit-scenario-19">Exploit Scenario:</a></li>
+<li><a href="#recommendation-19">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#msgvalue-inside-a-loop"><code>msg.value</code> inside a loop</a>
+<ul>
+<li><a href="#configuration-20">Configuration</a></li>
+<li><a href="#description-20">Description</a></li>
+<li><a href="#exploit-scenario-20">Exploit Scenario:</a></li>
+<li><a href="#recommendation-20">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#reentrancy-vulnerabilities">Reentrancy vulnerabilities</a>
+<ul>
+<li><a href="#configuration-21">Configuration</a></li>
+<li><a href="#description-21">Description</a></li>
+<li><a href="#exploit-scenario-21">Exploit Scenario:</a></li>
+<li><a href="#recommendation-21">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#storage-signed-integer-array">Storage Signed Integer Array</a>
+<ul>
+<li><a href="#configuration-22">Configuration</a></li>
+<li><a href="#description-22">Description</a></li>
+<li><a href="#exploit-scenario-22">Exploit Scenario:</a></li>
+<li><a href="#recommendation-22">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#unchecked-transfer">Unchecked transfer</a>
+<ul>
+<li><a href="#configuration-23">Configuration</a></li>
+<li><a href="#description-23">Description</a></li>
+<li><a href="#exploit-scenario-23">Exploit Scenario:</a></li>
+<li><a href="#recommendation-23">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#weak-prng">Weak PRNG</a>
+<ul>
+<li><a href="#configuration-24">Configuration</a></li>
+<li><a href="#description-24">Description</a></li>
+<li><a href="#exploit-scenario-24">Exploit Scenario:</a></li>
+<li><a href="#recommendation-24">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#domain-separator-collision">Domain separator collision</a>
+<ul>
+<li><a href="#configuration-25">Configuration</a></li>
+<li><a href="#description-25">Description</a></li>
+<li><a href="#exploit-scenario-25">Exploit Scenario:</a></li>
+<li><a href="#recommendation-25">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#dangerous-enum-conversion">Dangerous enum conversion</a>
+<ul>
+<li><a href="#configuration-26">Configuration</a></li>
+<li><a href="#description-26">Description</a></li>
+<li><a href="#exploit-scenario-26">Exploit Scenario:</a></li>
+<li><a href="#recommendation-26">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#incorrect-erc20-interface">Incorrect erc20 interface</a>
+<ul>
+<li><a href="#configuration-27">Configuration</a></li>
+<li><a href="#description-27">Description</a></li>
+<li><a href="#exploit-scenario-27">Exploit Scenario:</a></li>
+<li><a href="#recommendation-27">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#incorrect-erc721-interface">Incorrect erc721 interface</a>
+<ul>
+<li><a href="#configuration-28">Configuration</a></li>
+<li><a href="#description-28">Description</a></li>
+<li><a href="#exploit-scenario-28">Exploit Scenario:</a></li>
+<li><a href="#recommendation-28">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#dangerous-strict-equalities">Dangerous strict equalities</a>
+<ul>
+<li><a href="#configuration-29">Configuration</a></li>
+<li><a href="#description-29">Description</a></li>
+<li><a href="#exploit-scenario-29">Exploit Scenario:</a></li>
+<li><a href="#recommendation-29">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#contracts-that-lock-ether">Contracts that lock Ether</a>
+<ul>
+<li><a href="#configuration-30">Configuration</a></li>
+<li><a href="#description-30">Description</a></li>
+<li><a href="#exploit-scenario-30">Exploit Scenario:</a></li>
+<li><a href="#recommendation-30">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#deletion-on-mapping-containing-a-structure">Deletion on mapping containing a structure</a>
+<ul>
+<li><a href="#configuration-31">Configuration</a></li>
+<li><a href="#description-31">Description</a></li>
+<li><a href="#exploit-scenario-31">Exploit Scenario:</a></li>
+<li><a href="#recommendation-31">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#state-variable-shadowing-from-abstract-contracts">State variable shadowing from abstract contracts</a>
+<ul>
+<li><a href="#configuration-32">Configuration</a></li>
+<li><a href="#description-32">Description</a></li>
+<li><a href="#exploit-scenario-32">Exploit Scenario:</a></li>
+<li><a href="#recommendation-32">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#tautology-or-contradiction">Tautology or contradiction</a>
+<ul>
+<li><a href="#configuration-33">Configuration</a></li>
+<li><a href="#description-33">Description</a></li>
+<li><a href="#exploit-scenario-33">Exploit Scenario:</a></li>
+<li><a href="#recommendation-33">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#write-after-write">Write after write</a>
+<ul>
+<li><a href="#configuration-34">Configuration</a></li>
+<li><a href="#description-34">Description</a></li>
+<li><a href="#exploit-scenario-34">Exploit Scenario:</a></li>
+<li><a href="#recommendation-34">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#misuse-of-a-boolean-constant">Misuse of a Boolean constant</a>
+<ul>
+<li><a href="#configuration-35">Configuration</a></li>
+<li><a href="#description-35">Description</a></li>
+<li><a href="#exploit-scenario-35">Exploit Scenario:</a></li>
+<li><a href="#recommendation-35">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#constant-functions-using-assembly-code">Constant functions using assembly code</a>
+<ul>
+<li><a href="#configuration-36">Configuration</a></li>
+<li><a href="#description-36">Description</a></li>
+<li><a href="#exploit-scenario-36">Exploit Scenario:</a></li>
+<li><a href="#recommendation-36">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#constant-functions-changing-the-state">Constant functions changing the state</a>
+<ul>
+<li><a href="#configuration-37">Configuration</a></li>
+<li><a href="#description-37">Description</a></li>
+<li><a href="#exploit-scenario-37">Exploit Scenario:</a></li>
+<li><a href="#recommendation-37">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#divide-before-multiply">Divide before multiply</a>
+<ul>
+<li><a href="#configuration-38">Configuration</a></li>
+<li><a href="#description-38">Description</a></li>
+<li><a href="#exploit-scenario-38">Exploit Scenario:</a></li>
+<li><a href="#recommendation-38">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#reentrancy-vulnerabilities-2">Reentrancy vulnerabilities</a>
+<ul>
+<li><a href="#configuration-39">Configuration</a></li>
+<li><a href="#description-39">Description</a></li>
+<li><a href="#exploit-scenario-39">Exploit Scenario:</a></li>
+<li><a href="#recommendation-39">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#reused-base-constructors">Reused base constructors</a>
+<ul>
+<li><a href="#configuration-40">Configuration</a></li>
+<li><a href="#description-40">Description</a></li>
+<li><a href="#exploit-scenario-40">Exploit Scenario:</a></li>
+<li><a href="#recommendation-40">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#dangerous-usage-of-txorigin">Dangerous usage of <code>tx.origin</code></a>
+<ul>
+<li><a href="#configuration-41">Configuration</a></li>
+<li><a href="#description-41">Description</a></li>
+<li><a href="#exploit-scenario-41">Exploit Scenario:</a></li>
+<li><a href="#recommendation-41">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#unchecked-low-level-calls">Unchecked low-level calls</a>
+<ul>
+<li><a href="#configuration-42">Configuration</a></li>
+<li><a href="#description-42">Description</a></li>
+<li><a href="#exploit-scenario-42">Exploit Scenario:</a></li>
+<li><a href="#recommendation-42">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#unchecked-send">Unchecked Send</a>
+<ul>
+<li><a href="#configuration-43">Configuration</a></li>
+<li><a href="#description-43">Description</a></li>
+<li><a href="#exploit-scenario-43">Exploit Scenario:</a></li>
+<li><a href="#recommendation-43">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#uninitialized-local-variables">Uninitialized local variables</a>
+<ul>
+<li><a href="#configuration-44">Configuration</a></li>
+<li><a href="#description-44">Description</a></li>
+<li><a href="#exploit-scenario-44">Exploit Scenario:</a></li>
+<li><a href="#recommendation-44">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#unused-return">Unused return</a>
+<ul>
+<li><a href="#configuration-45">Configuration</a></li>
+<li><a href="#description-45">Description</a></li>
+<li><a href="#exploit-scenario-45">Exploit Scenario:</a></li>
+<li><a href="#recommendation-45">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#incorrect-modifier">Incorrect modifier</a>
+<ul>
+<li><a href="#configuration-46">Configuration</a></li>
+<li><a href="#description-46">Description</a></li>
+<li><a href="#exploit-scenario-46">Exploit Scenario:</a></li>
+<li><a href="#recommendation-46">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#builtin-symbol-shadowing">Builtin Symbol Shadowing</a>
+<ul>
+<li><a href="#configuration-47">Configuration</a></li>
+<li><a href="#description-47">Description</a></li>
+<li><a href="#exploit-scenario-47">Exploit Scenario:</a></li>
+<li><a href="#recommendation-47">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#local-variable-shadowing">Local variable shadowing</a>
+<ul>
+<li><a href="#configuration-48">Configuration</a></li>
+<li><a href="#description-48">Description</a></li>
+<li><a href="#exploit-scenario-48">Exploit Scenario:</a></li>
+<li><a href="#recommendation-48">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#uninitialized-function-pointers-in-constructors">Uninitialized function pointers in constructors</a>
+<ul>
+<li><a href="#configuration-49">Configuration</a></li>
+<li><a href="#description-49">Description</a></li>
+<li><a href="#exploit-scenario-49">Exploit Scenario:</a></li>
+<li><a href="#recommendation-49">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#pre-declaration-usage-of-local-variables">Pre-declaration usage of local variables</a>
+<ul>
+<li><a href="#configuration-50">Configuration</a></li>
+<li><a href="#description-50">Description</a></li>
+<li><a href="#exploit-scenario-50">Exploit Scenario:</a></li>
+<li><a href="#recommendation-50">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#void-constructor">Void constructor</a>
+<ul>
+<li><a href="#configuration-51">Configuration</a></li>
+<li><a href="#description-51">Description</a></li>
+<li><a href="#exploit-scenario-51">Exploit Scenario:</a></li>
+<li><a href="#recommendation-51">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#calls-inside-a-loop">Calls inside a loop</a>
+<ul>
+<li><a href="#configuration-52">Configuration</a></li>
+<li><a href="#description-52">Description</a></li>
+<li><a href="#exploit-scenario-52">Exploit Scenario:</a></li>
+<li><a href="#recommendation-52">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#missing-events-access-control">Missing events access control</a>
+<ul>
+<li><a href="#configuration-53">Configuration</a></li>
+<li><a href="#description-53">Description</a></li>
+<li><a href="#exploit-scenario-53">Exploit Scenario:</a></li>
+<li><a href="#recommendation-53">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#missing-events-arithmetic">Missing events arithmetic</a>
+<ul>
+<li><a href="#configuration-54">Configuration</a></li>
+<li><a href="#description-54">Description</a></li>
+<li><a href="#exploit-scenario-54">Exploit Scenario:</a></li>
+<li><a href="#recommendation-54">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#dangerous-unary-expressions">Dangerous unary expressions</a>
+<ul>
+<li><a href="#configuration-55">Configuration</a></li>
+<li><a href="#description-55">Description</a></li>
+<li><a href="#exploit-scenario-55">Exploit Scenario:</a></li>
+<li><a href="#recommendation-55">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#missing-zero-address-validation">Missing zero address validation</a>
+<ul>
+<li><a href="#configuration-56">Configuration</a></li>
+<li><a href="#description-56">Description</a></li>
+<li><a href="#exploit-scenario-56">Exploit Scenario:</a></li>
+<li><a href="#recommendation-56">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#reentrancy-vulnerabilities-3">Reentrancy vulnerabilities</a>
+<ul>
+<li><a href="#configuration-57">Configuration</a></li>
+<li><a href="#description-57">Description</a></li>
+<li><a href="#exploit-scenario-57">Exploit Scenario:</a></li>
+<li><a href="#recommendation-57">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#reentrancy-vulnerabilities-4">Reentrancy vulnerabilities</a>
+<ul>
+<li><a href="#configuration-58">Configuration</a></li>
+<li><a href="#description-58">Description</a></li>
+<li><a href="#exploit-scenario-58">Exploit Scenario:</a></li>
+<li><a href="#recommendation-58">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#block-timestamp">Block timestamp</a>
+<ul>
+<li><a href="#configuration-59">Configuration</a></li>
+<li><a href="#description-59">Description</a></li>
+<li><a href="#exploit-scenario-59">Exploit Scenario:</a></li>
+<li><a href="#recommendation-59">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#assembly-usage">Assembly usage</a>
+<ul>
+<li><a href="#configuration-60">Configuration</a></li>
+<li><a href="#description-60">Description</a></li>
+<li><a href="#recommendation-60">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#assert-state-change">Assert state change</a>
+<ul>
+<li><a href="#configuration-61">Configuration</a></li>
+<li><a href="#description-61">Description</a></li>
+<li><a href="#exploit-scenario-60">Exploit Scenario:</a></li>
+<li><a href="#recommendation-61">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#boolean-equality">Boolean equality</a>
+<ul>
+<li><a href="#configuration-62">Configuration</a></li>
+<li><a href="#description-62">Description</a></li>
+<li><a href="#exploit-scenario-61">Exploit Scenario:</a></li>
+<li><a href="#recommendation-62">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#deprecated-standards">Deprecated standards</a>
+<ul>
+<li><a href="#configuration-63">Configuration</a></li>
+<li><a href="#description-63">Description</a></li>
+<li><a href="#exploit-scenario-62">Exploit Scenario:</a></li>
+<li><a href="#recommendation-63">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#unindexed-erc20-event-parameters">Unindexed ERC20 event parameters</a>
+<ul>
+<li><a href="#configuration-64">Configuration</a></li>
+<li><a href="#description-64">Description</a></li>
+<li><a href="#exploit-scenario-63">Exploit Scenario:</a></li>
+<li><a href="#recommendation-64">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#function-initializing-state">Function Initializing State</a>
+<ul>
+<li><a href="#configuration-65">Configuration</a></li>
+<li><a href="#description-65">Description</a></li>
+<li><a href="#exploit-scenario-64">Exploit Scenario:</a></li>
+<li><a href="#recommendation-65">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#low-level-calls">Low-level calls</a>
+<ul>
+<li><a href="#configuration-66">Configuration</a></li>
+<li><a href="#description-66">Description</a></li>
+<li><a href="#recommendation-66">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#missing-inheritance">Missing inheritance</a>
+<ul>
+<li><a href="#configuration-67">Configuration</a></li>
+<li><a href="#description-67">Description</a></li>
+<li><a href="#exploit-scenario-65">Exploit Scenario:</a></li>
+<li><a href="#recommendation-67">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#conformance-to-solidity-naming-conventions">Conformance to Solidity naming conventions</a>
+<ul>
+<li><a href="#configuration-68">Configuration</a></li>
+<li><a href="#description-68">Description</a>
+<ul>
+<li><a href="#rule-exceptions">Rule exceptions</a></li>
+</ul>
+</li>
+<li><a href="#recommendation-68">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#different-pragma-directives-are-used">Different pragma directives are used</a>
+<ul>
+<li><a href="#configuration-69">Configuration</a></li>
+<li><a href="#description-69">Description</a></li>
+<li><a href="#recommendation-69">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#redundant-statements">Redundant Statements</a>
+<ul>
+<li><a href="#configuration-70">Configuration</a></li>
+<li><a href="#description-70">Description</a></li>
+<li><a href="#exploit-scenario-66">Exploit Scenario:</a></li>
+<li><a href="#recommendation-70">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#incorrect-versions-of-solidity">Incorrect versions of Solidity</a>
+<ul>
+<li><a href="#configuration-71">Configuration</a></li>
+<li><a href="#description-71">Description</a></li>
+<li><a href="#recommendation-71">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#unimplemented-functions">Unimplemented functions</a>
+<ul>
+<li><a href="#configuration-72">Configuration</a></li>
+<li><a href="#description-72">Description</a></li>
+<li><a href="#exploit-scenario-67">Exploit Scenario:</a></li>
+<li><a href="#recommendation-72">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#unused-state-variable">Unused state variable</a>
+<ul>
+<li><a href="#configuration-73">Configuration</a></li>
+<li><a href="#description-73">Description</a></li>
+<li><a href="#recommendation-73">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#costly-operations-inside-a-loop">Costly operations inside a loop</a>
+<ul>
+<li><a href="#configuration-74">Configuration</a></li>
+<li><a href="#description-74">Description</a></li>
+<li><a href="#exploit-scenario-68">Exploit Scenario:</a></li>
+<li><a href="#recommendation-74">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#dead-code">Dead-code</a>
+<ul>
+<li><a href="#configuration-75">Configuration</a></li>
+<li><a href="#description-75">Description</a></li>
+<li><a href="#exploit-scenario-69">Exploit Scenario:</a></li>
+<li><a href="#recommendation-75">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#reentrancy-vulnerabilities-5">Reentrancy vulnerabilities</a>
+<ul>
+<li><a href="#configuration-76">Configuration</a></li>
+<li><a href="#description-76">Description</a></li>
+<li><a href="#exploit-scenario-70">Exploit Scenario:</a></li>
+<li><a href="#recommendation-76">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#variable-names-too-similar">Variable names too similar</a>
+<ul>
+<li><a href="#configuration-77">Configuration</a></li>
+<li><a href="#description-77">Description</a></li>
+<li><a href="#exploit-scenario-71">Exploit Scenario:</a></li>
+<li><a href="#recommendation-77">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#too-many-digits">Too many digits</a>
+<ul>
+<li><a href="#configuration-78">Configuration</a></li>
+<li><a href="#description-78">Description</a></li>
+<li><a href="#exploit-scenario-72">Exploit Scenario:</a></li>
+<li><a href="#recommendation-78">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#state-variables-that-could-be-declared-constant">State variables that could be declared constant</a>
+<ul>
+<li><a href="#configuration-79">Configuration</a></li>
+<li><a href="#description-79">Description</a></li>
+<li><a href="#recommendation-79">Recommendation</a></li>
+</ul>
+</li>
+<li><a href="#public-function-that-could-be-declared-external">Public function that could be declared external</a>
+<ul>
+<li><a href="#configuration-80">Configuration</a></li>
+<li><a href="#description-80">Description</a></li>
+<li><a href="#recommendation-80">Recommendation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                  </div>
+                </div>
+
+                <div class="page-count">
+                  
+
+                      
+                </div>
+                <div class="post-pagination inner">
+                  
+                    <div class="prev-post">
+                      <div>
+                        <a href="https://ckp-0217.github.io/post/0x-xie-yi/">上一篇 0x协议</a>
+
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="next-post">
+                      <div>
+                        <a href="https://ckp-0217.github.io/post/zhu-quan-ge-ren/">下一篇 主权个人</a>
+
+                      </div>
+                    </div>
+                    
+                     
+                </div>
+
+          </div>
+
+
+      </div>
+
+      <!-- back to top -->
+      <button oneclik="topFunction()" id="BackToTop">
+        TOP
+      </button>
+
+      <div class="post-comment inner">
+        <div class="post-comment">
+          
+
+
+
+
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <!-- Footer -->
+<footer id="footer">
+  <div class="inner">
+    <section>
+      <h2>Follow</h2>
+      <ul class="icons">
+        
+          
+          <li>
+            <a href="https://github.com/ckp-0217" target="_blank">
+              <i class="icon brands style2 fab fa-github"></i>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </section>
+    <ul class="copyright">
+      <li>
+        <a href="https://ckp-0217.github.io/atom.xml" target="_blank">
+          RSS
+        </a> 
+      </li>
+      <li>ckp0217@foxmail.com</li>
+      
+    </ul>
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://ckp-0217.github.io/media/scripts/jquery.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/browser.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/breakpoints.min.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/util.js"></script>
+  <script src="https://ckp-0217.github.io/media/scripts/main.js"></script>
+  
+    <script src="https://ckp-0217.github.io/media/scripts/prism.js"></script>
+    <script>
+      Prism.highlightAll();
+    </script>
+    
+      <script>
+        post_scroll();
+        back_to_top();
+      </script>
+</body>
+
+</html>
