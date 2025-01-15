@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+    <title>商品预览图生成器</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="input-section">
+            <label for="productImage">商品图片：</label>
+            <input type="file" id="productImage" accept="image/*">
+
+            <label for="productName">产品名称：</label>
+            <input type="text" id="productName" placeholder="产品名称">
+
+            <label for="productPrice">价格：</label>
+            <input type="text" id="productPrice" placeholder="价格">
+
+            <label for="priceUnit">价格单位：</label>
+            <input type="text" id="priceUnit" placeholder="价格单位">
+
+            <label for="ingredients">配料：</label>
+            <textarea id="ingredients" placeholder="配料"></textarea>
+        </div>
+
+        <div class="preview-section" id="previewSection">
+            <img id="previewImage" src="" alt="商品图片">
+            <div class="price-container">
+                <span class="price-value" id="previewPrice"></span>
+                <span class="price-unit" id="priceUnitPreview"></span>
+            </div>
+            <h3 id="previewName"></h3>
+            <h3 id="previewIngredients"></h3>
+        </div>
+
+        <button onclick="downloadImage()">下载预览图</button>
+    </div>
+
+    <script>
+        document.getElementById('productImage').addEventListener('change', updatePreview);
+        document.getElementById('productName').addEventListener('input', updatePreview);
+        document.getElementById('productPrice').addEventListener('input', updatePreview);
+        document.getElementById('priceUnit').addEventListener('input', updatePreview);
+        document.getElementById('ingredients').addEventListener('input', updatePreview);
+
+        function updatePreview() {
+            const image = document.getElementById('productImage').files[0];
+            if (image) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+
+                    img.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+
+                        // 计算新的高度，保持原始宽高比
+                        const newWidth = 400;
+                        const newHeight = (img.height / img.width) * newWidth;
+
+                        // 设置canvas的大小
+                        canvas.width = newWidth;
+                        canvas.height = newHeight;
+
+                        // 将图片绘制到canvas上
+                        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+                        // 将canvas的内容设置为预览图片的源
+                        document.getElementById('previewImage').src = canvas.toDataURL();
+                    };
+                };
+
+                reader.readAsDataURL(image);
+            } else {
+                document.getElementById('previewImage').src = ""; // 清除预览图片
+            }
+
+            // 产品名称
+            if (document.getElementById('productName').value) {
+                document.getElementById('previewName').innerText = "产品名称：" + document.getElementById('productName').value;
+            } else {
+                document.getElementById('previewName').innerText = "";
+            }
+
+            const priceValue = document.getElementById('productPrice').value;
+            const priceUnitValue = document.getElementById('priceUnit').value;
+            const priceContainer = document.querySelector('.price-container');
+
+            // 价格
+            if (priceValue) {
+                document.getElementById('previewPrice').innerText = "￥" + priceValue;
+            } else {
+                document.getElementById('previewPrice').innerText = "";
+            }
+
+            // 价格单位
+            if (priceUnitValue) {
+                document.getElementById('priceUnitPreview').innerText = " / " + priceUnitValue;
+            } else {
+                document.getElementById('priceUnitPreview').innerText = "";
+            }
+
+            // 如果价格或价格单位为空，则隐藏整个price-container
+            if (!priceValue || !priceUnitValue) {
+                priceContainer.style.display = 'none';
+            } else {
+                priceContainer.style.display = 'block';
+            }
+
+            // 配料
+            if (document.getElementById('ingredients').value) {
+                document.getElementById('previewIngredients').innerText = "配料：" + document.getElementById('ingredients').value;
+            } else {
+                document.getElementById('previewIngredients').innerText = "";
+            }
+        }
+
+        function downloadImage() {
+            const previewSection = document.getElementById('previewSection');
+
+            html2canvas(previewSection).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'product-preview.png';
+                link.click();
+            });
+        }
+
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .input-section {
+            border: 1px solid #ccc;
+            /* padding: 20px; */
+            margin: 10px;
+            width: 80%;
+            box-sizing: border-box;
+        }
+
+        .preview-section {
+            /* border: 1px solid #ccc; */
+            /* padding: 20px; */
+            /* margin: 10px; */
+            /* width: 80%; */
+            background-color: rgb(247, 247, 247);
+            box-sizing: border-box;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .price-container {
+            /* display: inline-flex; */
+            /* background: linear-gradient(to right, deepskyblue, gold); */
+            padding: 20px 20px;
+            border-radius: 5px;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #previewIngredients,
+        #previewName {
+            padding: 0px 20px;
+
+        }
+
+        .price-value,
+        .price-unit {
+            color: white;
+            padding: 7px 15px;
+        }
+
+        .price-value {
+            background-color: rgb(43, 53, 65);
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .price-unit {
+            background-color: gold;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    </style>
+</body>
+
+</html>
